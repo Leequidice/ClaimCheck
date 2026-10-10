@@ -1,0 +1,34 @@
+﻿\"\"\"Claim Check - AI agent that audits company public claims.\"\"\"
+
+from __future__ import annotations
+
+import os
+from typing import Optional
+
+try:
+    import neatlogs
+except ImportError:
+    neatlogs = None
+
+_NEATLOGS_INITIALIZED = False
+
+
+def init_neatlogs(workflow_name: str = "claim-check") -> bool:
+    \"\"\"Initialize neatlogs if API key is present in environment.\"\"\"
+    global _NEATLOGS_INITIALIZED
+    if _NEATLOGS_INITIALIZED:
+        return True
+    api_key = os.getenv("NEATLOGS_API_KEY")
+    if not api_key:
+        return False
+    if neatlogs is not None:
+        try:
+            neatlogs.init(api_key=api_key, workflow_name=workflow_name)
+            _NEATLOGS_INITIALIZED = True
+            return True
+        except Exception:
+            return False
+    return False
+
+
+__all__ = ["init_neatlogs"]

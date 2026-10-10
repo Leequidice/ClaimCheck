@@ -1,4 +1,4 @@
-﻿\"\"\"Claim Check - AI agent that audits company public claims.\"\"\"
+﻿"""Claim Check - AI agent that audits company public claims."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ _NEATLOGS_INITIALIZED = False
 
 
 def init_neatlogs(workflow_name: str = "claim-check") -> bool:
-    \"\"\"Initialize neatlogs if API key is present in environment.\"\"\"
+    """Initialize neatlogs if API key is present in environment."""
     global _NEATLOGS_INITIALIZED
     if _NEATLOGS_INITIALIZED:
         return True

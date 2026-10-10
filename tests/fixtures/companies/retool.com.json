@@ -1,0 +1,96 @@
+﻿[
+  {
+    "matched_on": "retool.com",
+    "match_type": "domain",
+    "matches": [
+      {
+        "confidence_score": 1.0,
+        "company_data": {
+          "crustdata_company_id": 48102,
+          "updated_at": "2026-03-01T12:00:00Z",
+          "indexed_at": "2026-03-01T12:00:00Z",
+          "basic_info": {
+            "name": "Retool",
+            "primary_domain": "retool.com",
+            "all_domains": ["retool.com"],
+            "website": "https://retool.com",
+            "professional_network_url": "https://www.linkedin.com/company/try-retool",
+            "year_founded": 2017,
+            "description": "Retool is the fast way to build internal tools.",
+            "company_type": "Privately Held",
+            "status": "Operating",
+            "employee_count_range": "201-500",
+            "markets": ["Developer Tools", "Enterprise Software", "Low Code"]
+          },
+          "headcount": {
+            "total": 350,
+            "by_role_absolute": {
+              "Engineering": 150,
+              "Sales": 80,
+              "Operations": 40
+            },
+            "growth_percent": {
+              "mom": 1.5,
+              "six_months": 8.2,
+              "yoy": 18.5
+            }
+          },
+          "funding": {
+            "total_investment_usd": 135000000,
+            "last_round_amount_usd": 45000000,
+            "last_fundraise_date": "2022-07-28",
+            "last_round_type": "Series C",
+            "investors": ["Sequoia Capital", "John Collison", "Patrick Collison", "Elad Gil"],
+            "funding_rounds": [
+              {
+                "round_type": "Series C",
+                "amount_usd": 45000000,
+                "date": "2022-07-28"
+              },
+              {
+                "round_type": "Series B",
+                "amount_usd": 50000000,
+                "date": "2020-10-21"
+              }
+            ]
+          },
+          "locations": {
+            "country": "United States",
+            "state": "California",
+            "headquarters": "San Francisco, CA",
+            "street_address": "500 Howard St, Suite 500",
+            "all_office_addresses": [
+              "San Francisco, CA, USA",
+              "New York, NY, USA",
+              "London, UK"
+            ]
+          },
+          "people": {
+            "founders": [
+              {
+                "name": "David Hsu",
+                "title": "Founder & CEO",
+                "profile_url": "https://www.linkedin.com/in/dvdhsu"
+              }
+            ],
+            "cxos": [
+              {
+                "name": "David Hsu",
+                "title": "Chief Executive Officer"
+              }
+            ],
+            "decision_makers": []
+          },
+          "revenue": {
+            "estimated": {
+              "lower_bound_usd": 50000000,
+              "upper_bound_usd": 100000000
+            },
+            "public_markets": null,
+            "acquisition_status": "Independent"
+          }
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+﻿[
+  {
+    "matched_on": "https://www.linkedin.com/in/dvdhsu/",
+    "match_type": "professional_network_profile_url",
+    "match_status": "matched",
+    "matches": [
+      {
+        "confidence_score": 1.0,
+        "person_data": {
+          "crustdata_person_id": 91234,
+          "updated_at": "2026-03-01T12:00:00Z",
+          "basic_profile": {
+            "name": "David Hsu",
+            "first_name": "David",
+            "last_name": "Hsu",
+            "headline": "Founder and CEO at Retool",
+            "current_title": "Founder & CEO",
+            "summary": "Building Retool.",
+            "location": "San Francisco, California, United States"
+          },
+          "experience": {
+            "employment_details": {
+              "current": [
+                {
+                  "company_name": "Retool",
+                  "title": "Founder & CEO",
+                  "start_date": "2017-01-01"
+                }
+              ],
+              "past": []
+            },
+            "years_of_experience": "More than 8 years",
+            "years_of_experience_raw": 9.5
+          },
+          "education": {
+            "schools": [
+              {
+                "school_name": "University of Oxford",
+                "degree_name": "Computer Science & Philosophy"
+              }
+            ]
+          },
+          "skills": {
+            "professional_network_skills": ["Software Engineering", "Product Design", "Startups"]
+          }
+        }
+      }
+    ]
+  }
+]

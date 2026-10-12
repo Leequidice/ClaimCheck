@@ -270,14 +270,18 @@ class ClaimReasoner:
                         except Exception:
                             amt_ok = False
 
-                    # Check date within the month if date claimed
+                    # Check date within +-1 month if date claimed
                     date_ok = True
                     if claimed_round_date and r_date:
-                        # Normalize date strings to YYYY-MM
                         claimed_ym = self._extract_year_month(claimed_round_date)
                         actual_ym = self._extract_year_month(r_date)
-                        if claimed_ym and actual_ym:
-                            date_ok = (claimed_ym == actual_ym)
+                        if claimed_ym and actual_ym and len(claimed_ym) == 7 and len(actual_ym) == 7:
+                            c_yr, c_mo = int(claimed_ym[:4]), int(claimed_ym[5:7])
+                            a_yr, a_mo = int(actual_ym[:4]), int(actual_ym[5:7])
+                            diff_months = abs((c_yr - a_yr) * 12 + (c_mo - a_mo))
+                            date_ok = (diff_months <= 1)
+                        elif claimed_ym and actual_ym:
+                            date_ok = (claimed_ym[:4] == actual_ym[:4])
                         elif claimed_ym:
                             date_ok = claimed_ym[:4] in r_date
 
@@ -291,6 +295,7 @@ class ClaimReasoner:
                     "amount_usd": matched_round.get("amount_usd"),
                     "date": matched_round.get("date") or matched_round.get("funding_date"),
                 }
+                amt_disp = f"${trimmed_evidence['amount_usd']:,.0f}" if isinstance(trimmed_evidence.get('amount_usd'), (int, float)) else "undisclosed"
                 return ClaimAuditResult(
                     claim_id=claim.id,
                     claim=claim,
@@ -300,8 +305,8 @@ class ClaimReasoner:
                     source_cited="crustdata.funding.funding_rounds",
                     reasoning=(
                         f"Historical round verified: {trimmed_evidence['round_type']} "
-                        f"of ${trimmed_evidence['amount_usd']:,.0f} on {trimmed_evidence['date']} "
-                        f"matches within +-10% amount and month tolerance."
+                        f"of {amt_disp} on {trimmed_evidence['date']} "
+                        f"matches within +-10% amount and +-1 month date tolerance."
                     ),
                 )
             elif type_matched_round:
@@ -324,7 +329,7 @@ class ClaimReasoner:
                     source_cited="crustdata.funding.funding_rounds",
                     reasoning=(
                         f"Round '{norm_target_round}' found but contradicts claim: recorded amount "
-                        f"is {amt_disp} on {actual_dt} (outside +-10% amount or month date tolerance)."
+                        f"is {amt_disp} on {actual_dt} (outside +-10% amount or +-1 month date tolerance)."
                     ),
                 )
             else:
@@ -377,12 +382,10 @@ class ClaimReasoner:
                     ),
                 )
 
-        # Fallback to LLM arbitration if qualitative or complex
+        # Fallback to LLM arbitration if qualitative or complex (strictly using historical rounds, never last_round_type)
         trimmed_funding = {
             "total_investment_usd": funding.total_investment_usd,
-            "last_round_type": funding.last_round_type,
-            "last_round_amount_usd": funding.last_round_amount_usd,
-            "rounds": [{"type": r.get("round_type"), "amount": r.get("amount_usd"), "date": r.get("date")} for r in all_rounds[:5]],
+            "rounds": [{"type": r.get("round_type"), "amount": r.get("amount_usd"), "date": r.get("date")} for r in all_rounds[:10]],
         }
         return self._arbitrate_with_llm(claim, {"funding": trimmed_funding})
 

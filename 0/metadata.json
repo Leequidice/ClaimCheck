@@ -1,0 +1,78 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4QMNKCBXMQ9J9K7TEMMWCFV",
+  "session_id": "3b7edeed-57fd-440c-93a8-a41846251c88",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-12T08:46:38.2041905Z",
+  "branch": "master",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [
+    "README.md",
+    "claim_check/models.py",
+    "claim_check/reasoner.py",
+    "claim_check/verifier.py",
+    "eval/dataset.py",
+    "state/llm_cache.json",
+    "state/llm_spend.json"
+  ],
+  "agent": "Antigravity",
+  "model": "",
+  "turn_id": "126562273f51",
+  "checkpoint_transcript_start": 383,
+  "transcript_lines_at_start": 383,
+  "session_metrics": {
+    "turn_count": 5
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-12T08:46:38.0501638Z",
+    "agent_lines": 220,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 257,
+    "human_removed": 16,
+    "total_committed": 221,
+    "total_lines_changed": 493,
+    "agent_percentage": 44.62474645030426,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 2530,
+      "user_lines_removed": 16,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "claim_check/auditor.py": 242,
+        "claim_check/cli.py": 134,
+        "claim_check/models.py": 4,
+        "claim_check/planner.py": 45,
+        "claim_check/reasoner.py": 487,
+        "claim_check/report.py": 99,
+        "claim_check/state.py": 100,
+        "claim_check/verifier.py": 136,
+        "eval/dataset.py": 138,
+        "eval/harness.py": 191,
+        "eval/results/eval_20261012_082835.json": 122,
+        "eval/results/eval_20261012_083007.json": 262,
+        "eval/results/eval_20261012_083644.json": 262,
+        "state/llm_cache.json": 249,
+        "state/llm_spend.json": 3,
+        "tests/test_state.py": 56
+      },
+      "user_removed_per_file": {
+        "claim_check/models.py": 4,
+        "state/llm_cache.json": 9,
+        "state/llm_spend.json": 3
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2767,
+      "agent_lines_removed": 16
+    }
+  ]
+}

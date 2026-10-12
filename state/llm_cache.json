@@ -1702,5 +1702,53 @@
     "input_tokens": 661,
     "output_tokens": 222,
     "cost_usd": 0.000443
+  },
+  "55068de5eb444e5cb2346f08ed7708306c1169cb7930276d549439d5c16bf232": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Vercel was founded in 2015\",\n    \"normalized_value\": 2015,\n    \"tolerance_min\": 2015,\n    \"tolerance_max\": 2015,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a Series F round in September 2025\",\n    \"normalized_value\": \"Series F\",\n    \"tolerance_min\": null,\n    \"tolerance_max\": null,\n    \"unit\": null,\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 659,
+    "output_tokens": 211,
+    "cost_usd": 0.000428
+  },
+  "b9f475de7c3f622fe72cc7cc9ea6ac3798b3939c494b06e6997bed9fcddf24d9": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"A critical arithmetic inconsistency undermines the claim. The funding_total_usd is listed as $863,000,000, but summing all historical rounds with known amounts yields: $300M (Series F) + $250M (Series E) + $150M (Series D) + $102M (Series C) + $40M (Series B) + $21M (Series A) = $863M. This appears consistent on the surface, but it implies the funding_total was updated to include the Series F round dated 2025-09-30. Since this date is in the future relative to most data collection windows, the presence of a 2025-09-30 date raises a temporal plausibility concern \u2014 the data may be forward-projected or placeholder rather than confirmed. More critically, there is a missing Series E round gap: the historical rounds jump from Series D (2021) to Series E (2024) with no Series E amount anomaly, but there is no Series F amount discrepancy per se. However, the funding_total exactly equals the sum of all listed rounds, leaving zero residual for the undated Series A (2018-01-01, amount null), which should contribute some positive amount. This means the funding_total is understated or the Series F amount is overstated to compensate, indicating a data integrity issue. The null amount for the 2018 Series A is unaccounted for in the total, making the funding_total internally inconsistent. This casts doubt on the reliability of the Series F record itself.\"\n}\n```",
+    "input_tokens": 848,
+    "output_tokens": 384,
+    "cost_usd": 0.008304
+  },
+  "ecd2046ba8d649ff943e508d0db41ce9417199c64556612108e851212ff052d8": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"PostHog was founded in 2020\",\n    \"normalized_value\": 2020,\n    \"tolerance_min\": 2020,\n    \"tolerance_max\": 2020,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a Series E round in September 2025\",\n    \"normalized_value\": \"Series E\",\n    \"tolerance_min\": null,\n    \"tolerance_max\": null,\n    \"unit\": null,\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 659,
+    "output_tokens": 211,
+    "cost_usd": 0.000428
+  },
+  "2bb4f3232f843077d8712bfb3bcd07c73cea0ba71adeceab4241a9ebf402e8cb": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.88,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The Series E round of $75,000,000 on 2025-09-29 is directly present in the historical_rounds data and matches the claim of 'Series E in September 2025' exactly. No contradicting evidence found for the round type or date. One minor flag worth noting: the funding_total_usd of $182,150,000 is broadly consistent with summing all listed rounds ($3M + $150K + $9M + $15M + $10M + $70M + $75M = $182.15M), which cross-validates the data integrity. The rapid succession of Series D (June 2025) and Series E (September 2025) within ~3.5 months is unusual but not impossible, and both records are internally consistent within the dataset. No date misalignment, no range boundary flaw, and no subsidiary/parent contradiction detected. Claim stands as verified.\"\n}\n```",
+    "input_tokens": 849,
+    "output_tokens": 249,
+    "cost_usd": 0.006282
+  },
+  "23573604fcdb8dfd40bef74e4e26a48b9f8638afc52609fd74ac7160c8ac2d4c": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.97,\n  \"found_contradiction\": false,\n  \"cited_counter_evidence\": null,\n  \"verification_notes\": \"The historical rounds list explicitly contains a series_f round of $300,000,000 dated 2025-09-30, which directly matches the claim of a Series F round in September 2025. No contradicting evidence is present in the retrieved data. The round sequence (A\u2192B\u2192C\u2192D\u2192E\u2192F) is logically consistent. Confidence is very high.\"\n}\n```",
+    "input_tokens": 869,
+    "output_tokens": 141,
+    "cost_usd": 0.004722
+  },
+  "546199a0c497915418a8210ce8ad1a9e7fbc7d3884e6265d3b02892f13956777": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.97,\n  \"found_contradiction\": false,\n  \"cited_counter_evidence\": null,\n  \"verification_notes\": \"The historical rounds list explicitly contains a series_e round of $75,000,000 dated 2025-09-29, which directly matches the claim of a Series E round in September 2025. No contradicting evidence is present in the retrieved data. The round sequence (pre_seed \u2192 seed \u2192 series_a \u2192 series_b \u2192 series_c \u2192 series_d \u2192 series_e) is internally consistent. Confidence is high.\"\n}\n```",
+    "input_tokens": 870,
+    "output_tokens": 153,
+    "cost_usd": 0.004905
   }
 }

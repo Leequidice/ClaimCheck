@@ -1,0 +1,93 @@
+{
+  "currency": "USD",
+  "pricing_basis": {
+    "claude-haiku": {
+      "input_per_million": 0.25,
+      "output_per_million": 1.25,
+      "assigned_roles": [
+        "extract",
+        "routine"
+      ]
+    },
+    "claude-sonnet-4.6": {
+      "input_per_million": 3.0,
+      "output_per_million": 15.0,
+      "assigned_roles": [
+        "arbiter",
+        "verify"
+      ]
+    },
+    "crustdata_enrichment": {
+      "assumed_cost_per_lookup_usd": 0.05,
+      "status": "unmeasured assumption",
+      "credits_per_lookup": 1
+    }
+  },
+  "empirical_role_benchmarks": {
+    "extract": {
+      "model": "claude-haiku",
+      "avg_input_tokens": 663,
+      "avg_output_tokens": 266,
+      "avg_cost_usd": 0.000499,
+      "cost_calculation": "663 * 0.25/1M + 266 * 1.25/1M"
+    },
+    "arbiter": {
+      "model": "claude-sonnet-4.6",
+      "avg_input_tokens": 728,
+      "avg_output_tokens": 291,
+      "avg_cost_usd": 0.006549,
+      "cost_calculation": "728 * 3.00/1M + 291 * 15.00/1M"
+    },
+    "verify": {
+      "model": "claude-sonnet-4.6",
+      "avg_input_tokens": 1458,
+      "avg_output_tokens": 226,
+      "avg_cost_usd": 0.007764,
+      "cost_calculation": "1458 * 3.00/1M + 226 * 15.00/1M (~.008 per call)"
+    }
+  },
+  "per_claim_unit_economics": {
+    "truthful_verified_claim": {
+      "extract_share_usd": 0.00025,
+      "verify_cost_usd": 0.007764,
+      "llm_cost_usd": 0.008014,
+      "llm_tokens": 1923
+    },
+    "contradicted_lie_claim": {
+      "extract_share_usd": 0.00025,
+      "verify_cost_usd": 0.0,
+      "llm_cost_usd": 0.00025,
+      "llm_tokens": 465,
+      "notes": "Filtered deterministically by range/date bounds without triggering verify pass"
+    },
+    "blended_avg_llm_cost_per_claim": 0.004132
+  },
+  "per_company_audit": {
+    "average_claims_per_company": 2,
+    "cold_run_llm_cost_usd": 0.016027,
+    "crustdata_enrichment_cost_usd": 0.05,
+    "crustdata_cost_note": "unmeasured assumption",
+    "total_cold_cost_usd": 0.066027,
+    "cached_warm_run_llm_cost_usd": 0.0
+  },
+  "scale_projections": {
+    "100_companies": {
+      "total_claims": 200,
+      "cold_llm_cost_usd": 1.6,
+      "assumed_crustdata_cost_usd": 5.0,
+      "total_estimated_cost_usd": 6.6
+    },
+    "1000_companies": {
+      "total_claims": 2000,
+      "cold_llm_cost_usd": 16.03,
+      "assumed_crustdata_cost_usd": 50.0,
+      "total_estimated_cost_usd": 66.03
+    },
+    "10000_companies": {
+      "total_claims": 20000,
+      "cold_llm_cost_usd": 160.27,
+      "assumed_crustdata_cost_usd": 500.0,
+      "total_estimated_cost_usd": 660.27
+    }
+  }
+}

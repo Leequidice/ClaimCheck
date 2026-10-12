@@ -1,0 +1,10 @@
+Great progress. Fixes before anything else:
+
+Bug: make Crustdata models tolerate nulls (investors, and every list field: null becomes an empty list). A failed enrichment must be recorded as error with the reason and excluded from precision/recall, then reported separately as “enrichment failures”. It must never show as OK/unverifiable.
+Ground truth: rebuild eval/dataset.py from eval/companies.csv (the 10 sourced companies; fields: founded_year, round, round_amount_usd, round_date). Remove all companies and values you wrote from memory.
+Claim types: founded_year is an exact match. A historical-round claim (“raised $82M Series C in June 2025”) is checked against Crustdata’s funding_rounds list (amount ±10%, date within the month). Do not score total funding or headcount in the main benchmark; if kept, put them in a separate “informational” section with an as-of date and ±25% tolerance.
+Planted lies: generate them programmatically (year shifted 3 to 5, round amount x2.5, wrong round type, wrong date by a year).
+Diagnose every false alarm and every missed lie: list claim, ground truth, Crustdata value, verdict, and which side is wrong. Do not tune prompts to hit 100%. Keep a train/held-out split (tune on 5 companies, report on the other 5).
+Trim report evidence to only the fields used; no profile-picture URLs or unrelated people.
+Make the DoH DNS fallback opt-in via env var, confirm no secrets in state/*.json or git history, and confirm claim_check/claim_check/llm.py isn’t a nested-folder mistake.
+Save the current eval results as eval/results/baseline_before_fixes.json and commit each change through Entire.

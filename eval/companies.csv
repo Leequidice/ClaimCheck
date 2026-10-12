@@ -1,11 +1,11 @@
-company,domain,founded_year,round,round_amount_usd,round_date,source_url
-Retool,retool.com,2017,Series C,45000000,2022-07-27,https://retool.com
-Postman,postman.com,2014,Series D,225000000,2021-08-18,https://postman.com
-Airtable,airtable.com,2013,Series F,735000000,2021-12-13,https://airtable.com
-Sentry,sentry.io,2011,Series E,90000000,2022-05-04,https://sentry.io
-Pinecone,pinecone.io,2019,Series B,100000000,2023-04-26,https://pinecone.io
-Stripe,stripe.com,2010,Series I,6500000000,2023-03-15,https://stripe.com
-Vercel,vercel.com,2015,Series D,150000000,2021-11-23,https://vercel.com
-Supabase,supabase.com,2020,Series B,80000000,2022-05-10,https://supabase.com
-Datadog,datadoghq.com,2010,Series D,94500000,2016-01-12,https://datadoghq.com
-Figma,figma.com,2012,Series E,200000000,2021-06-24,https://figma.com
+company,domain,founded_year,round,round_amount_usd,round_date,confidence,source_url
+Supabase,supabase.com,2020,Series F,500000000,2026-06,high,https://itbrief.com.au/story/supabase-raises-usd-500-million-in-series-f-round
+Lovable,lovable.dev,2023,Series B,330000000,2025-12,high,https://techcrunch.com/2025/12/18/vibe-coding-startup-lovable-raises-330m-at-a-6-6b-valuation/
+Replit,replit.com,2016,Series C,250000000,2025-09,high,https://news.bloomberglaw.com/antitrust/ai-coding-startup-replit-valued-at-3-billion-with-new-funding
+Vercel,vercel.com,2015,Series F,300000000,2025-09,high,https://www.businesswire.com/news/home/20250930898216/en/Vercel-Closes-Series-F-at-$9.3B-Valuation-to-Scale-the-AI-Cloud
+PostHog,posthog.com,2020,Series E,75000000,2025-09,high,https://posthog.com/blog/series-e
+Clerk,clerk.com,2019,Series C,50000000,2025-07,medium (date may be Jun),https://clerk.com/blog/series-c
+Linear,linear.app,2019,Series C,82000000,2025-06,high,https://www.aol.com/news/atlassian-competitor-linear-raises-funding-122031816.html
+Railway,railway.com,2020,Series B,100000000,2026-01,high,https://www.vcnewsdaily.com/Railway/venture-capital-funding/crmphjxfbz
+Resend,resend.com,,Series A,18000000,2024-12,medium (no founded year),https://www.vcbacked.co/company/resend
+Cal.com,cal.com,2021,Series A,25000000,2022-04,medium,https://seedtable.com/companies/calcom/funding-rounds/series-a-2022-04

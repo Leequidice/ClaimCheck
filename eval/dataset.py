@@ -37,7 +37,7 @@ ROUND_SUBSTITUTIONS = {
 class SourcedCompany:
     company: str
     domain: str
-    founded_year: int
+    founded_year: Optional[int]
     round_type: str
     round_amount_usd: float
     round_date: str
@@ -73,7 +73,8 @@ def load_sourced_companies() -> List[SourcedCompany]:
             if not cname or not dom:
                 continue
 
-            yr = int(row["founded_year"])
+            raw_yr = (row.get("founded_year") or "").strip()
+            yr = int(raw_yr) if raw_yr and raw_yr.isdigit() else None
             r_type = row["round"].strip()
             r_amt = float(row["round_amount_usd"])
             r_dt = row["round_date"].strip()
@@ -96,27 +97,31 @@ def load_sourced_companies() -> List[SourcedCompany]:
     return companies
 
 
-def _format_date_human(iso_date: str) -> str:
-    """Format YYYY-MM-DD to 'Month YYYY' (e.g. 'July 2022')."""
+def _format_date_human(date_str: str) -> str:
+    """Format YYYY-MM-DD or YYYY-MM to 'Month YYYY' (e.g. 'July 2022', 'June 2026')."""
     try:
-        dt = datetime.strptime(iso_date, "%Y-%m-%d")
+        parts = date_str.strip().split("-")
+        yr = parts[0]
+        mo = parts[1] if len(parts) > 1 else "01"
+        dt = datetime(int(yr), int(mo), 1)
         return dt.strftime("%B %Y")
     except Exception:
-        return iso_date
+        return date_str
 
 
-def _shift_date_by_year(iso_date: str, years: int = 1) -> str:
-    """Shift an ISO date string by N years."""
+def _shift_date_by_year(date_str: str, years: int = 1) -> str:
+    """Shift an ISO date string (YYYY-MM-DD or YYYY-MM) by N years."""
     try:
-        parts = iso_date.split("-")
+        parts = date_str.strip().split("-")
         yr = int(parts[0]) + years
-        return f"{yr}-{parts[1]}-{parts[2]}"
+        rest = "-".join(parts[1:])
+        return f"{yr}-{rest}" if rest else f"{yr}"
     except Exception:
         return f"2018-01-01"
 
 
 def _format_usd_millions(amount: float) -> str:
-    """Format float amount to readable string (e.g. $45M, $6,500M)."""
+    """Format float amount to readable string (e.g. $45M, $6.5B)."""
     if amount >= 1_000_000_000:
         return f"${amount/1_000_000_000:.1f}B"
     elif amount >= 1_000_000:
@@ -129,7 +134,7 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
     
     Split: first `train_count` companies -> 'train' (tune), remainder -> 'test' (held-out).
     Programmatic planted lies:
-      - year shifted 3 to 5
+      - year shifted 3 to 5 (if founded_year exists)
       - round amount x2.5
       - wrong round type
       - wrong date by a year
@@ -145,10 +150,25 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
         # -------------------------------------------------------------
         # 1. Truthful Case
         # -------------------------------------------------------------
-        truth_pitch = (
-            f"{sc.company} was founded in {sc.founded_year}. "
-            f"The company secured a {amt_str} {sc.round_type} round in {date_human}."
-        )
+        expected_truth = {"funding": "verified"}
+        meta_truth = {
+            "true_round": sc.round_type,
+            "true_round_amount_usd": sc.round_amount_usd,
+            "true_round_date": sc.round_date,
+        }
+
+        if sc.founded_year is not None:
+            truth_pitch = (
+                f"{sc.company} was founded in {sc.founded_year}. "
+                f"The company secured a {amt_str} {sc.round_type} round in {date_human}."
+            )
+            expected_truth["founding_year"] = "verified"
+            meta_truth["true_founded_year"] = sc.founded_year
+        else:
+            truth_pitch = (
+                f"{sc.company} secured a {amt_str} {sc.round_type} round in {date_human}."
+            )
+
         cases.append(
             EvalCase(
                 case_id=f"{sc.domain}_truth",
@@ -157,24 +177,14 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
                 pitch_text=truth_pitch,
                 is_adversarial=False,
                 split=split,
-                expected_verdicts={
-                    "founding_year": "verified",
-                    "funding": "verified",
-                },
-                metadata={
-                    "true_founded_year": sc.founded_year,
-                    "true_round": sc.round_type,
-                    "true_round_amount_usd": sc.round_amount_usd,
-                    "true_round_date": sc.round_date,
-                },
+                expected_verdicts=expected_truth,
+                metadata=meta_truth,
             )
         )
 
         # -------------------------------------------------------------
         # 2. Programmatic Planted Lie Case
         # -------------------------------------------------------------
-        # Year shifted 3 to 5 (alternating 4 years)
-        fake_year = sc.founded_year - (4 if idx % 2 == 0 else 5)
         # Round amount x2.5
         fake_amount = sc.round_amount_usd * 2.5
         fake_amt_str = _format_usd_millions(fake_amount)
@@ -185,10 +195,31 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
         fake_iso_date = _shift_date_by_year(sc.round_date, years=1 if idx % 2 == 0 else -1)
         fake_date_human = _format_date_human(fake_iso_date)
 
-        lie_pitch = (
-            f"{sc.company} was founded in {fake_year}. "
-            f"The company secured a {fake_amt_str} {fake_round} round in {fake_date_human}."
-        )
+        expected_lie = {"funding": "contradicted"}
+        meta_lie = {
+            "planted_round": fake_round,
+            "planted_amount_usd": fake_amount,
+            "planted_date": fake_iso_date,
+            "true_round": sc.round_type,
+            "true_amount_usd": sc.round_amount_usd,
+            "true_date": sc.round_date,
+        }
+
+        if sc.founded_year is not None:
+            # Year shifted 3 to 5 (alternating 4 or 5 years)
+            fake_year = sc.founded_year - (4 if idx % 2 == 0 else 5)
+            lie_pitch = (
+                f"{sc.company} was founded in {fake_year}. "
+                f"The company secured a {fake_amt_str} {fake_round} round in {fake_date_human}."
+            )
+            expected_lie["founding_year"] = "contradicted"
+            meta_lie["planted_year"] = fake_year
+            meta_lie["true_year"] = sc.founded_year
+        else:
+            lie_pitch = (
+                f"{sc.company} secured a {fake_amt_str} {fake_round} round in {fake_date_human}."
+            )
+
         cases.append(
             EvalCase(
                 case_id=f"{sc.domain}_planted_lie",
@@ -197,20 +228,8 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
                 pitch_text=lie_pitch,
                 is_adversarial=True,
                 split=split,
-                expected_verdicts={
-                    "founding_year": "contradicted",
-                    "funding": "contradicted",
-                },
-                metadata={
-                    "planted_year": fake_year,
-                    "planted_round": fake_round,
-                    "planted_amount_usd": fake_amount,
-                    "planted_date": fake_iso_date,
-                    "true_year": sc.founded_year,
-                    "true_round": sc.round_type,
-                    "true_amount_usd": sc.round_amount_usd,
-                    "true_date": sc.round_date,
-                },
+                expected_verdicts=expected_lie,
+                metadata=meta_lie,
             )
         )
 

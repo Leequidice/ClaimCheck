@@ -1,0 +1,22 @@
+Documentation correction pass. Do not change any code, eval logic, prompts, or ground truth. Do not re-run the benchmark.
+
+1. README results section. Rewrite it from eval/results/ablation_legacy.json and ablation_evidence.json only:
+   - Remove "Maintained 100% on test truths". Held-out truthful claims are 8 verified of 9.
+   - Lead with truthful claims per mode as "N verified of 19", split train/held-out. State that in evidence mode the 2 non-verified truthful claims are Replit and Clerk (Crustdata date disagrees with the press release, cause unknown).
+   - Replace "Overall Precision 100%" with counts: lies caught N of 38, truthful claims flagged contradicted N of 19, per mode. If you keep a precision figure, state its definition and that the Replit/Clerk disagreements are excluded from it.
+   - Say "in this run" for the legacy vs evidence difference. State that it is a single run on 10 companies and that 2 false alarms (Vercel, PostHog) is a small sample.
+
+2. Add these to Limitations, in plain words:
+   - The hard-tier lies were generated outside the checker's tolerances by construction (amount x1.2-1.25 vs a ±10% bound, 3-month shift vs ±1 month), so 19 of 19 mostly confirms the tolerances are applied, not that subtle lies near the boundary are caught.
+   - The earlier cross-company collision check only tests that claim text contains the company name or the word "company", so it is weak evidence; do not present it as proof.
+   - LLM output can vary between runs; results are from one run per mode.
+
+3. Cost figures. Compute from state/llm_spend.json and the per-role token logs: mean LLM cost per company audit and per claim, measured. Keep the Crustdata per-lookup cost labeled "unmeasured assumption". Confirm the model name behind MODEL_EXTRACT and the per-million-token prices you used for it; if the $0.25/$1.25 rates do not match the actual model, correct them and recompute. Update eval/results/unit_economics.json, and in the README replace the sentence saying cfo.ai produced these numbers with: costs measured from the LLM spend log; Crustdata cost assumed; business model built separately in cfo.ai.
+
+4. Print a final table of: measured LLM cost per audit, per claim, assumed Crustdata cost, model names and prices used. I will paste it into cfo.ai.
+
+Commit through Entire with a clear message. Report the commit hash.
+
+---
+
+Continue

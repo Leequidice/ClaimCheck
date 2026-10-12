@@ -1,0 +1,34 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4QRRR5ASAS56HYX3GSE3YCJ",
+  "session_id": "3b7edeed-57fd-440c-93a8-a41846251c88",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-12T09:58:14.8812321Z",
+  "branch": "master",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [
+    "claim_check/auditor.py",
+    "claim_check/reasoner.py",
+    "claim_check/report.py",
+    "eval/harness.py"
+  ],
+  "agent": "Antigravity",
+  "model": "",
+  "turn_id": "56e35144654d",
+  "session_metrics": {
+    "turn_count": 6
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-12T09:58:14.6888662Z",
+    "agent_lines": 343,
+    "agent_removed": 89,
+    "human_added": 1824,
+    "human_modified": 4,
+    "human_removed": 0,
+    "total_committed": 2171,
+    "total_lines_changed": 2262,
+    "agent_percentage": 19.098143236074268,
+    "metric_version": 2
+  }
+}

@@ -78,19 +78,7 @@ class CrustdataClient:
         if self.offline:
             self.api_key = None
         else:
-            if api_key:
-                self.api_key = api_key
-            else:
-                try:
-                    self.api_key = get_crustdata_key()
-                except ConfigurationError:
-                    if not self.offline:
-                        # Allow initialization if offline fixture fallback is intended
-                        self.api_key = None
-                        self.offline = True
-                        logger.warning(
-                            "No CRUSTDATA_API_KEY found; falling back to offline fixture mode."
-                        )
+            self.api_key = api_key if api_key else get_crustdata_key()
 
     def _get_headers(self) -> Dict[str, str]:
         if not self.api_key:

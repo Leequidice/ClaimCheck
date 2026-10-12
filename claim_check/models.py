@@ -7,7 +7,15 @@ documentation (API version 2025-11-01).
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+
+
+def _empty_list_if_none(v: Any) -> Any:
+    return [] if v is None else v
+
+
+def _empty_dict_if_none(v: Any) -> Any:
+    return {} if v is None else v
 
 
 # =====================================================================
@@ -30,6 +38,11 @@ class CompanyBasicInfo(BaseModel):
     employee_count_range: Optional[str] = None
     markets: List[str] = Field(default_factory=list)
 
+    @field_validator("all_domains", "markets", mode="before")
+    @classmethod
+    def _coerce_lists(cls, v: Any) -> Any:
+        return _empty_list_if_none(v)
+
 
 class CompanyHeadcount(BaseModel):
     total: Optional[int] = None
@@ -39,16 +52,29 @@ class CompanyHeadcount(BaseModel):
     growth_percent: Dict[str, Any] = Field(default_factory=dict)
     growth_absolute: Dict[str, Any] = Field(default_factory=dict)
 
+    @field_validator(
+        "by_role_absolute", "by_role_percent", "by_region_absolute",
+        "growth_percent", "growth_absolute", mode="before"
+    )
+    @classmethod
+    def _coerce_dicts(cls, v: Any) -> Any:
+        return _empty_dict_if_none(v)
+
 
 class CompanyFunding(BaseModel):
     total_investment_usd: Optional[float] = None
     last_round_amount_usd: Optional[float] = None
     last_fundraise_date: Optional[str] = None
     last_round_type: Optional[str] = None
-    investors: List[str] = Field(default_factory=list)
+    investors: List[Any] = Field(default_factory=list)
     funding_rounds: List[Dict[str, Any]] = Field(default_factory=list)
     milestones: List[Dict[str, Any]] = Field(default_factory=list)
     acquisitions: List[Dict[str, Any]] = Field(default_factory=list)
+
+    @field_validator("investors", "funding_rounds", "milestones", "acquisitions", mode="before")
+    @classmethod
+    def _coerce_lists(cls, v: Any) -> Any:
+        return _empty_list_if_none(v)
 
 
 class CompanyLocations(BaseModel):
@@ -58,11 +84,21 @@ class CompanyLocations(BaseModel):
     street_address: Optional[str] = None
     all_office_addresses: List[Any] = Field(default_factory=list)
 
+    @field_validator("all_office_addresses", mode="before")
+    @classmethod
+    def _coerce_lists(cls, v: Any) -> Any:
+        return _empty_list_if_none(v)
+
 
 class CompanyPeople(BaseModel):
     founders: List[Dict[str, Any]] = Field(default_factory=list)
     cxos: List[Dict[str, Any]] = Field(default_factory=list)
     decision_makers: List[Dict[str, Any]] = Field(default_factory=list)
+
+    @field_validator("founders", "cxos", "decision_makers", mode="before")
+    @classmethod
+    def _coerce_lists(cls, v: Any) -> Any:
+        return _empty_list_if_none(v)
 
 
 class CompanyRevenue(BaseModel):
@@ -92,6 +128,11 @@ class CompanyEnrichItem(BaseModel):
     matched_on: str
     match_type: str
     matches: List[CompanyMatch] = Field(default_factory=list)
+
+    @field_validator("matches", mode="before")
+    @classmethod
+    def _coerce_lists(cls, v: Any) -> Any:
+        return _empty_list_if_none(v)
 
     @property
     def primary_match(self) -> Optional[CompanyData]:
@@ -123,6 +164,11 @@ class PersonExperience(BaseModel):
 class PersonEducation(BaseModel):
     schools: List[Dict[str, Any]] = Field(default_factory=list)
 
+    @field_validator("schools", mode="before")
+    @classmethod
+    def _coerce_lists(cls, v: Any) -> Any:
+        return _empty_list_if_none(v)
+
 
 class PersonData(BaseModel):
     crustdata_person_id: Optional[int] = None
@@ -143,6 +189,11 @@ class PersonEnrichItem(BaseModel):
     match_type: str
     match_status: str  # 'matched', 'not_found', 'redacted'
     matches: List[PersonMatch] = Field(default_factory=list)
+
+    @field_validator("matches", mode="before")
+    @classmethod
+    def _coerce_lists(cls, v: Any) -> Any:
+        return _empty_list_if_none(v)
 
     @property
     def primary_match(self) -> Optional[PersonData]:
@@ -172,6 +223,7 @@ class VerdictType(str, Enum):
     VERIFIED = "verified"
     CONTRADICTED = "contradicted"
     UNVERIFIABLE = "unverifiable"
+    ERROR = "error"
 
 
 class AtomicClaim(BaseModel):
@@ -206,6 +258,8 @@ class CompanyAuditReport(BaseModel):
     verified_count: int = 0
     contradicted_count: int = 0
     unverifiable_count: int = 0
+    error_count: int = 0
+    enrichment_error: Optional[str] = None
     results: List[ClaimAuditResult] = Field(default_factory=list)
     llm_usage: Optional[Dict[str, Any]] = None
     neatlogs_trace_id: Optional[str] = None

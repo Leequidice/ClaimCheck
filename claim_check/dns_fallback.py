@@ -1,4 +1,4 @@
-﻿"""Transparent DNS fallback for environments where local ISP DNS fails on cloud domains."""
+"""Transparent DNS fallback for environments where local ISP DNS fails on cloud domains."""
 
 from __future__ import annotations
 
@@ -34,9 +34,13 @@ def fallback_getaddrinfo(host: Any, port: Any, family: int = 0, type: int = 0, p
         raise
 
 
-def install_dns_fallback():
-    """Install transparent DNS fallback to survive flaky local DNS servers."""
+def install_dns_fallback(force: bool = False):
+    """Install DNS over HTTPS fallback if enabled via ENABLE_DOH_FALLBACK env var or force=True."""
     global _INSTALLED
-    if not _INSTALLED:
+    import os
+
+    opt_in = force or os.getenv("ENABLE_DOH_FALLBACK", "").lower() in ("true", "1", "yes")
+    if opt_in and not _INSTALLED:
         socket.getaddrinfo = fallback_getaddrinfo
         _INSTALLED = True
+        logger.info("DoH DNS fallback installed.")

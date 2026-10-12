@@ -10,6 +10,15 @@ try:
 except ImportError:
     neatlogs = None
 
+try:
+    from dotenv import load_dotenv
+    from pathlib import Path
+    _env_file = Path(__file__).resolve().parents[1] / ".env"
+    if _env_file.exists():
+        load_dotenv(dotenv_path=_env_file)
+except ImportError:
+    pass
+
 from claim_check.dns_fallback import install_dns_fallback
 install_dns_fallback()
 

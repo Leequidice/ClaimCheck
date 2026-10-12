@@ -1,0 +1,13 @@
+credentials in .env example
+
+---
+
+Create the .env file with credentials from the .env example file
+
+---
+
+The proxy offers: nova-micro, nova-lite, nova-pro, nova-2-lite, claude-haiku, claude-sonnet-4.6, claude-opus-4.6. Implement a small model router in config: claude-haiku for claim extraction and routine steps; claude-sonnet-4.6 only for source-conflict arbitration and the final verification pass. Make each role’s model configurable by env var (MODEL_EXTRACT, MODEL_ARBITER, MODEL_VERIFY). Never use opus unless I explicitly pass a flag. Log tokens and estimated cost per role per run, and keep the disk response cache. Then complete the earlier fixes (neatlogs init, no silent offline fallback, synthetic fixtures, new CSV schema) and continue to Step 2.
+
+---
+
+Continue

@@ -1,0 +1,57 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4QHPXCCWDVYDZ425KDY316H",
+  "session_id": "3b7edeed-57fd-440c-93a8-a41846251c88",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-12T07:54:52.9822364Z",
+  "branch": "master",
+  "checkpoints_count": 4,
+  "save_step_count": 1,
+  "files_touched": [
+    "claim_check/config.py",
+    "claim_check/crustdata.py"
+  ],
+  "agent": "Antigravity",
+  "model": "",
+  "turn_id": "8774c385f966",
+  "checkpoint_transcript_start": 278,
+  "transcript_lines_at_start": 278,
+  "session_metrics": {
+    "turn_count": 4
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-12T07:54:52.9408766Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 270,
+    "human_modified": 83,
+    "human_removed": 0,
+    "total_committed": 270,
+    "total_lines_changed": 353,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 100,
+      "user_lines_removed": 25,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "claim_check/config.py": 87,
+        "scripts/list_models.py": 13
+      },
+      "user_removed_per_file": {
+        "claim_check/config.py": 25
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 100,
+      "agent_lines_removed": 25
+    }
+  ]
+}

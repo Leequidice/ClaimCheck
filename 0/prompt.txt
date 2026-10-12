@@ -1,0 +1,9 @@
+Good work. Two things before anything else: (1) Run the unit-economics request from my earlier message and write eval/results/unit_economics.json plus a markdown table. (2) Print the neatlogs trace URLs for the legacy-mode runs on Vercel and PostHog (the two demoted claims) and the same two claims in evidence mode, so I can screenshot them side by side. Also list exactly what you changed in claim_check/crustdata.py and claim_check/state.py during the ablation work and why. Don’t change any more code until I reply.
+
+---
+
+continue
+
+---
+
+Fix eval/results/unit_economics.json (verify cost should be about $0.008 per call from the token counts; label the Crustdata cost as an unmeasured assumption; remove the human-analyst comparison; delete any unmeasured latency). Confirm the two ablation files were produced after the run-ID fix. Then write README.md with: what it does, setup, a demo command, the architecture, and a Results section using only the final ablation files: 17 of 19 truthful claims verified, 38 of 38 planted lies caught (19 easy and 19 hard, where hard lies were generated outside the checker’s tolerances), legacy verifier 2 false alarms (Vercel and PostHog, demoted on memory-based doubt) versus evidence verifier 0 (train split only; held-out 0 vs 0), and 2 data-source date disagreements (Replit, Clerk) with cause unknown. Include limitations: 10 companies, ground truth from press releases, earlier benchmark runs affected by a run-ID collision are excluded. Add a “Built with” section describing how neatlogs (traces, the legacy-vs-evidence comparison), Entire (checkpointed commits), and cfo.ai (business plan) were used. Commit through Entire. Then stop.

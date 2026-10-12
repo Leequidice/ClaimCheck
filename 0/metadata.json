@@ -1,0 +1,71 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4QYXMQXPN8XWBJ9XCKCEXRA",
+  "session_id": "3b7edeed-57fd-440c-93a8-a41846251c88",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-12T11:45:46.6619216Z",
+  "branch": "master",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "claim_check/auditor.py",
+    "claim_check/cli.py",
+    "claim_check/crustdata.py",
+    "claim_check/state.py",
+    "claim_check/verifier.py",
+    "eval/dataset.py",
+    "eval/harness.py"
+  ],
+  "agent": "Antigravity",
+  "model": "",
+  "turn_id": "185b6f3700fb",
+  "checkpoint_transcript_start": 909,
+  "transcript_lines_at_start": 909,
+  "session_metrics": {
+    "turn_count": 9
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-12T11:45:46.4906766Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 1666,
+    "total_committed": 0,
+    "total_lines_changed": 1668,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 7163,
+      "user_lines_removed": 1666,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "claim_check/auditor.py": 4,
+        "claim_check/cli.py": 9,
+        "claim_check/crustdata.py": 12,
+        "claim_check/state.py": 4,
+        "claim_check/verifier.py": 76,
+        "eval/dataset.py": 137,
+        "eval/harness.py": 297,
+        "eval/results/ablation_evidence.json": 2441,
+        "eval/results/ablation_legacy.json": 2475,
+        "state/llm_cache.json": 1705,
+        "state/llm_spend.json": 3
+      },
+      "user_removed_per_file": {
+        "claim_check/auditor.py": 2,
+        "claim_check/cli.py": 2,
+        "claim_check/crustdata.py": 6,
+        "claim_check/state.py": 3,
+        "claim_check/verifier.py": 20,
+        "eval/dataset.py": 39,
+        "eval/harness.py": 102,
+        "state/llm_cache.json": 1489,
+        "state/llm_spend.json": 3
+      }
+    }
+  ]
+}

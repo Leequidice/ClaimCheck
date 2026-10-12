@@ -1,0 +1,13 @@
+Where aremyou commiting to?
+
+---
+
+Push to https://github.com/Leequidice/ClaimCheck
+
+---
+
+logged in
+
+---
+
+Fix the README: (1) change “Maintained 100% on test truths” to “8 verified of 9”; (2) remove “Zero field-name hallucination”; (3) replace precision percentages with counts; (4) rewrite the cfo.ai section: report price $15, LLM cost $0.03 (measured), data cost $0.10 (assumption), fixed cost $100/month, about 99% gross margin and break-even at 7 audits, $99 subscription breaks even at 50 audits, all labeled as assumptions; (5) set the Entire link to entire.io; (6) update unit_economics.json to use $0.03 LLM and $0.10 data per audit; (7) copy Claim_Check___Financial_Model.xlsx into docs/, which I’ll add myself. Then commit through Entire and stop.

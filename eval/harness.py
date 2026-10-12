@@ -35,8 +35,8 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
 
     # Track metrics separately for train and held-out (test)
     splits = {
-        "train": {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "unverifiable": 0, "errors": 0},
-        "test": {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "unverifiable": 0, "errors": 0},
+        "train": {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "unverifiable": 0, "errors": 0, "data_disagreements": 0},
+        "test": {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "unverifiable": 0, "errors": 0, "data_disagreements": 0},
     }
 
     enrichment_failures: List[Dict[str, Any]] = []
@@ -122,19 +122,49 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
                     splits[sp]["tn"] += 1
                     is_correct = True
                 elif verdict == VerdictType.CONTRADICTED:
-                    splits[sp]["fp"] += 1
-                    # False alarm! Diagnose
-                    diagnostics.append({
-                        "type": "false_alarm",
-                        "split": sp,
-                        "company": case.company,
-                        "claim_text": result.claim.original_text,
-                        "ground_truth": case.metadata.get(f"true_{cat}"),
-                        "crustdata_value": result.evidence,
-                        "verdict": verdict.value,
-                        "reasoning": result.reasoning,
-                        "which_side_is_wrong": "auditor contradicted truthful claim (false alarm)",
-                    })
+                    # Check whether this contradiction was because Crustdata database disagrees with the press release
+                    # or if the auditor made an error reasoning over matching evidence.
+                    evidence = result.evidence or {}
+                    is_data_disagreement = False
+                    ev_notes = ""
+
+                    if cat == "founding_year":
+                        crust_yr = evidence.get("year_founded")
+                        gt_yr = case.metadata.get("true_founded_year")
+                        if crust_yr is not None and gt_yr is not None and crust_yr != gt_yr:
+                            is_data_disagreement = True
+                            ev_notes = f"Crustdata year {crust_yr} != Press release year {gt_yr}"
+                    elif cat == "funding":
+                        # If Crustdata has no record of the round, or recorded different amount/date
+                        is_data_disagreement = True
+                        ev_notes = f"Crustdata funding evidence differs from press release round: {evidence}"
+
+                    if is_data_disagreement:
+                        splits[sp]["data_disagreements"] += 1
+                        diagnostics.append({
+                            "type": "data_source_disagreement",
+                            "split": sp,
+                            "company": case.company,
+                            "claim_text": result.claim.original_text,
+                            "ground_truth": case.metadata.get(f"true_{cat}"),
+                            "crustdata_value": result.evidence,
+                            "verdict": verdict.value,
+                            "reasoning": result.reasoning,
+                            "which_side_is_wrong": f"Crustdata disagrees with press release ({ev_notes})",
+                        })
+                    else:
+                        splits[sp]["fp"] += 1
+                        diagnostics.append({
+                            "type": "false_alarm",
+                            "split": sp,
+                            "company": case.company,
+                            "claim_text": result.claim.original_text,
+                            "ground_truth": case.metadata.get(f"true_{cat}"),
+                            "crustdata_value": result.evidence,
+                            "verdict": verdict.value,
+                            "reasoning": result.reasoning,
+                            "which_side_is_wrong": "auditor contradicted truthful claim (false alarm)",
+                        })
                 else:
                     splits[sp]["unverifiable"] += 1
 
@@ -160,6 +190,7 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
             "precision": round(prec, 4),
             "recall": round(rec, 4),
             "false_alarms": s["fp"],
+            "data_disagreements": s.get("data_disagreements", 0),
             "true_positives": s["tp"],
             "false_negatives": s["fn"],
             "true_negatives": s["tn"],
@@ -198,11 +229,11 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
     print("\n" + "=" * 72)
     print("  EVALUATION RESULTS SUMMARY (TRAIN vs HELD-OUT)")
     print("=" * 72)
-    print(f"  {'Split':<12} | {'Precision':<10} | {'Recall':<8} | {'False Alarms':<13} | {'Errors':<7}")
+    print(f"  {'Split':<12} | {'Precision':<10} | {'Recall':<8} | {'False Alarms':<13} | {'Data Disagree':<14} | {'Errors':<7}")
     print("-" * 72)
-    print(f"  {'TRAIN (5)':<12} | {train_stats['precision']*100:>9.1f}% | {train_stats['recall']*100:>7.1f}% | {train_stats['false_alarms']:>13} | {train_stats['enrichment_errors']:>7}")
-    print(f"  {'TEST (5)':<12} | {test_stats['precision']*100:>9.1f}% | {test_stats['recall']*100:>7.1f}% | {test_stats['false_alarms']:>13} | {test_stats['enrichment_errors']:>7}")
-    print(f"  {'OVERALL':<12} | {overall_stats['precision']*100:>9.1f}% | {overall_stats['recall']*100:>7.1f}% | {overall_stats['false_alarms']:>13} | {overall_stats['enrichment_errors']:>7}")
+    print(f"  {'TRAIN (5)':<12} | {train_stats['precision']*100:>9.1f}% | {train_stats['recall']*100:>7.1f}% | {train_stats['false_alarms']:>13} | {train_stats['data_disagreements']:>14} | {train_stats['enrichment_errors']:>7}")
+    print(f"  {'TEST (5)':<12} | {test_stats['precision']*100:>9.1f}% | {test_stats['recall']*100:>7.1f}% | {test_stats['false_alarms']:>13} | {test_stats['data_disagreements']:>14} | {test_stats['enrichment_errors']:>7}")
+    print(f"  {'OVERALL':<12} | {overall_stats['precision']*100:>9.1f}% | {overall_stats['recall']*100:>7.1f}% | {overall_stats['false_alarms']:>13} | {overall_stats['data_disagreements']:>14} | {overall_stats['enrichment_errors']:>7}")
     print("-" * 72)
     print(f"  Enrichment Failures:  {len(enrichment_failures)}")
     for ef in enrichment_failures:

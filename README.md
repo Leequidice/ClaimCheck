@@ -133,50 +133,51 @@ Each company generates 3 paired cases:
 
 ### Final Ablation Results Summary
 
-*Sourced strictly from `eval/results/ablation_legacy.json` and `eval/results/ablation_evidence.json`:*
+*Sourced strictly from `eval/results/ablation_legacy.json` and `eval/results/ablation_evidence.json` (one run per mode):*
 
-| Metric | Legacy Verifier Mode | Evidence Verifier Mode | Delta / Impact |
+| Metric | Legacy Verifier Mode | Evidence Verifier Mode | Notes |
 | :--- | :--- | :--- | :--- |
-| **Truthful Claims Verified** | 15 verified of 19 | **17 verified of 19** | **+2 genuine rounds confirmed** |
-| ↳ Train Split (5 companies) | 7 verified of 10 | **9 verified of 10** | +2 (Vercel & PostHog protected) |
-| ↳ Held-Out Test Split (5 companies) | 8 verified of 9 | **8 verified of 9** | Maintained 100% on test truths |
-| **Planted Lies Caught** | **38 caught of 38** (100%) | **38 caught of 38** (100%) | 100% adversarial recall |
-| ↳ Easy-Tier Lies | 19 caught of 19 (100%) | **19 caught of 19** (100%) | 100% easy lie recall |
-| ↳ Hard-Tier Lies | 19 caught of 19 (100%) | **19 caught of 19** (100%) | 100% hard lie recall |
-| **False Alarms (Train Split)** | **2** | **0** | **-2 false alarms eliminated** |
-| **False Alarms (Held-Out Split)**| **0** | **0** | 0 false alarms on held-out test |
-| **Overall False Alarm Count** | **2** | **0** | **Zero false alarms overall** |
-| **Overall Precision** | 95.0% | **100.0%** | **+5.0% precision** |
-| **Data-Source Date Disagreements** | 2 (Replit, Clerk) | 2 (Replit, Clerk) | Reported separately (cause unknown) |
+| **Truthful Claims Verified** | **15 verified of 19** | **17 verified of 19** | Replit & Clerk date disagreements in both modes |
+| ↳ Train Split (5 companies) | 7 verified of 10 | 9 verified of 10 | Vercel and PostHog demoted in legacy mode |
+| ↳ Held-Out Test Split (5 companies) | 8 verified of 9 | 8 verified of 9 | Clerk date differs from Crustdata |
+| **Planted Lies Caught** | **38 caught of 38** | **38 caught of 38** | Total across easy and hard tiers |
+| ↳ Easy-Tier Lies | 19 caught of 19 | 19 caught of 19 | 100% caught across both splits |
+| ↳ Hard-Tier Lies | 19 caught of 19 | 19 caught of 19 | Generated outside checker tolerances |
+| **Truthful Claims Flagged Contradicted (False Alarms)** | **2 flagged of 19** | **0 flagged of 19** | In this run: train split 2 vs 0; held-out 0 vs 0 |
+| ↳ Train Split (5 companies) | 2 of 10 (Vercel, PostHog) | 0 of 10 | Demoted on memory-based doubt in legacy mode |
+| ↳ Held-Out Test Split (5 companies) | 0 of 9 | 0 of 9 | 0 false alarms on held-out test in both modes |
+| **Overall Precision** (excl. Replit/Clerk disagreements) | 95.0% (38 / 40) | 100.0% (38 / 38) | Defined as Lies Caught / (Lies Caught + False Alarms) |
+| **Data-Source Date Disagreements** | 2 of 19 (Replit, Clerk) | 2 of 19 (Replit, Clerk) | Crustdata date disagrees with press release; cause unknown |
 
-### Key Findings
+### Key Findings in This Run
 
-1. **Elimination of False Alarms**:
-   - In `legacy` mode, the second-pass verifier demoted **Vercel** ($300M Series F, Sep 2025) and **PostHog** ($75M Series E, Sep 2025) to `contradicted` based on memory-based skepticism about future 2025 dates and rapid round cadences. Both were false alarms because Crustdata records directly matched the press releases (`2025-09-30` for Vercel, `2025-09-29` for PostHog).
-   - In `evidence` mode, the strict evidence-based demotion rule eliminated both false alarms in the Train split (dropping false alarms from 2 to 0) and raised verified truthful claims from 15 of 19 to 17 of 19.
-2. **100% Hard-Tier Adversarial Recall**:
-   - The checker caught all 19 of 19 hard lies (and 19 of 19 easy lies) across both Train and Held-Out Test splits without prompt tuning.
-   - The ±10% amount bound and ±1 month date tolerance accurately flagged all hard-tier boundary shifts (amounts shifted by 20–25%, dates shifted by 3 months, founded years shifted by 1 year, and adjacent round changes).
+1. **Truthful Claims Verified and False Alarms**:
+   - In **evidence mode**, **17 of 19** truthful claims were verified (Train: 9 of 10, Held-Out Test: 8 of 9). The only 2 non-verified truthful claims were **Replit** and **Clerk**, where the Crustdata database record dates disagree with the press-release ground truth (cause unknown).
+   - In **legacy mode**, **15 of 19** truthful claims were verified. The verifier demoted **Vercel** ($300M Series F, Sep 2025) and **PostHog** ($75M Series E, Sep 2025) to `contradicted` based on memory-based skepticism about future 2025 dates and funding cadence, producing 2 false alarms in the Train split (0 in held-out test).
+   - In this run, evidence mode had 0 false alarms versus 2 in legacy mode. Note that this is a single run on 10 companies, and 2 false alarms (Vercel, PostHog) is a small sample.
+2. **Planted Lies Caught**:
+   - **38 of 38** planted lies were caught across both modes (19 easy of 19, 19 hard of 19).
 3. **Data-Source Date Disagreements (Replit & Clerk)**:
-   - For **Replit** (Press release: `2025-09`; Crustdata milestone: `2025-07-30`) and **Clerk** (Press release: `2025-07`; Crustdata milestone: `2025-10-15`), the Crustdata database disagrees with the press release dates.
-   - These 2 cases are logged separately under `data_source_disagreements_raw` with cause marked as **unknown**, without asserting why dates differ or penalizing agent reasoning.
+   - For **Replit** (Press release: `2025-09`; Crustdata milestone: `2025-07-30`) and **Clerk** (Press release: `2025-07`; Crustdata milestone: `2025-10-15`), Crustdata records dates differing by 2 and 3 months respectively from the press releases. The cause of these date differences is marked as **unknown**, and they are reported separately as data-source disagreements rather than auditor errors.
 
 ---
 
 ## Limitations
 
-1. **Benchmark Scope**: The evaluation benchmark is currently built on 10 tech startups/companies (5 Train, 5 Held-out Test).
-2. **Ground Truth Sourcing**: Ground-truth funding data is sourced directly from publicly accessible press releases and startup blogs, which can occasionally record different calendar months than corporate registry filings.
-3. **Excluded Historical Runs**: Earlier intermediate test runs affected by an earlier run-ID collision bug (fixed via microsecond timestamping and random UUID suffixes in `claim_check/state.py`) are strictly excluded from the benchmark metrics.
+- **Dataset Size**: The benchmark evaluates 10 companies (5 Train, 5 Held-out Test); 2 false alarms in the ablation is a small sample.
+- **Ground Truth Sourcing**: Ground truth is sourced directly from press releases, which may record different announcement or effective dates than primary regulatory filings.
+- **Hard-Tier Construction**: The hard-tier lies were generated outside the checker's tolerances by construction (amount x1.2–1.25 vs a ±10% bound, 3-month shift vs ±1 month), so 19 of 19 mostly confirms the tolerances are applied, not that subtle lies near the boundary are caught.
+- **Run-ID Collision Check**: The earlier cross-company collision check only tests that claim text contains the company name or the word "company", so it is weak evidence; do not present it as proof. Earlier intermediate benchmark runs affected by an earlier run-ID collision bug are excluded from the reported figures.
+- **Run Variance**: LLM outputs can vary between runs; the reported results are from one run per mode.
 
 ---
 
 ## Built With
 
-- **[Neatlogs](https://neatlogs.com)**: Full observability and distributed tracing across all agent audit pipelines. Every run emits structured spans (`company_audit_run`, `extract_claims`, `crustdata.enrich`, `verifier.independent_pass`). Neatlogs traces provide the side-by-side evidence comparison between legacy demotions and evidence confirmations:
+- **[Neatlogs](https://neatlogs.com)**: Distributed tracing and observability across the audit pipeline. Emits structured spans (`company_audit_run`, `extract_claims`, `crustdata.enrich`, `verifier.independent_pass`). Neatlogs traces capture the side-by-side comparison between legacy demotions and evidence confirmations in this run:
   - *Vercel Legacy Demotion Trace:* [https://neatlogs.com/traces/b6d27753f38a6687e52f7b88c9f61632](https://neatlogs.com/traces/b6d27753f38a6687e52f7b88c9f61632)
   - *Vercel Evidence Confirmation Trace:* [https://neatlogs.com/traces/26c82e806766b88a44b7f7ad81004b8c](https://neatlogs.com/traces/26c82e806766b88a44b7f7ad81004b8c)
   - *PostHog Legacy Demotion Trace:* [https://neatlogs.com/traces/70d18172f9b89de1d50eb85bd60e33e5](https://neatlogs.com/traces/70d18172f9b89de1d50eb85bd60e33e5)
   - *PostHog Evidence Confirmation Trace:* [https://neatlogs.com/traces/ed439e200f70b76a8176af7a5680f763](https://neatlogs.com/traces/ed439e200f70b76a8176af7a5680f763)
-- **[Entire](https://entire.dev)**: Checkpointed git commit tracking for AI-driven development. Every change and evaluation experiment was committed through Entire with verifiable session checkpoint hashes (`entire enable -y --agent antigravity`).
-- **[cfo.ai](https://cfo.ai)**: Used to model unit economics, API credit allocation, token budgets, and cost projections (`eval/results/unit_economics.json`), showing a blended LLM audit cost of ~$0.016 per company with zero cost on warm cache hits.
+- **[Entire](https://entire.dev)**: Checkpointed git commit tracking for AI-assisted development. Every code change and evaluation step was committed through Entire with verifiable session checkpoint hashes (`entire enable -y --agent antigravity`).
+- **[cfo.ai](https://cfo.ai)**: Costs measured from the LLM spend log; Crustdata cost assumed; business model built separately in cfo.ai.

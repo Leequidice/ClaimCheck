@@ -1,0 +1,64 @@
+Project: Claim Check. A Python CLI agent that audits a company’s public claims. Input: a company URL or pasted pitch text. Output: a report where every checkable claim is labeled verified, contradicted, or unverifiable, with evidence, source, and confidence.
+
+Hard requirements
+
+Pipeline: (a) extract atomic, checkable claims from the text (headcount, funding, founding year, location, founder backgrounds, customer counts); (b) for each claim, plan which evidence source to query; (c) fetch evidence from the Crustdata API (read the current docs for company enrichment and people endpoints; do not guess field names); (d) when sources disagree, decide which to trust and record the reasoning; (e) emit a verdict.
+Reasoning rules: treat claims as ranges, not exact numbers (e.g. “40 employees” vs. 46 in the data is verified; vs. 120 is contradicted). Never mark a claim verified without at least one cited data point. Use “unverifiable” when evidence is missing instead of guessing.
+State and recovery: save progress per claim to JSON so a crashed run resumes. Retry failed API calls with backoff. A single failed claim must not abort the whole run.
+Verification step: a second independent pass re-checks every “verified” verdict by looking for contradicting evidence before the report is finalized.
+Models: call models through the LiteLLM OpenAI-compatible endpoint with the team key. Keep calls cheap; the budget is $20 total.
+neatlogs: pip install neatlogs, call neatlogs.init(...) from the first commit, and read docs.neatlogs.com and the hackathon skill for setup. Every claim’s verdict path should appear as traceable spans.
+Entire: set up Entire in the repo following its docs and commit through it, so each AI-made change carries a checkpoint.
+Evaluation harness (most important): build eval/ containing about 20 real companies with ground-truth values I will supply, plus altered copies with planted lies (inflated headcount, fake funding round, false founding year). Report precision, recall, and false-alarm count per run. Save every run’s results so runs can be compared.
+README: setup, a demo run, eval results table, and a “before/after a fix” section with neatlogs trace screenshots.
+
+Order of work: (1) Crustdata client and one working enrichment call, (2) claim extractor, (3) end-to-end on one company, (4) state and resume, (5) verification pass, (6) eval harness, (7) polish. Commit small. Ask me before adding scope.
+
+---
+
+Still enabling?
+
+---
+
+Thanks. Before I fill in credentials: (1) Create .env.example and add .env to .gitignore now, and load all keys from environment variables only. Never hardcode them or print them in logs. (2) The LiteLLM base URL you assumed looks wrong. Leave it as a required env var with no default, and I’ll supply the real one. (3) Start Step 1 now without keys: read the current Crustdata API docs (company enrichment and people endpoints) and write the client with typed response models, retry with backoff, and a recorded-fixture mode so we can test offline. Don’t guess field names; if the docs are unreachable, tell me. (4) Create eval/companies.csv with columns company, domain, true_headcount, true_funding_usd, true_founded_year, source_url and leave the rows empty for me to fill. Commit through Entire in small steps.
+
+---
+
+credentials in .env example
+
+---
+
+Create the .env file with credentials from the .env example file
+
+---
+
+The proxy offers: nova-micro, nova-lite, nova-pro, nova-2-lite, claude-haiku, claude-sonnet-4.6, claude-opus-4.6. Implement a small model router in config: claude-haiku for claim extraction and routine steps; claude-sonnet-4.6 only for source-conflict arbitration and the final verification pass. Make each role’s model configurable by env var (MODEL_EXTRACT, MODEL_ARBITER, MODEL_VERIFY). Never use opus unless I explicitly pass a flag. Log tokens and estimated cost per role per run, and keep the disk response cache. Then complete the earlier fixes (neatlogs init, no silent offline fallback, synthetic fixtures, new CSV schema) and continue to Step 2.
+
+---
+
+Continue
+
+---
+
+Done?
+
+---
+
+Great progress. Fixes before anything else:
+
+Bug: make Crustdata models tolerate nulls (investors, and every list field: null becomes an empty list). A failed enrichment must be recorded as error with the reason and excluded from precision/recall, then reported separately as “enrichment failures”. It must never show as OK/unverifiable.
+Ground truth: rebuild eval/dataset.py from eval/companies.csv (the 10 sourced companies; fields: founded_year, round, round_amount_usd, round_date). Remove all companies and values you wrote from memory.
+Claim types: founded_year is an exact match. A historical-round claim (“raised $82M Series C in June 2025”) is checked against Crustdata’s funding_rounds list (amount ±10%, date within the month). Do not score total funding or headcount in the main benchmark; if kept, put them in a separate “informational” section with an as-of date and ±25% tolerance.
+Planted lies: generate them programmatically (year shifted 3 to 5, round amount x2.5, wrong round type, wrong date by a year).
+Diagnose every false alarm and every missed lie: list claim, ground truth, Crustdata value, verdict, and which side is wrong. Do not tune prompts to hit 100%. Keep a train/held-out split (tune on 5 companies, report on the other 5).
+Trim report evidence to only the fields used; no profile-picture URLs or unrelated people.
+Make the DoH DNS fallback opt-in via env var, confirm no secrets in state/*.json or git history, and confirm claim_check/claim_check/llm.py isn’t a nested-folder mistake.
+Save the current eval results as eval/results/baseline_before_fixes.json and commit each change through Entire.
+
+---
+
+Stop and fix the evaluation design. (1) Ground truth must be independent of Crustdata. I’ve replaced eval/companies.csv with press-release-sourced values. Use it as-is; never write or overwrite ground truth from Crustdata. Treat ‘Crustdata disagrees with press release’ as its own reported category (data-source disagreement), not as an agent error. (2) Rebuild the dataset from the new CSV, keep a 5/5 train/held-out split, and generate planted lies programmatically as before. Skip a company’s founded_year check when blank. Accept a round date within ±1 month. (3) Verifier rule: the second pass may demote verified to contradicted only if it cites contradicting evidence from the retrieved data or a second retrieved source. Memory-based doubt lowers confidence but doesn’t change the verdict. (4) For historical-round claims, read only the rounds/milestones list, never last_round_type. (5) Tell me exactly what you changed in reasoner.py after the last benchmark run (the two edits after you read the diagnostics) and whether you re-ran the benchmark after them. Report the new train and held-out numbers separately, with every false alarm and miss diagnosed, including which side (agent, Crustdata, or ground truth) was wrong and the evidence for that. Don’t tune prompts to hit targets. Commit each step through Entire.
+
+---
+
+continue

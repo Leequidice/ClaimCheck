@@ -1,40 +1,47 @@
-"""Evaluation dataset loader and synthetic lie generator."""
+"""Evaluation dataset loader and programmatic planted lie generator.
+
+Strictly sourced from eval/companies.csv (fields: company, domain, founded_year, round,
+round_amount_usd, round_date, source_url).
+All planted lies are generated programmatically:
+  - founded_year shifted 3 to 5 years
+  - round_amount_usd multiplied by 2.5
+  - wrong round type (e.g. Series A -> Series D, Seed -> Series B)
+  - wrong date by a year (e.g. +1 year or -1 year)
+"""
 
 from __future__ import annotations
 
 import csv
-import json
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CSV_PATH = ROOT_DIR / "eval" / "companies.csv"
-BENCHMARK_PATH = ROOT_DIR / "eval" / "benchmark_companies.json"
 
-# Curated benchmark of 20 real companies with verified ground-truth values
-DEFAULT_BENCHMARK = [
-    {"company": "Retool", "domain": "retool.com", "true_headcount": 416, "true_funding_usd": 141000000, "true_founded_year": 2017, "source_url": "https://retool.com"},
-    {"company": "Stripe", "domain": "stripe.com", "true_headcount": 17058, "true_funding_usd": 10440247725, "true_founded_year": 2010, "source_url": "https://stripe.com"},
-    {"company": "Figma", "domain": "figma.com", "true_headcount": 3135, "true_funding_usd": 1448624736, "true_founded_year": 2012, "source_url": "https://figma.com"},
-    {"company": "Notion", "domain": "notion.so", "true_headcount": 600, "true_funding_usd": 343000000, "true_founded_year": 2013, "source_url": "https://notion.so"},
-    {"company": "Supabase", "domain": "supabase.com", "true_headcount": 110, "true_funding_usd": 116000000, "true_founded_year": 2020, "source_url": "https://supabase.com"},
-    {"company": "Vercel", "domain": "vercel.com", "true_headcount": 550, "true_funding_usd": 563000000, "true_founded_year": 2015, "source_url": "https://vercel.com"},
-    {"company": "Datadog", "domain": "datadoghq.com", "true_headcount": 5200, "true_funding_usd": 148000000, "true_founded_year": 2010, "source_url": "https://datadoghq.com"},
-    {"company": "Snowflake", "domain": "snowflake.com", "true_headcount": 7000, "true_funding_usd": 2100000000, "true_founded_year": 2012, "source_url": "https://snowflake.com"},
-    {"company": "Canva", "domain": "canva.com", "true_headcount": 4500, "true_funding_usd": 570000000, "true_founded_year": 2012, "source_url": "https://canva.com"},
-    {"company": "Postman", "domain": "postman.com", "true_headcount": 600, "true_funding_usd": 433000000, "true_founded_year": 2014, "source_url": "https://postman.com"},
-    {"company": "Airtable", "domain": "airtable.com", "true_headcount": 900, "true_funding_usd": 1400000000, "true_founded_year": 2012, "source_url": "https://airtable.com"},
-    {"company": "GitLab", "domain": "gitlab.com", "true_headcount": 2100, "true_funding_usd": 413000000, "true_founded_year": 2011, "source_url": "https://gitlab.com"},
-    {"company": "Sentry", "domain": "sentry.io", "true_headcount": 400, "true_funding_usd": 217000000, "true_founded_year": 2012, "source_url": "https://sentry.io"},
-    {"company": "Temporal", "domain": "temporal.io", "true_headcount": 180, "true_funding_usd": 120000000, "true_founded_year": 2019, "source_url": "https://temporal.io"},
-    {"company": "Linear", "domain": "linear.app", "true_headcount": 60, "true_funding_usd": 52000000, "true_founded_year": 2019, "source_url": "https://linear.app"},
-    {"company": "Pinecone", "domain": "pinecone.io", "true_headcount": 120, "true_funding_usd": 138000000, "true_founded_year": 2019, "source_url": "https://pinecone.io"},
-    {"company": "LangChain", "domain": "langchain.com", "true_headcount": 45, "true_funding_usd": 35000000, "true_founded_year": 2022, "source_url": "https://langchain.com"},
-    {"company": "Anthropic", "domain": "anthropic.com", "true_headcount": 500, "true_funding_usd": 7600000000, "true_founded_year": 2021, "source_url": "https://anthropic.com"},
-    {"company": "Scale AI", "domain": "scale.com", "true_headcount": 900, "true_funding_usd": 1600000000, "true_founded_year": 2016, "source_url": "https://scale.com"},
-    {"company": "Brex", "domain": "brex.com", "true_headcount": 1100, "true_funding_usd": 1500000000, "true_founded_year": 2017, "source_url": "https://brex.com"},
-]
+# Alternate round type substitution map
+ROUND_SUBSTITUTIONS = {
+    "seed": "Series B",
+    "series a": "Series D",
+    "series b": "Series F",
+    "series c": "Series A",
+    "series d": "Series A",
+    "series e": "Series B",
+    "series f": "Series C",
+    "series i": "Series B",
+}
+
+
+@dataclass
+class SourcedCompany:
+    company: str
+    domain: str
+    founded_year: int
+    round_type: str
+    round_amount_usd: float
+    round_date: str
+    source_url: str
 
 
 @dataclass
@@ -44,93 +51,165 @@ class EvalCase:
     domain: str
     pitch_text: str
     is_adversarial: bool
+    split: str  # 'train' or 'test' (held-out)
     expected_verdicts: Dict[str, str]  # claim_category -> 'verified' | 'contradicted'
+    metadata: Dict[str, Any]
 
 
-def load_raw_companies() -> List[Dict[str, Any]]:
-    """Load companies from companies.csv if populated, or fallback to default benchmark."""
-    companies = []
-    if CSV_PATH.exists():
-        with open(CSV_PATH, "r", encoding="utf-8-sig") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                if row.get("company") and row.get("domain"):
-                    try:
-                        hc = int(row["true_headcount"]) if row.get("true_headcount") else None
-                        fnd = float(row["true_funding_usd"]) if row.get("true_funding_usd") else None
-                        yr = int(row["true_founded_year"]) if row.get("true_founded_year") else None
-                        companies.append({
-                            "company": row["company"].strip(),
-                            "domain": row["domain"].strip(),
-                            "true_headcount": hc,
-                            "true_funding_usd": fnd,
-                            "true_founded_year": yr,
-                            "source_url": row.get("source_url", "").strip(),
-                        })
-                    except Exception:
-                        continue
+def load_sourced_companies() -> List[SourcedCompany]:
+    """Load companies strictly from eval/companies.csv.
+    
+    Raises FileNotFoundError or ValueError if missing or invalid.
+    """
+    if not CSV_PATH.exists():
+        raise FileNotFoundError(f"Required benchmark dataset {CSV_PATH} not found.")
 
-    if not companies:
-        companies = DEFAULT_BENCHMARK
+    companies: List[SourcedCompany] = []
+    with open(CSV_PATH, "r", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            cname = (row.get("company") or "").strip()
+            dom = (row.get("domain") or "").strip()
+            if not cname or not dom:
+                continue
+
+            yr = int(row["founded_year"])
+            r_type = row["round"].strip()
+            r_amt = float(row["round_amount_usd"])
+            r_dt = row["round_date"].strip()
+            s_url = (row.get("source_url") or "").strip()
+
+            companies.append(
+                SourcedCompany(
+                    company=cname,
+                    domain=dom,
+                    founded_year=yr,
+                    round_type=r_type,
+                    round_amount_usd=r_amt,
+                    round_date=r_dt,
+                    source_url=s_url,
+                )
+            )
+
+    if len(companies) < 10:
+        raise ValueError(f"Expected at least 10 sourced companies in {CSV_PATH}, found {len(companies)}.")
     return companies
 
 
-def generate_eval_cases() -> List[EvalCase]:
-    """Generate pairs of truthful and altered (planted lies) eval test cases."""
-    raw = load_raw_companies()
+def _format_date_human(iso_date: str) -> str:
+    """Format YYYY-MM-DD to 'Month YYYY' (e.g. 'July 2022')."""
+    try:
+        dt = datetime.strptime(iso_date, "%Y-%m-%d")
+        return dt.strftime("%B %Y")
+    except Exception:
+        return iso_date
+
+
+def _shift_date_by_year(iso_date: str, years: int = 1) -> str:
+    """Shift an ISO date string by N years."""
+    try:
+        parts = iso_date.split("-")
+        yr = int(parts[0]) + years
+        return f"{yr}-{parts[1]}-{parts[2]}"
+    except Exception:
+        return f"2018-01-01"
+
+
+def _format_usd_millions(amount: float) -> str:
+    """Format float amount to readable string (e.g. $45M, $6,500M)."""
+    if amount >= 1_000_000_000:
+        return f"${amount/1_000_000_000:.1f}B"
+    elif amount >= 1_000_000:
+        return f"${amount/1_000_000:.0f}M"
+    return f"${amount:,.0f}"
+
+
+def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
+    """Generate paired truthful and programmatic planted lie cases.
+    
+    Split: first `train_count` companies -> 'train' (tune), remainder -> 'test' (held-out).
+    Programmatic planted lies:
+      - year shifted 3 to 5
+      - round amount x2.5
+      - wrong round type
+      - wrong date by a year
+    """
+    sourced = load_sourced_companies()
     cases: List[EvalCase] = []
 
-    for item in raw:
-        cname = item["company"]
-        dom = item["domain"]
-        hc = item["true_headcount"]
-        fnd = item["true_funding_usd"]
-        yr = item["true_founded_year"]
+    for idx, sc in enumerate(sourced):
+        split = "train" if idx < train_count else "test"
+        date_human = _format_date_human(sc.round_date)
+        amt_str = _format_usd_millions(sc.round_amount_usd)
 
-        # Case 1: Truthful claim text
-        fnd_str = f"${fnd/1_000_000:.0f}M" if fnd and fnd >= 1_000_000 else f"${fnd:,.0f}"
-        truth_text = (
-            f"{cname} was founded in {yr}. "
-            f"The company has raised approximately {fnd_str} in funding "
-            f"and currently has around {hc} employees."
+        # -------------------------------------------------------------
+        # 1. Truthful Case
+        # -------------------------------------------------------------
+        truth_pitch = (
+            f"{sc.company} was founded in {sc.founded_year}. "
+            f"The company secured a {amt_str} {sc.round_type} round in {date_human}."
         )
         cases.append(
             EvalCase(
-                case_id=f"{dom}_truth",
-                company=cname,
-                domain=dom,
-                pitch_text=truth_text,
+                case_id=f"{sc.domain}_truth",
+                company=sc.company,
+                domain=sc.domain,
+                pitch_text=truth_pitch,
                 is_adversarial=False,
+                split=split,
                 expected_verdicts={
                     "founding_year": "verified",
                     "funding": "verified",
-                    "headcount": "verified",
+                },
+                metadata={
+                    "true_founded_year": sc.founded_year,
+                    "true_round": sc.round_type,
+                    "true_round_amount_usd": sc.round_amount_usd,
+                    "true_round_date": sc.round_date,
                 },
             )
         )
 
-        # Case 2: Altered copy with planted lies (inflated headcount, fake funding, false founding year)
-        fake_hc = (hc * 5) if hc else 2000
-        fake_fnd = (fnd * 10) if fnd else 500000000
-        fake_yr = (yr - 15) if yr else 1995
-        fake_fnd_str = f"${fake_fnd/1_000_000:.0f}M" if fake_fnd >= 1_000_000 else f"${fake_fnd:,.0f}"
+        # -------------------------------------------------------------
+        # 2. Programmatic Planted Lie Case
+        # -------------------------------------------------------------
+        # Year shifted 3 to 5 (alternating 4 years)
+        fake_year = sc.founded_year - (4 if idx % 2 == 0 else 5)
+        # Round amount x2.5
+        fake_amount = sc.round_amount_usd * 2.5
+        fake_amt_str = _format_usd_millions(fake_amount)
+        # Wrong round type
+        norm_r = sc.round_type.lower().strip()
+        fake_round = ROUND_SUBSTITUTIONS.get(norm_r, "Series Z")
+        # Wrong date by a year
+        fake_iso_date = _shift_date_by_year(sc.round_date, years=1 if idx % 2 == 0 else -1)
+        fake_date_human = _format_date_human(fake_iso_date)
 
-        lie_text = (
-            f"{cname} was founded back in {fake_yr}. "
-            f"We have secured over {fake_fnd_str} in private capital "
-            f"and employ a massive workforce of {fake_hc} employees."
+        lie_pitch = (
+            f"{sc.company} was founded in {fake_year}. "
+            f"The company secured a {fake_amt_str} {fake_round} round in {fake_date_human}."
         )
         cases.append(
             EvalCase(
-                case_id=f"{dom}_planted_lie",
-                company=cname,
-                domain=dom,
-                pitch_text=lie_text,
+                case_id=f"{sc.domain}_planted_lie",
+                company=sc.company,
+                domain=sc.domain,
+                pitch_text=lie_pitch,
                 is_adversarial=True,
+                split=split,
                 expected_verdicts={
                     "founding_year": "contradicted",
                     "funding": "contradicted",
-                    "headcount": "contradicted",
+                },
+                metadata={
+                    "planted_year": fake_year,
+                    "planted_round": fake_round,
+                    "planted_amount_usd": fake_amount,
+                    "planted_date": fake_iso_date,
+                    "true_year": sc.founded_year,
+                    "true_round": sc.round_type,
+                    "true_amount_usd": sc.round_amount_usd,
+                    "true_date": sc.round_date,
                 },
             )
         )

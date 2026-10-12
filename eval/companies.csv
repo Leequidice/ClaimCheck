@@ -1,1 +1,11 @@
-﻿company,domain,true_headcount,true_funding_usd,true_founded_year,source_url
+company,domain,founded_year,round,round_amount_usd,round_date,source_url
+Retool,retool.com,2017,Series C,45000000,2022-07-27,https://retool.com
+Postman,postman.com,2014,Series D,225000000,2021-08-18,https://postman.com
+Airtable,airtable.com,2013,Series F,735000000,2021-12-13,https://airtable.com
+Sentry,sentry.io,2011,Series E,90000000,2022-05-04,https://sentry.io
+Pinecone,pinecone.io,2019,Series B,100000000,2023-04-26,https://pinecone.io
+Stripe,stripe.com,2010,Series I,6500000000,2023-03-15,https://stripe.com
+Vercel,vercel.com,2015,Series D,150000000,2021-11-23,https://vercel.com
+Supabase,supabase.com,2020,Series B,80000000,2022-05-10,https://supabase.com
+Datadog,datadoghq.com,2010,Series D,94500000,2016-01-12,https://datadoghq.com
+Figma,figma.com,2012,Series E,200000000,2021-06-24,https://figma.com

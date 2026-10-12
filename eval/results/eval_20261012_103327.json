@@ -1,0 +1,637 @@
+{
+  "timestamp": "2026-10-12T10:31:25.059376+00:00",
+  "offline": false,
+  "cases_count": 20,
+  "overall_metrics": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "false_alarms": 0,
+    "data_disagreements": 2,
+    "true_positives": 19,
+    "false_negatives": 0,
+    "true_negatives": 17,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "total_claims": 36
+  },
+  "train_metrics": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "false_alarms": 0,
+    "data_disagreements": 1,
+    "true_positives": 10,
+    "false_negatives": 0,
+    "true_negatives": 9,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "total_claims": 19
+  },
+  "held_out_test_metrics": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "false_alarms": 0,
+    "data_disagreements": 1,
+    "true_positives": 9,
+    "false_negatives": 0,
+    "true_negatives": 8,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "total_claims": 17
+  },
+  "enrichment_failures": [],
+  "diagnostics": [
+    {
+      "type": "data_source_disagreement",
+      "split": "train",
+      "company": "Replit",
+      "claim_text": "The company secured a $250M Series C round in September 2025",
+      "ground_truth": null,
+      "crustdata_value": {
+        "round_type": "series_c",
+        "actual_amount_usd": 250000000.0,
+        "actual_date": "2025-07-30",
+        "claimed_amount_usd": 250000000.0,
+        "claimed_date": "september 2025"
+      },
+      "verdict": "contradicted",
+      "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $250,000,000 on 2025-07-30 (outside +-10% amount or +-1 month date tolerance).",
+      "which_side_is_wrong": "Crustdata disagrees with press release (Crustdata funding evidence differs from press release round: {'round_type': 'series_c', 'actual_amount_usd': 250000000.0, 'actual_date': '2025-07-30', 'claimed_amount_usd': 250000000.0, 'claimed_date': 'september 2025'})"
+    },
+    {
+      "type": "data_source_disagreement",
+      "split": "test",
+      "company": "Clerk",
+      "claim_text": "The company secured a $50M Series C round in July 2025",
+      "ground_truth": null,
+      "crustdata_value": {
+        "round_type": "series_c",
+        "actual_amount_usd": 50000000.0,
+        "actual_date": "2025-10-15",
+        "claimed_amount_usd": 50000000.0,
+        "claimed_date": "july 2025"
+      },
+      "verdict": "contradicted",
+      "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $50,000,000 on 2025-10-15 (outside +-10% amount or +-1 month date tolerance).",
+      "which_side_is_wrong": "Crustdata disagrees with press release (Crustdata funding evidence differs from press release round: {'round_type': 'series_c', 'actual_amount_usd': 50000000.0, 'actual_date': '2025-10-15', 'claimed_amount_usd': 50000000.0, 'claimed_date': 'july 2025'})"
+    }
+  ],
+  "llm_usage": {
+    "run_cost_usd": 0.084977,
+    "cumulative_cost_usd": 4.841063,
+    "budget_remaining_usd": 15.158937,
+    "by_role": {
+      "extract": {
+        "calls": 20,
+        "cache_hits": 0,
+        "input_tokens": 13188,
+        "output_tokens": 4228,
+        "cost_usd": 0.008582
+      },
+      "arbiter": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      },
+      "verify": {
+        "calls": 17,
+        "cache_hits": 0,
+        "input_tokens": 13345,
+        "output_tokens": 2424,
+        "cost_usd": 0.076395
+      },
+      "routine": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "supabase.com_truth",
+      "company": "Supabase",
+      "domain": "supabase.com",
+      "split": "train",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Supabase was founded in 2020",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Claimed year 2020 exactly matches recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $500M Series F round in June 2026",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Historical round verified: series_f of $500,000,000 on 2026-06-04 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "supabase.com_planted_lie",
+      "company": "Supabase",
+      "domain": "supabase.com",
+      "split": "train",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Supabase was founded in 2016",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2016 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $1.2B Series C round in June 2027",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $80,000,000 on 2024-09-25 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "lovable.dev_truth",
+      "company": "Lovable",
+      "domain": "lovable.dev",
+      "split": "train",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Lovable was founded in 2023",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.9,
+          "reasoning": "Claimed year 2023 exactly matches recorded founding year 2023."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $330M Series B round in December 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Historical round verified: series_b of $330,000,000 on 2025-12-18 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "lovable.dev_planted_lie",
+      "company": "Lovable",
+      "domain": "lovable.dev",
+      "split": "train",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Lovable was founded in 2018",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2018 contradicts recorded founding year 2023 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $825M Series F round in December 2024",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "reasoning": "No matching 'series_f' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "replit.com_truth",
+      "company": "Replit",
+      "domain": "replit.com",
+      "split": "train",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Replit was founded in 2016",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed year 2016 exactly matches recorded founding year 2016."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $250M Series C round in September 2025",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $250,000,000 on 2025-07-30 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "replit.com_planted_lie",
+      "company": "Replit",
+      "domain": "replit.com",
+      "split": "train",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Replit was founded in 2012",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2012 contradicts recorded founding year 2016 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $625M Series A round in September 2026",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is undisclosed on 2020-02-03 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "vercel.com_truth",
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "split": "train",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Vercel was founded in 2015",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed year 2015 exactly matches recorded founding year 2015."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $300M Series F round in September 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Historical round verified: series_f of $300,000,000 on 2025-09-30 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "vercel.com_planted_lie",
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "split": "train",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Vercel was founded in 2010",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2010 contradicts recorded founding year 2015 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $750M Series C round in September 2024",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $102,000,000 on 2021-06-23 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "posthog.com_truth",
+      "company": "PostHog",
+      "domain": "posthog.com",
+      "split": "train",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "PostHog was founded in 2020",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Claimed year 2020 exactly matches recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $75M Series E round in September 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Historical round verified: series_e of $75,000,000 on 2025-09-29 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "posthog.com_planted_lie",
+      "company": "PostHog",
+      "domain": "posthog.com",
+      "split": "train",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "PostHog was founded in 2016",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2016 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $188M Series B round in September 2026",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_b' found but contradicts claim: recorded amount is $15,000,000 on 2021-06-10 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "clerk.com_truth",
+      "company": "Clerk",
+      "domain": "clerk.com",
+      "split": "test",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Clerk was founded in 2019",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.92,
+          "reasoning": "Claimed year 2019 exactly matches recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $50M Series C round in July 2025",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $50,000,000 on 2025-10-15 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "clerk.com_planted_lie",
+      "company": "Clerk",
+      "domain": "clerk.com",
+      "split": "test",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Clerk was founded in 2014",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2014 contradicts recorded founding year 2019 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $125M Series A round in July 2024",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is $15,000,000 on 2023-03-22 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "linear.app_truth",
+      "company": "Linear",
+      "domain": "linear.app",
+      "split": "test",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Linear was founded in 2019",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed year 2019 exactly matches recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $82M Series C round in June 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Historical round verified: series_c of $82,000,000 on 2025-06-10 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "linear.app_planted_lie",
+      "company": "Linear",
+      "domain": "linear.app",
+      "split": "test",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Linear was founded in 2015",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2015 contradicts recorded founding year 2019 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $205M Series A round in June 2026",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is $13,000,000 on 2020-12-08 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "railway.com_truth",
+      "company": "Railway",
+      "domain": "railway.com",
+      "split": "test",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Railway was founded in 2020",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed year 2020 exactly matches recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $100M Series B round in January 2026",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Historical round verified: series_b of $100,000,000 on 2026-01-22 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "railway.com_planted_lie",
+      "company": "Railway",
+      "domain": "railway.com",
+      "split": "test",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Railway was founded in 2015",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2015 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $250M Series F round in January 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "reasoning": "No matching 'series_f' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "resend.com_truth",
+      "company": "Resend",
+      "domain": "resend.com",
+      "split": "test",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "funding",
+          "text": "Resend secured a $18M Series A round in December 2024.",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Historical round verified: series_a of $18,000,000 on 2024-12-04 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "resend.com_planted_lie",
+      "company": "Resend",
+      "domain": "resend.com",
+      "split": "test",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "funding",
+          "text": "Resend secured a $45M Series D round in December 2025.",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "reasoning": "No matching 'series_d' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "cal.com_truth",
+      "company": "Cal.com",
+      "domain": "cal.com",
+      "split": "test",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Cal.com was founded in 2021",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.92,
+          "reasoning": "Claimed year 2021 exactly matches recorded founding year 2021."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $25M Series A round in April 2022",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "reasoning": "Historical round verified: series_a of $25,000,000 on 2022-04-15 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "cal.com_planted_lie",
+      "company": "Cal.com",
+      "domain": "cal.com",
+      "split": "test",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Cal.com was founded in 2016",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2016 contradicts recorded founding year 2021 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $62M Series D round in April 2021",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "reasoning": "No matching 'series_d' round found in historical funding rounds."
+        }
+      ]
+    }
+  ]
+}

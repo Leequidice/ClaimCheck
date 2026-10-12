@@ -59,8 +59,8 @@ class CrustdataClient:
         fixture_dir: Optional[Path | str] = None,
         record_fixtures: bool = False,
         base_url: str = "https://api.crustdata.com",
-        max_retries: int = 3,
-        backoff_factor: float = 1.0,
+        max_retries: int = 5,
+        backoff_factor: float = 2.0,
         timeout: float = 30.0,
     ):
         self.offline = offline
@@ -69,6 +69,7 @@ class CrustdataClient:
         self.backoff_factor = backoff_factor
         self.timeout = timeout
         self.record_fixtures = record_fixtures
+        self._company_cache: Dict[str, CompanyEnrichItem] = {}
 
         if fixture_dir:
             self.fixture_dir = Path(fixture_dir)
@@ -197,12 +198,17 @@ class CrustdataClient:
         else:
             raise ValueError("Must provide one of: domain, name, profile_url, crustdata_id")
 
+        # Check in-memory cache
+        if identifier_key in self._company_cache:
+            return self._company_cache[identifier_key]
+
         # Check offline fixture mode
         if self.offline:
             fixture_file = self.fixture_dir / "companies" / self._safe_filename(identifier_key)
             if fixture_file.exists():
                 data = json.loads(fixture_file.read_text(encoding="utf-8-sig"))
                 items = [CompanyEnrichItem.model_validate(item) for item in data]
+                self._company_cache[identifier_key] = items[0]
                 return items[0]
             # No fixture found: return empty match response
             return CompanyEnrichItem(matched_on=identifier_key, match_type=match_type, matches=[])
@@ -220,9 +226,9 @@ class CrustdataClient:
             fixture_file.write_text(json.dumps(raw_response, indent=2), encoding="utf-8")
 
         items = [CompanyEnrichItem.model_validate(item) for item in raw_response]
-        if items:
-            return items[0]
-        return CompanyEnrichItem(matched_on=identifier_key, match_type=match_type, matches=[])
+        res = items[0] if items else CompanyEnrichItem(matched_on=identifier_key, match_type=match_type, matches=[])
+        self._company_cache[identifier_key] = res
+        return res
 
     # =====================================================================
     # Person Enrichment

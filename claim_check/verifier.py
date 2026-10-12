@@ -23,7 +23,31 @@ from claim_check.models import (
 
 logger = logging.getLogger(__name__)
 
-VERIFIER_SYSTEM_PROMPT = """You are a rigorous, independent verification inspector.
+VERIFIER_LEGACY_SYSTEM_PROMPT = """You are a rigorous, independent verification inspector.
+Your sole job is to cross-examine and stress-test claims that were provisionally marked 'verified'.
+Look specifically for:
+1. Contradicting evidence in other parts of the company data (e.g. recent layoffs vs old peak headcount, round date vs total fundraise timing, subsidiaries vs parent).
+2. Range boundary flaws (is the claimed range too broad or misleading?).
+3. Date misalignments (e.g. claimed current headcount from 2021 data).
+
+If you find counter-evidence or a fatal flaw:
+- Demote verdict to 'contradicted' or 'unverifiable'.
+- State the counter-evidence clearly.
+
+If the verification holds up under scrutiny:
+- Keep verdict as 'verified'.
+- Confirm why no contradicting evidence was found.
+
+OUTPUT STRICTLY A VALID JSON OBJECT:
+{
+  "confirmed_verdict": "verified" | "contradicted" | "unverifiable",
+  "confidence": 0.0 to 1.0,
+  "found_contradiction": true | false,
+  "verification_notes": "concise explanation of stress-test findings"
+}
+"""
+
+VERIFIER_EVIDENCE_SYSTEM_PROMPT = """You are a rigorous, independent verification inspector.
 Your job is to cross-examine and stress-test claims that were provisionally marked 'verified'.
 
 STRICT VERIFIER RULES:
@@ -41,12 +65,22 @@ OUTPUT STRICTLY A VALID JSON OBJECT:
 }
 """
 
+# Default prompt alias
+VERIFIER_SYSTEM_PROMPT = VERIFIER_EVIDENCE_SYSTEM_PROMPT
+
 
 class IndependentVerifier:
     """Second independent pass re-checking all provisional 'verified' verdicts."""
 
-    def __init__(self, llm_client: Optional[LLMClient] = None):
+    def __init__(
+        self,
+        llm_client: Optional[LLMClient] = None,
+        verifier_mode: str = "evidence",
+    ):
         self.llm = llm_client or LLMClient()
+        self.verifier_mode = verifier_mode.lower()
+        if self.verifier_mode not in ("legacy", "evidence"):
+            raise ValueError(f"Invalid verifier_mode '{verifier_mode}'. Must be 'legacy' or 'evidence'.")
 
     def verify_all(
         self,
@@ -89,8 +123,15 @@ class IndependentVerifier:
             "founders": [f.get("name") for f in (company_dict.get("people") or {}).get("founders", []) if isinstance(f, dict)],
         }
 
+        # Select prompt based on verifier mode
+        system_prompt = (
+            VERIFIER_LEGACY_SYSTEM_PROMPT
+            if self.verifier_mode == "legacy"
+            else VERIFIER_EVIDENCE_SYSTEM_PROMPT
+        )
+
         messages = [
-            {"role": "system", "content": VERIFIER_SYSTEM_PROMPT},
+            {"role": "system", "content": system_prompt},
             {
                 "role": "user",
                 "content": json.dumps(
@@ -123,23 +164,38 @@ class IndependentVerifier:
             res.second_pass_verified = True
             res.verification_notes = parsed.get("verification_notes", "Passed independent second verification pass.")
 
-            # Rule: demote to contradicted ONLY IF specific contradicting evidence from retrieved data is cited
-            if parsed.get("found_contradiction", False) and confirmed_str == "contradicted" and cited_counter:
-                logger.info(f"Second pass demoted {res.claim_id} to contradicted citing: {cited_counter}")
-                res.verdict = VerdictType.CONTRADICTED
-                res.confidence = float(parsed.get("confidence", res.confidence))
-                res.reasoning += f" [Second Pass Refutation: {res.verification_notes}]"
-            elif confirmed_str == "unverifiable" and parsed.get("found_contradiction", False) and cited_counter:
-                res.verdict = VerdictType.UNVERIFIABLE
-                res.confidence = float(parsed.get("confidence", res.confidence))
-                res.reasoning += f" [Second Pass Demotion: {res.verification_notes}]"
+            if self.verifier_mode == "legacy":
+                # Legacy behavior: memory-based doubt or suspicion may demote directly
+                if parsed.get("found_contradiction", False) and confirmed_str != "verified":
+                    logger.info(f"[Legacy] Second pass demoted {res.claim_id} to {confirmed_str}")
+                    try:
+                        res.verdict = VerdictType(confirmed_str)
+                    except ValueError:
+                        res.verdict = VerdictType.UNVERIFIABLE
+                    res.confidence = float(parsed.get("confidence", res.confidence))
+                    res.reasoning += f" [Second Pass Note (Legacy): {res.verification_notes}]"
+                else:
+                    new_conf = float(parsed.get("confidence", res.confidence))
+                    if new_conf < res.confidence:
+                        res.confidence = new_conf
             else:
-                # Memory-based doubt lowers confidence but keeps verdict verified
-                new_conf = float(parsed.get("confidence", res.confidence))
-                if new_conf < res.confidence:
-                    res.confidence = new_conf
-                if "doubt" in res.verification_notes.lower() or "suspicious" in res.verification_notes.lower():
-                    res.reasoning += f" [Second Pass Caution: {res.verification_notes}]"
+                # Evidence-based behavior: demote to contradicted ONLY IF specific contradicting evidence from retrieved data is cited
+                if parsed.get("found_contradiction", False) and confirmed_str == "contradicted" and cited_counter:
+                    logger.info(f"Second pass demoted {res.claim_id} to contradicted citing: {cited_counter}")
+                    res.verdict = VerdictType.CONTRADICTED
+                    res.confidence = float(parsed.get("confidence", res.confidence))
+                    res.reasoning += f" [Second Pass Refutation: {res.verification_notes}]"
+                elif confirmed_str == "unverifiable" and parsed.get("found_contradiction", False) and cited_counter:
+                    res.verdict = VerdictType.UNVERIFIABLE
+                    res.confidence = float(parsed.get("confidence", res.confidence))
+                    res.reasoning += f" [Second Pass Demotion: {res.verification_notes}]"
+                else:
+                    # Memory-based doubt lowers confidence but keeps verdict verified
+                    new_conf = float(parsed.get("confidence", res.confidence))
+                    if new_conf < res.confidence:
+                        res.confidence = new_conf
+                    if "doubt" in res.verification_notes.lower() or "suspicious" in res.verification_notes.lower():
+                        res.reasoning += f" [Second Pass Caution: {res.verification_notes}]"
 
         except Exception as e:
             logger.warning(f"Second-pass verification exception for {res.claim_id}: {e}")

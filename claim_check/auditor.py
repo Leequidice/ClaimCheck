@@ -53,15 +53,17 @@ class ClaimAuditor:
         state_manager: Optional[StateManager] = None,
         offline: bool = False,
         allow_opus: bool = False,
+        verifier_mode: str = "evidence",
     ):
         self.offline = offline
         self.allow_opus = allow_opus
+        self.verifier_mode = verifier_mode
         self.llm = llm_client or LLMClient(offline=offline, allow_opus=allow_opus)
         self.crustdata = crustdata_client or CrustdataClient(offline=offline)
         self.state = state_manager or StateManager()
         self.extractor = ClaimExtractor(llm_client=self.llm)
         self.reasoner = ClaimReasoner(llm_client=self.llm)
-        self.verifier = IndependentVerifier(llm_client=self.llm)
+        self.verifier = IndependentVerifier(llm_client=self.llm, verifier_mode=verifier_mode)
 
     def _extract_domain(self, target: str) -> str:
         """Normalize URL or string into a domain."""

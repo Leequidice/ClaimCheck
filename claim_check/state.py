@@ -1,4 +1,4 @@
-﻿"""State Persistence and Recovery.
+"""State Persistence and Recovery.
 
 Saves progress per claim to JSON so crashed or interrupted runs resume seamlessly.
 Isolates failures so a single claim failure never aborts the whole run.
@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import logging
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -32,7 +33,7 @@ class StateManager:
 
     def init_run(self, target: str, claims: List[AtomicClaim], run_id: Optional[str] = None) -> str:
         """Initialize a new audit run or reload an existing one."""
-        rid = run_id or f"run_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
+        rid = run_id or f"run_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f')}_{uuid.uuid4().hex[:6]}"
         path = self._run_file(rid)
 
         if not path.exists():

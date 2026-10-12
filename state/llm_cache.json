@@ -1486,5 +1486,221 @@
     "input_tokens": 661,
     "output_tokens": 222,
     "cost_usd": 0.000443
+  },
+  "2c02c3055915326dfadb12d17a10a9d2c4913bcc74f13018260834beaf2cccf3": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2020 is consistent with the earliest funding activity in the dataset: a seed round of $125,000 on 2020-08-25 and a second seed round of $6,000,000 on 2020-12-15. These early-stage rounds align naturally with a company founded in 2020. The subsequent Series A in September 2021 further supports a 2020 founding timeline. No contradicting evidence was found in the company data. Minor note: some future-dated rounds (2025\u20132026) appear anomalous but do not affect the founding year claim. Confidence is slightly below 1.0 only because no independent corroborating source (e.g., incorporation records, press releases) is present in the evidence \u2014 the founding year is inferred from internal data alone.\"\n}\n```",
+    "input_tokens": 886,
+    "output_tokens": 229,
+    "cost_usd": 0.006093
+  },
+  "d945346eedb616a28bca46fc136da6304a69c164d9785566f472903fbd353a4a": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The Series F round of $500,000,000 on 2026-06-04 is directly present in the historical_rounds data and matches the claim exactly \u2014 no tolerance adjustment needed. Cross-checks: (1) Total funding of $1,189,224,796 is consistent with summing all listed rounds (~$1,189,224,921, a negligible rounding difference). (2) The Series F date (2026-06-04) precedes a later 'series_unknown' round (2026-10-02), which is chronologically coherent and does not contradict the Series F. (3) The funding progression (seed \u2192 A \u2192 B \u2192 C \u2192 D \u2192 E \u2192 F) follows a logical sequence with no gaps or anachronisms. (4) No contradicting round of a different amount or date labeled 'series_f' exists in the data. The only minor note is that the claim states 'June 2026' while the date is June 4, 2026 \u2014 this is fully consistent. No fatal flaws identified.\"\n}\n```",
+    "input_tokens": 944,
+    "output_tokens": 280,
+    "cost_usd": 0.007032
+  },
+  "63475e5ed9fcc0cd6c8a12498e10bf53f4efe188ae5bb48954e534aabce5aaa3": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Supabase was founded in 2021\",\n    \"normalized_value\": 2021,\n    \"tolerance_min\": 2021,\n    \"tolerance_max\": 2021,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $625M Series G round in September 2026\",\n    \"normalized_value\": 625000000,\n    \"tolerance_min\": 562500000,\n    \"tolerance_max\": 687500000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 223,
+    "cost_usd": 0.000445
+  },
+  "a688ba01b139daa5c4666ea34b6d666d888793a921b42f06b553498e32f3ff22": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.72,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2023 is internally consistent with the funding timeline: the earliest round is a pre-seed dated 2024-10-07, which is plausible for a company founded in 2023 (pre-seed typically follows founding by months to ~1 year). No round predates 2023, and no other data field contradicts a 2023 founding. One minor flag: the Series C is dated 2026-08-12, which is a future date relative to most current reference points \u2014 this may indicate projected/placeholder data, but it does not contradict the founding year. Confidence is modestly reduced due to the absence of corroborating founder records or headquarters data, and the presence of what appear to be future-dated rounds, which raises general data quality concerns without specifically contradicting the 2023 claim.\"\n}\n```",
+    "input_tokens": 702,
+    "output_tokens": 230,
+    "cost_usd": 0.005556
+  },
+  "5d807d8157892b6f21a3b985f9506e848642484607752f3dd6370e038639c243": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The Series B round of $330,000,000 on 2025-12-18 is directly present in the historical_rounds data and matches the claim exactly. No contradicting evidence found: the round sequence is logical (pre_seed \u2192 seed \u2192 series_a \u2192 series_b \u2192 series_c), and the Series B date of December 2025 sits correctly between the Series A (July 2025) and Series C (August 2026). A minor consistency check on total funding: summing all rounds gives ~$952.5M (7,462,523 + 15,035,221 + 200,000,000 + 330,000,000 + 400,000,000 = 952,497,744), which matches the reported funding_total_usd of $952,497,744 exactly, further corroborating the integrity of the data. No date misalignments, range boundary issues, or contradicting subsidiary/headcount signals were identified.\"\n}\n```",
+    "input_tokens": 761,
+    "output_tokens": 265,
+    "cost_usd": 0.006258
+  },
+  "f7a4b1d8bb1ff75f9fb261780b772052de46a38702f86e9867a526ac4bf47be6": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Lovable was founded in 2022\",\n    \"normalized_value\": 2022,\n    \"tolerance_min\": 2022,\n    \"tolerance_max\": 2022,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $396M Series C round in September 2025\",\n    \"normalized_value\": 396000000,\n    \"tolerance_min\": 316800000,\n    \"tolerance_max\": 475200000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "6d2d357de68f06e7b9bf82efa146ee1b8673e6002bc83d12ed6ee58401dae8a4": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2016 is consistent with the company evidence. The earliest funding rounds are seed rounds in March and October 2018, which is plausible for a company founded in 2016 (typically 1-2 years before first external funding). There are no funding rounds dated before 2016 that would contradict the founding year. The funding timeline progresses logically from seed (2018) through Series A (2020-2021), Series B (2021-2023), Series C (2025), and Series D (2026), all consistent with a 2016 founding. No contradicting evidence found in the company data. Confidence is slightly below 1.0 because the founders list is empty and headquarters is null, preventing full corroboration from those fields, and the founding year relies solely on the single recorded data point.\"\n}\n```",
+    "input_tokens": 915,
+    "output_tokens": 232,
+    "cost_usd": 0.006225
+  },
+  "c916fe2ec263f6872f9fa92a934ce29a7d528cb199e3af28620c7c66f8359c45": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Replit was founded in 2017\",\n    \"normalized_value\": 2017,\n    \"tolerance_min\": 2017,\n    \"tolerance_max\": 2017,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $312M Series D round in December 2025\",\n    \"normalized_value\": 312000000,\n    \"tolerance_min\": 280800000,\n    \"tolerance_max\": 343200000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "f7f767a4fe9c1a5f55d88917df9ba689365e94a6045327fa7236888c1c8cac2f": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2015 is consistent with the company data provided. The earliest funding round recorded is a Series A dated 2018-01-01, which is plausible for a company founded in 2015 (allowing ~3 years before institutional funding). The subsequent funding progression (Series A in 2020, B in 2020, C and D in 2021, E in 2024, F in 2025) is coherent and does not contradict a 2015 founding. No counter-evidence found in the employee range, funding totals, or round history. The Series F date of 2025-09-30 appears to be a future-dated or projected round, which is a minor anomaly but does not affect the founding year claim. Vercel (originally known as ZEIT) is publicly documented as having been founded in 2015 by Guillermo Rauch, consistent with this data.\"\n}\n```",
+    "input_tokens": 792,
+    "output_tokens": 251,
+    "cost_usd": 0.006141
+  },
+  "b4bbdb3edbf565e384a7e786c013ca741271e823f1dc3b651925807c48b55362": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"A critical arithmetic inconsistency undermines the claim. The company's total funding is listed as $863,000,000, but summing all historical rounds with known amounts yields: $300M (Series F) + $250M (Series E) + $150M (Series D) + $102M (Series C) + $40M (Series B) + $21M (Series A) = $863M. This sum actually matches, so the funding_total_usd is internally consistent. However, the Series F round dated 2025-09-30 is a future date relative to any reasonable current data snapshot, raising a date alignment concern \u2014 this round may be projected or pre-announced rather than confirmed closed. More critically, the claim states the round was secured 'in September 2025,' and the provisional evidence date is 2025-09-30 (end of month), which is at the outer boundary of the \u00b11 month tolerance window. The absence of a Series E2 or any round between Series E (May 2024) and Series F (Sep 2025) is plausible but the future-dated record cannot be independently stress-tested against current real-world data. The funding_total_usd of $863M does incorporate the $300M Series F, suggesting the data source treats it as closed, but the future date (2025-09-30) means this cannot be verified against historical records available prior to that date. Verdict is demoted to 'unverifiable' due to the forward-looking date making independent cross-verification impossible, not 'contradicted' by internal data \u2014 however, the future date itself is a fatal flaw for a 'verified' status.\"\n}\n```",
+    "input_tokens": 851,
+    "output_tokens": 417,
+    "cost_usd": 0.008808
+  },
+  "9e55f43d6204b875eba9c5433ec901833fab78a481c57f1e31b558f9778b4126": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Vercel was founded in 2014\",\n    \"normalized_value\": 2014,\n    \"tolerance_min\": 2014,\n    \"tolerance_max\": 2014,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $360M Series G round in June 2025\",\n    \"normalized_value\": 360000000,\n    \"tolerance_min\": 288000000,\n    \"tolerance_max\": 432000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "a38ae6cf1ffe936b5993a02a3d0c0424830b5525c8df673e81ac7b1318a64b6c": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2020 is consistent with all available evidence. The earliest funding round (pre_seed) is dated 2020-03-16, which aligns with a 2020 founding. The seed round followed on 2020-06-04 and Series A on 2020-12-17, all within the founding year or shortly after \u2014 a coherent early-stage funding timeline. No contradicting evidence found: there are no layoff records, no subsidiary/parent complications, and no headcount data that would conflict. The funding round labels (series_a through series_e) are noted as somewhat atypical naming conventions for a company of this size, but this does not contradict the founding year. The 2020 founding year stands verified.\"\n}\n```",
+    "input_tokens": 793,
+    "output_tokens": 213,
+    "cost_usd": 0.005574
+  },
+  "ad41d1530b1ba8ac3dde0c03794ae171fea4f67103298fec614514c44d9304d0": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"The Series E round of $75M on 2025-09-29 is present in the historical rounds data and matches the claim exactly. However, a critical arithmetic contradiction exists: summing all historical rounds yields $3M (pre-seed) + $9M (seed... wait, seed=$3M, pre_seed=$150K, series_a=$9M, series_b=$15M, series_c=$10M, series_d=$70M, series_e=$75M) = $182,150,000, which does match the reported funding_total_usd of $182,150,000. So the totals are internally consistent. However, a significant red flag is the rapid-fire sequencing of rounds: Series C on 2024-01-01, Series D on 2025-06-09, and Series E on 2025-09-29 \u2014 meaning Series D and Series E are only ~3.5 months apart. This is highly atypical for venture funding cadence and raises credibility concerns about the data integrity. Additionally, the Series C amount of $10M is unusually small relative to the Series B ($15M), representing a down-round in size, which is anomalous. The Series E date of 2025-09-29 is also a future date relative to most training data cutoffs, making independent corroboration impossible. While the internal data is self-consistent, the implausible round sequencing (D and E within ~3.5 months) and the future-dated round undermine confidence, warranting a demotion to 'unverifiable' rather than fully contradicted, but the structural anomalies are severe enough to flag as contradicted on plausibility grounds.\"\n}\n```",
+    "input_tokens": 852,
+    "output_tokens": 427,
+    "cost_usd": 0.008961
+  },
+  "ff6c23cd073fda1c348f7affa90429075d4838f415b6bf4eb7b0c5461cb95e98": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"PostHog was founded in 2021\",\n    \"normalized_value\": 2021,\n    \"tolerance_min\": 2021,\n    \"tolerance_max\": 2021,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $94M Series F round in December 2025\",\n    \"normalized_value\": 94000000,\n    \"tolerance_min\": 75000000,\n    \"tolerance_max\": 113000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "898c3f6c51904df941fbeeb80d82e03e20019ae3442ea1c028a9d4a18da7ee11": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2019 is consistent with the earliest funding round recorded \u2014 a pre-seed round dated 2019-03-01. This corroborates that the company was active (and thus founded) in 2019. No contradicting evidence found in the funding timeline, employee range, or other fields. One minor anomaly noted: a Series C round is dated 2025-10-15, which is a future date and may indicate a data entry error, but this does not affect the founding year claim. The funding progression (pre-seed 2019 \u2192 seed 2021/2022 \u2192 Series A 2023 \u2192 Series B 2023/2024 \u2192 Series C 2025) is broadly consistent with a company founded in 2019.\"\n}\n```",
+    "input_tokens": 834,
+    "output_tokens": 215,
+    "cost_usd": 0.005727
+  },
+  "0997696daab57f16324f84196b185effeb3b24583e75f34f6cd207b2a1aa824b": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Clerk was founded in 2018\",\n    \"normalized_value\": 2018,\n    \"tolerance_min\": 2018,\n    \"tolerance_max\": 2018,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $60M Series D round in April 2025\",\n    \"normalized_value\": 60000000,\n    \"tolerance_min\": 48000000,\n    \"tolerance_max\": 72000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 659,
+    "output_tokens": 221,
+    "cost_usd": 0.000441
+  },
+  "f2b9f8dd093ec12f478c7c7a03e16b66328848cb36fc4d7d4871cd8f3deda2aa": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2019 is consistent with all available evidence. The earliest funding round is a seed round dated 2019-11-22, which aligns with a 2019 founding \u2014 companies typically raise seed funding in their founding year or shortly after. The Series A in December 2020 and subsequent rounds follow a logical progression. No contradicting evidence was found: there are no layoff records, no subsidiary/parent complications, and no data suggesting an earlier or later founding date. The seed round date actually corroborates the 2019 founding claim directly.\"\n}\n```",
+    "input_tokens": 739,
+    "output_tokens": 170,
+    "cost_usd": 0.004767
+  },
+  "79e7bdaa79e6a56b293edd017934bd3a7c713bbaacde6f0b02aa325bc2ba09b3": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The historical rounds data contains an exact match: round_type='series_c', amount_usd=82,000,000, date='2025-06-10', which directly corroborates the claim of an $82M Series C in June 2025. No contradicting evidence found on the round type, amount, or date. One minor observation: on the same date (2025-06-10) there is also a 'secondary_market' round with a null amount, which is a separate transaction and does not conflict with the Series C. The total funding of $233.2M is broadly consistent with summing the known rounds ($4.2M + $13M + $35M + $82M + $99M = $233.2M), further supporting data integrity. The future-dated secondary market round (2026-08-26) is noted but does not affect the validity of the June 2025 Series C claim.\"\n}\n```",
+    "input_tokens": 800,
+    "output_tokens": 252,
+    "cost_usd": 0.00618
+  },
+  "a6402e0c95d395b0048e96f91e397fd11b3146538d0745aa6f0005a6e359e7ee": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Linear was founded in 2020\",\n    \"normalized_value\": 2020,\n    \"tolerance_min\": 2020,\n    \"tolerance_max\": 2020,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $102M Series D round in September 2025\",\n    \"normalized_value\": 102000000,\n    \"tolerance_min\": 81600000,\n    \"tolerance_max\": 122400000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 657,
+    "output_tokens": 220,
+    "cost_usd": 0.000439
+  },
+  "b0cea1c7b7a8966e017b723454e1c2198fbcff2ad8a2fe277ba2d31e5b70cc95": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2020 is internally consistent with the available evidence. The earliest funding round is a seed round dated 2021-06-18, which is plausible for a company founded in 2020 (seed funding typically follows founding by several months to a year). The Series A in May 2022 and Series B in January 2026 follow a logical progression. No contradicting evidence was found \u2014 there are no layoff records, no subsidiary/parent complications, and no headcount data that would conflict. The one minor note is that the Series B date of 2026-01-22 appears to be a future or very recent date depending on current context, but this does not contradict the founding year claim. The founding year of 2020 stands as verified.\"\n}\n```",
+    "input_tokens": 601,
+    "output_tokens": 216,
+    "cost_usd": 0.005043
+  },
+  "9b990a189441a078b6a5a4ce34277b4db204c9704f0e28dc0aa8b49d9788c419": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The Series B round of $100M on 2026-01-22 is directly corroborated by the historical_rounds data. Cross-checks pass: (1) The funding_total_usd of $120M is consistent with the sum of known rounds \u2014 Series A ($20M) + Series B ($100M) = $120M, with the seed round amount listed as null, meaning the total accounts for all quantified rounds exactly. No inflation or discrepancy detected. (2) The date 2026-01-22 matches the claim of 'January 2026' precisely. (3) The round type 'series_b' matches. (4) No contradicting rounds (e.g., a conflicting Series B at a different amount or date) appear in the historical data. One minor note: the employee_range of '11-50' for a company that just raised $100M Series B is on the smaller side, but Railway is known as a lean infrastructure startup, so this is not a disqualifying inconsistency. No fatal flaws found.\"\n}\n```",
+    "input_tokens": 662,
+    "output_tokens": 281,
+    "cost_usd": 0.006201
+  },
+  "4ced7c2cf1928cc246cde1e2e5411eaf34fb4b517a5bfcac336101bdc108d2f9": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Railway was founded in 2019\",\n    \"normalized_value\": 2019,\n    \"tolerance_min\": 2019,\n    \"tolerance_max\": 2019,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $120M Series C round in October 2025\",\n    \"normalized_value\": 120000000,\n    \"tolerance_min\": 96000000,\n    \"tolerance_max\": 144000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 657,
+    "output_tokens": 220,
+    "cost_usd": 0.000439
+  },
+  "9a2c9343bb2f0ef22609b1812e3da1936db09b5c6272474a6d7cf4a566134fcf": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.95,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The Series A round of $18M on 2024-12-04 is directly present in the historical rounds data. Cross-checking against total funding: $500K (pre-seed) + $3M (seed) + $18M (Series A) = $21.5M, which exactly matches the reported funding_total_usd of $21,500,000. This internal consistency strongly corroborates the claim. No contradicting evidence found regarding round type, amount, or date. The company was founded in 2023, making a 2024 Series A timeline plausible. No red flags such as layoffs, subsidiary complications, or date misalignments were identified.\"\n}\n```",
+    "input_tokens": 669,
+    "output_tokens": 197,
+    "cost_usd": 0.004962
+  },
+  "54c46acba78072cbd084bdcbbc38884ad6af840779ab9bf63d4aa2074cbc6c05": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"funding\",\n    \"original_text\": \"Resend secured a $22M Series B round in March 2025.\",\n    \"normalized_value\": 22000000,\n    \"tolerance_min\": 17600000,\n    \"tolerance_max\": 26400000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 652,
+    "output_tokens": 118,
+    "cost_usd": 0.000311
+  },
+  "087d4b244cc6c23b517b196521824c0a03b1628d49fd5dfb223b074e2812df3a": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.88,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2021 is internally consistent with the available evidence. The seed round dated 2021-12-16 aligns with a company founded in 2021, as seed funding typically occurs in the early stages of a company's life. The Series A in April 2022 follows a logical progression from the 2021 seed round. No contradicting signals were found: there are no layoff records, no headcount data suggesting a much older or larger organization, and no subsidiary/parent structure that would complicate the founding date. The employee range of 11-50 is plausible for a company ~1-2 years old at the time of data capture. One minor caveat: Cal.com is an open-source project (formerly Calendso) that may have had pre-2021 GitHub activity before formal incorporation, but the recorded founding year of 2021 is consistent with formal company establishment and the earliest funding event.\"\n}\n```",
+    "input_tokens": 564,
+    "output_tokens": 251,
+    "cost_usd": 0.005457
+  },
+  "eb0f76602bf9f2829de2c2ec8c24b4a67762d3715dd4cb7810bbab8731cdcddc": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.95,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of a $25M Series A in April 2022 is directly corroborated by the historical_rounds data showing a series_a of $25,000,000 on 2022-04-15. No contradicting evidence found: (1) The total funding of $32,400,000 is consistent with the sum of the two known rounds ($25M + $7.4M = $32.4M), confirming no hidden rounds distort the picture. (2) The company was founded in 2021, making a Series A in April 2022 chronologically plausible following a seed round in December 2021. (3) The seed round predates the Series A, which is the correct sequencing. (4) The employee range of 11-50 is consistent with an early-stage company at Series A. No date misalignments, range boundary issues, or internal contradictions were identified.\"\n}\n```",
+    "input_tokens": 623,
+    "output_tokens": 251,
+    "cost_usd": 0.005634
+  },
+  "e56b03cc38cb5c908182bc40bcc88defc9a2eb587f0acf975361edf11ce7e69e": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Cal.com was founded in 2020\",\n    \"normalized_value\": 2020,\n    \"tolerance_min\": 2020,\n    \"tolerance_max\": 2020,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $30M Series B round in January 2022\",\n    \"normalized_value\": 30000000,\n    \"tolerance_min\": 24000000,\n    \"tolerance_max\": 36000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
   }
 }

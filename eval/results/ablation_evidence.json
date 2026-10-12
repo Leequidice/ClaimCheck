@@ -1,0 +1,2441 @@
+{
+  "timestamp": "2026-10-12T11:43:25.449106+00:00",
+  "offline": false,
+  "verifier_mode": "evidence",
+  "cases_count": 30,
+  "overall_metrics": {
+    "truth_verified": 17,
+    "truth_total": 19,
+    "truth_report": "17 verified of 19",
+    "easy_caught": 19,
+    "easy_total": 19,
+    "easy_report": "19 caught of 19",
+    "hard_caught": 19,
+    "hard_total": 19,
+    "hard_report": "19 caught of 19",
+    "lies_caught": 38,
+    "lies_total": 38,
+    "lies_report": "38 caught of 38",
+    "false_alarms": 0,
+    "data_disagreements": 2,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "precision": 1.0,
+    "recall_easy": 1.0,
+    "recall_hard": 1.0,
+    "recall_overall": 1.0
+  },
+  "train_metrics": {
+    "truth_verified": 9,
+    "truth_total": 10,
+    "truth_report": "9 verified of 10",
+    "easy_caught": 10,
+    "easy_total": 10,
+    "easy_report": "10 caught of 10",
+    "hard_caught": 10,
+    "hard_total": 10,
+    "hard_report": "10 caught of 10",
+    "lies_caught": 20,
+    "lies_total": 20,
+    "lies_report": "20 caught of 20",
+    "false_alarms": 0,
+    "data_disagreements": 1,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "precision": 1.0,
+    "recall_easy": 1.0,
+    "recall_hard": 1.0,
+    "recall_overall": 1.0
+  },
+  "held_out_test_metrics": {
+    "truth_verified": 8,
+    "truth_total": 9,
+    "truth_report": "8 verified of 9",
+    "easy_caught": 9,
+    "easy_total": 9,
+    "easy_report": "9 caught of 9",
+    "hard_caught": 9,
+    "hard_total": 9,
+    "hard_report": "9 caught of 9",
+    "lies_caught": 18,
+    "lies_total": 18,
+    "lies_report": "18 caught of 18",
+    "false_alarms": 0,
+    "data_disagreements": 1,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "precision": 1.0,
+    "recall_easy": 1.0,
+    "recall_hard": 1.0,
+    "recall_overall": 1.0
+  },
+  "data_source_disagreements_raw": {
+    "replit.com": {
+      "company": "Replit",
+      "press_release_date": "2025-09",
+      "press_release_round": "Series C",
+      "press_release_amount_usd": 250000000.0,
+      "crustdata_round_records": [
+        {
+          "round_type": "corporate_round",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "investment_bank",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/visa",
+              "name": "Visa",
+              "permalink": "visa",
+              "type": "organization",
+              "uuid": "95b124ce-5927-50eb-d1ea-15aad4f20ce9"
+            }
+          ],
+          "permalink": "replit-corporate-round--f7222da2",
+          "date": "2026-05-28",
+          "funding_date": "2026-05-28",
+          "amount_usd": null,
+          "investors": "Visa",
+          "lead_investors": "Visa"
+        },
+        {
+          "round_type": "series_d",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "private_equity_firm",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/georgian-partners",
+              "name": "Georgian",
+              "permalink": "georgian-partners",
+              "type": "organization",
+              "uuid": "f4054ae0-d294-50c2-37cf-539e3c0a8009"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/1789-capital",
+              "name": "1789 Capital",
+              "permalink": "1789-capital",
+              "type": "organization",
+              "uuid": "e15b9b76-bc13-4cca-9441-1393e55293df"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/accenture-ventures",
+              "name": "Accenture Ventures",
+              "permalink": "accenture-ventures",
+              "type": "organization",
+              "uuid": "cc8191b3-a5a1-49aa-8428-8efa8da06119"
+            },
+            {
+              "categories": [
+                "angel_group",
+                "micro_vc",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/alumni-ventures",
+              "name": "Alumni Ventures",
+              "permalink": "alumni-ventures",
+              "type": "organization",
+              "uuid": "e8487396-f60c-25f1-2bb5-bfcb4e0f4b66"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            },
+            {
+              "categories": [
+                "hedge_fund",
+                "private_equity_firm"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/coatue",
+              "name": "Coatue",
+              "permalink": "coatue",
+              "type": "organization",
+              "uuid": "d41a176d-2d63-8120-abdd-09962ffac419"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/craft-ventures",
+              "name": "Craft Ventures",
+              "permalink": "craft-ventures",
+              "type": "organization",
+              "uuid": "904a716a-93d3-4456-9543-70fcf381e268"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/databricks-ventures",
+              "name": "Databricks Ventures",
+              "permalink": "databricks-ventures",
+              "type": "organization",
+              "uuid": "33357f24-f972-471c-b502-3dad7f47cda4"
+            },
+            {
+              "categories": [
+                "secondary_purchaser",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/g-squared-2",
+              "name": "G Squared",
+              "permalink": "g-squared-2",
+              "type": "organization",
+              "uuid": "02f59f0c-f60f-4de2-bc1f-ee8ca615637c"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/id8-investments",
+              "name": "ID8 Investments",
+              "permalink": "id8-investments",
+              "type": "organization",
+              "uuid": "14c8911a-b5d0-493f-9207-0fc07137d642"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/jared-leto",
+              "name": "Jared Leto",
+              "permalink": "jared-leto",
+              "type": "person",
+              "uuid": "e025d3a9-fab7-b34e-abd6-511fc8d7a4c2"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/karman-ventures",
+              "name": "Karman Ventures",
+              "permalink": "karman-ventures",
+              "type": "organization",
+              "uuid": "43e4d15e-74a8-4b4f-9b02-e2be69e7cee4"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/okta-ventures",
+              "name": "Okta Ventures",
+              "permalink": "okta-ventures",
+              "type": "organization",
+              "uuid": "e726500c-cde8-4fac-99e9-45d26936e489"
+            },
+            {
+              "categories": [
+                "private_equity_firm",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/prysm-capital",
+              "name": "Prysm Capital",
+              "permalink": "prysm-capital",
+              "type": "organization",
+              "uuid": "9601674b-be60-432c-a253-c0544ef17f46"
+            },
+            {
+              "categories": [
+                "fund_of_funds",
+                "government_office",
+                "private_equity_firm"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/qatar-investment-authority",
+              "name": "Qatar Investment Authority",
+              "permalink": "qatar-investment-authority",
+              "type": "organization",
+              "uuid": "6bc63a55-60c3-91bc-c059-2c60bf916de3"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/sahin",
+              "name": "Sahin Boydas",
+              "permalink": "sahin",
+              "type": "person",
+              "uuid": "1975faea-863c-0f5f-31ce-eb3b9ff160cc"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/shaquille-o-neal",
+              "name": "Shaquille O'Neal",
+              "permalink": "shaquille-o-neal",
+              "type": "person",
+              "uuid": "d5b91775-0752-78fc-97be-2c93016953a1"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/tether-ventures",
+              "name": "Tether Ventures",
+              "permalink": "tether-ventures",
+              "type": "organization",
+              "uuid": "2fad7878-a0dc-4c1c-a9c0-579db81f9db9"
+            },
+            {
+              "categories": [
+                "investment_bank",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/visa",
+              "name": "Visa",
+              "permalink": "visa",
+              "type": "organization",
+              "uuid": "95b124ce-5927-50eb-d1ea-15aad4f20ce9"
+            },
+            {
+              "categories": [
+                "accelerator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/y-combinator",
+              "name": "Y Combinator",
+              "permalink": "y-combinator",
+              "type": "organization",
+              "uuid": "73633ee4-ea65-2967-6c5d-9b5fec7d2d5e"
+            }
+          ],
+          "permalink": "replit-series-d--d8ce1288",
+          "date": "2026-03-11",
+          "funding_date": "2026-03-11",
+          "amount_usd": 400000000.0,
+          "investors": "Georgian, 1789 Capital, Accenture Ventures, Alumni Ventures, Andreessen Horowitz, Coatue, Craft Ventures, Databricks Ventures, G Squared, ID8 Investments, Jared Leto, Karman Ventures, Okta Ventures, Prysm Capital, Qatar Investment Authority, Sahin Boydas, Shaquille O'Neal, Tether Ventures, Visa, Y Combinator",
+          "lead_investors": "Georgian"
+        },
+        {
+          "round_type": "series_c",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "private_equity_firm",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/prysm-capital",
+              "name": "Prysm Capital",
+              "permalink": "prysm-capital",
+              "type": "organization",
+              "uuid": "9601674b-be60-432c-a253-c0544ef17f46"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/american-express-ventures",
+              "name": "Amex Ventures",
+              "permalink": "american-express-ventures",
+              "type": "organization",
+              "uuid": "79bade51-0fd8-6d47-ed71-5308c4c70ea3"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/autopilot-ventures",
+              "name": "Autopilot Ventures",
+              "permalink": "autopilot-ventures",
+              "type": "organization",
+              "uuid": "f698b556-cb21-4990-b2b1-b07e861305be"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/bossanova-investimentos",
+              "name": "Bossa Invest",
+              "permalink": "bossanova-investimentos",
+              "type": "organization",
+              "uuid": "1bd15aa6-56ac-0d89-9405-7b7a4c8f76f0"
+            },
+            {
+              "categories": [
+                "hedge_fund",
+                "private_equity_firm"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/coatue",
+              "name": "Coatue",
+              "permalink": "coatue",
+              "type": "organization",
+              "uuid": "d41a176d-2d63-8120-abdd-09962ffac419"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/craft-ventures",
+              "name": "Craft Ventures",
+              "permalink": "craft-ventures",
+              "type": "organization",
+              "uuid": "904a716a-93d3-4456-9543-70fcf381e268"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/flex-capital",
+              "name": "Flex Capital",
+              "permalink": "flex-capital",
+              "type": "organization",
+              "uuid": "616b95b2-323b-405e-854c-acc19833ac20"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/flybridge-capital",
+              "name": "Flybridge",
+              "permalink": "flybridge-capital",
+              "type": "organization",
+              "uuid": "b7c000b8-0b00-9936-7e3f-7954f1af2949"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/google-ai-futures-fund",
+              "name": "Google AI Futures Fund",
+              "permalink": "google-ai-futures-fund",
+              "type": "organization",
+              "uuid": "a5f38d6f-1166-44df-aaf6-45aaa7a68972"
+            },
+            {
+              "categories": [
+                "angel",
+                "investment_partner"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/milad-alucozai",
+              "name": "Milad Alucozai",
+              "permalink": "milad-alucozai",
+              "type": "person",
+              "uuid": "8f6e15f3-84ee-bd88-38e6-9171a81976b0"
+            },
+            {
+              "categories": [
+                "private_equity_firm",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/millennia-capital",
+              "name": "Millennia Capital",
+              "permalink": "millennia-capital",
+              "type": "organization",
+              "uuid": "320f7280-4b6a-4231-a913-28a5a0de6229"
+            },
+            {
+              "categories": [
+                "angel",
+                "investment_partner"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/paul-graham",
+              "name": "Paul Graham",
+              "permalink": "paul-graham",
+              "type": "person",
+              "uuid": "ff5d7573-bf2d-41ad-a669-999780af96e2"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/sahin",
+              "name": "Sahin Boydas",
+              "permalink": "sahin",
+              "type": "person",
+              "uuid": "1975faea-863c-0f5f-31ce-eb3b9ff160cc"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/start-equity-ventures",
+              "name": "START EQUITY VENTURES",
+              "permalink": "start-equity-ventures",
+              "type": "organization",
+              "uuid": "16192775-2f7d-4eac-bc7c-6ca0b6ee9d5e"
+            },
+            {
+              "categories": [
+                "entrepreneurship_program",
+                "fund_of_funds",
+                "secondary_purchaser",
+                "syndicate",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/ventioneers",
+              "name": "Ventioneers",
+              "permalink": "ventioneers",
+              "type": "organization",
+              "uuid": "c3f1d44f-8645-4bc9-851d-847a770a4de4"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/xfactor-ventures",
+              "name": "XFactor Ventures",
+              "permalink": "xfactor-ventures",
+              "type": "organization",
+              "uuid": "d42d22d2-d1a5-fc74-0e46-dc4184ccc0d3"
+            },
+            {
+              "categories": [
+                "accelerator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/y-combinator",
+              "name": "Y Combinator",
+              "permalink": "y-combinator",
+              "type": "organization",
+              "uuid": "73633ee4-ea65-2967-6c5d-9b5fec7d2d5e"
+            }
+          ],
+          "permalink": "replit-series-c--5bc1828d",
+          "date": "2025-07-30",
+          "funding_date": "2025-07-30",
+          "amount_usd": 250000000.0,
+          "investors": "Prysm Capital, Amex Ventures, Andreessen Horowitz, Autopilot Ventures, Bossa Invest, Coatue, Craft Ventures, Flex Capital, Flybridge, Google AI Futures Fund, Milad Alucozai, Millennia Capital, Paul Graham, Sahin Boydas, START EQUITY VENTURES, Ventioneers, XFactor Ventures, Y Combinator",
+          "lead_investors": "Prysm Capital"
+        },
+        {
+          "round_type": "series_b",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/craft-ventures",
+              "name": "Craft Ventures",
+              "permalink": "craft-ventures",
+              "type": "organization",
+              "uuid": "904a716a-93d3-4456-9543-70fcf381e268"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/aispace-ventures",
+              "name": "AIspace Ventures",
+              "permalink": "aispace-ventures",
+              "type": "organization",
+              "uuid": "b7ef2e57-bd00-4673-b530-13edd61949c6"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/inertia-ventures",
+              "name": "Inertia Ventures",
+              "permalink": "inertia-ventures",
+              "type": "organization",
+              "uuid": "005d7f1a-ea59-4791-aae1-b12001a7d8ea"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/vibe-vc",
+              "name": "Vibe VC",
+              "permalink": "vibe-vc",
+              "type": "organization",
+              "uuid": "8493e31d-53d3-4d3b-a8da-c109ad05f6f2"
+            }
+          ],
+          "permalink": "replit-series-b--44c05bf8",
+          "date": "2023-11-06",
+          "funding_date": "2023-11-06",
+          "amount_usd": 20000000.0,
+          "investors": "Craft Ventures, AIspace Ventures, Inertia Ventures, Vibe VC",
+          "lead_investors": "Craft Ventures"
+        },
+        {
+          "round_type": "series_b",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/ark-fund",
+              "name": "ARK Ventures",
+              "permalink": "ark-fund",
+              "type": "organization",
+              "uuid": "10d83fb1-eadd-42f9-84c2-fa672813ad44"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/bloomberg-beta",
+              "name": "Bloomberg Beta",
+              "permalink": "bloomberg-beta",
+              "type": "organization",
+              "uuid": "98c022ed-7618-e03e-ff49-8ba92924d58d"
+            },
+            {
+              "categories": [
+                "hedge_fund",
+                "private_equity_firm"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/coatue",
+              "name": "Coatue",
+              "permalink": "coatue",
+              "type": "organization",
+              "uuid": "d41a176d-2d63-8120-abdd-09962ffac419"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/hamilton-helmer",
+              "name": "Hamilton Helmer",
+              "permalink": "hamilton-helmer",
+              "type": "person",
+              "uuid": "1972bb36-ef50-47ce-bfe5-c5c0941d5479"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/khosla-ventures",
+              "name": "Khosla Ventures",
+              "permalink": "khosla-ventures",
+              "type": "organization",
+              "uuid": "fe5a4983-a46a-2fc2-5633-e35e0a86b694"
+            },
+            {
+              "categories": [
+                "angel",
+                "investment_partner"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/naval-ravikant",
+              "name": "Naval Ravikant",
+              "permalink": "naval-ravikant",
+              "type": "person",
+              "uuid": "bb0955c3-af0d-2d01-cd4f-985a93252432"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/sv-angel",
+              "name": "SV Angel",
+              "permalink": "sv-angel",
+              "type": "organization",
+              "uuid": "902deab4-ec41-68ce-d9df-c0c959578176"
+            },
+            {
+              "categories": [
+                "accelerator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/y-combinator",
+              "name": "Y Combinator",
+              "permalink": "y-combinator",
+              "type": "organization",
+              "uuid": "73633ee4-ea65-2967-6c5d-9b5fec7d2d5e"
+            }
+          ],
+          "permalink": "replit-series-b--f5ec1fae",
+          "date": "2023-04-25",
+          "funding_date": "2023-04-25",
+          "amount_usd": 97400000.0,
+          "investors": "Andreessen Horowitz, ARK Ventures, Bloomberg Beta, Coatue, Hamilton Helmer, Khosla Ventures, Naval Ravikant, SV Angel, Y Combinator",
+          "lead_investors": "Andreessen Horowitz"
+        },
+        {
+          "round_type": "series_b",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "hedge_fund",
+                "private_equity_firm"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/coatue",
+              "name": "Coatue",
+              "permalink": "coatue",
+              "type": "organization",
+              "uuid": "d41a176d-2d63-8120-abdd-09962ffac419"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/bloomberg-beta",
+              "name": "Bloomberg Beta",
+              "permalink": "bloomberg-beta",
+              "type": "organization",
+              "uuid": "98c022ed-7618-e03e-ff49-8ba92924d58d"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/contrary-capital",
+              "name": "Contrary",
+              "permalink": "contrary-capital",
+              "type": "organization",
+              "uuid": "f5a75e1e-52c2-e432-0cc0-00a6b3dbad75"
+            },
+            {
+              "categories": [
+                "private_equity_firm",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/fifth-down-capital",
+              "name": "Fifth Down Capital",
+              "permalink": "fifth-down-capital",
+              "type": "organization",
+              "uuid": "bb03d3cf-3ecb-4c0e-b32d-d8d00f05ef60"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/inblockchain",
+              "name": "INBlockchain",
+              "permalink": "inblockchain",
+              "type": "organization",
+              "uuid": "b580eb21-5a19-46f0-8ec5-2eed2f09824a"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/mattia-astori",
+              "name": "Mattia Astori",
+              "permalink": "mattia-astori",
+              "type": "person",
+              "uuid": "e7a26ffa-3ce0-4b2f-a0f0-64646afed6f7"
+            },
+            {
+              "categories": [
+                "accelerator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/neo-innovation",
+              "name": "Neo",
+              "permalink": "neo-innovation",
+              "type": "organization",
+              "uuid": "f6b44cee-4bf4-6fbc-8010-8e63b1f89c31"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/not-boring",
+              "name": "Not Boring",
+              "permalink": "not-boring",
+              "type": "organization",
+              "uuid": "29139495-13b9-45a0-afa2-f6f8dbd6ba19"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/reach-capital",
+              "name": "Reach Capital",
+              "permalink": "reach-capital",
+              "type": "organization",
+              "uuid": "03d0c2ea-f56a-bd52-ce54-0457905e0552"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/vinay-hiremath",
+              "name": "Vinay Hiremath",
+              "permalink": "vinay-hiremath",
+              "type": "person",
+              "uuid": "4e178238-27d4-23c5-f02e-2f65ee19231d"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/voltcapital",
+              "name": "Volt Capital",
+              "permalink": "voltcapital",
+              "type": "organization",
+              "uuid": "ab32670a-ee6a-484b-837c-302bd82a3be1"
+            }
+          ],
+          "permalink": "replit-series-b--22b87220",
+          "date": "2021-12-09",
+          "funding_date": "2021-12-09",
+          "amount_usd": 80000000.0,
+          "investors": "Coatue, Andreessen Horowitz, Bloomberg Beta, Contrary, Fifth Down Capital, INBlockchain, Mattia Astori, Neo, Not Boring, Reach Capital, Vinay Hiremath, Volt Capital",
+          "lead_investors": "Coatue"
+        },
+        {
+          "round_type": "series_a",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/capital-partners-l-p",
+              "name": "A.Capital Ventures",
+              "permalink": "capital-partners-l-p",
+              "type": "organization",
+              "uuid": "1a3f81de-d5b2-0745-0c62-efaae40629d6"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/anil-patel-d83f",
+              "name": "Anil Patel",
+              "permalink": "anil-patel-d83f",
+              "type": "person",
+              "uuid": "2a466f5c-ef8e-45cb-8583-4accea7dd83f"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/bloomberg-beta",
+              "name": "Bloomberg Beta",
+              "permalink": "bloomberg-beta",
+              "type": "organization",
+              "uuid": "98c022ed-7618-e03e-ff49-8ba92924d58d"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/reach-capital",
+              "name": "Reach Capital",
+              "permalink": "reach-capital",
+              "type": "organization",
+              "uuid": "03d0c2ea-f56a-bd52-ce54-0457905e0552"
+            },
+            {
+              "categories": [
+                "accelerator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/y-combinator",
+              "name": "Y Combinator",
+              "permalink": "y-combinator",
+              "type": "organization",
+              "uuid": "73633ee4-ea65-2967-6c5d-9b5fec7d2d5e"
+            }
+          ],
+          "permalink": "replit-series-a--eb7356ab",
+          "date": "2021-02-18",
+          "funding_date": "2021-02-18",
+          "amount_usd": 20000000.0,
+          "investors": "A.Capital Ventures, Andreessen Horowitz, Anil Patel, Bloomberg Beta, Reach Capital, Y Combinator",
+          "lead_investors": "A.Capital Ventures"
+        },
+        {
+          "round_type": "series_a",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/sv-angel",
+              "name": "SV Angel",
+              "permalink": "sv-angel",
+              "type": "organization",
+              "uuid": "902deab4-ec41-68ce-d9df-c0c959578176"
+            }
+          ],
+          "permalink": "replit-series-a--b8e87052",
+          "date": "2020-02-03",
+          "funding_date": "2020-02-03",
+          "amount_usd": null,
+          "investors": "SV Angel",
+          "lead_investors": null
+        },
+        {
+          "round_type": "seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            }
+          ],
+          "permalink": "replit-seed--36c10c6d",
+          "date": "2018-10-22",
+          "funding_date": "2018-10-22",
+          "amount_usd": 4500000.0,
+          "investors": "Andreessen Horowitz",
+          "lead_investors": "Andreessen Horowitz"
+        },
+        {
+          "round_type": "seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "accelerator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/amino-capital",
+              "name": "Amino Capital",
+              "permalink": "amino-capital",
+              "type": "organization",
+              "uuid": "ddacc266-31cb-864c-5df8-94f401101652"
+            },
+            {
+              "categories": [
+                "micro_vc"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/mission-and-market",
+              "name": "Mission and Market",
+              "permalink": "mission-and-market",
+              "type": "organization",
+              "uuid": "a01f2421-fa88-6b2e-247d-3b61e04f6855"
+            }
+          ],
+          "permalink": "replit-seed--492b6af3",
+          "date": "2018-03-27",
+          "funding_date": "2018-03-27",
+          "amount_usd": null,
+          "investors": "Amino Capital, Mission and Market",
+          "lead_investors": null
+        },
+        {
+          "round_type": "pre_seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "accelerator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/y-combinator",
+              "name": "Y Combinator",
+              "permalink": "y-combinator",
+              "type": "organization",
+              "uuid": "73633ee4-ea65-2967-6c5d-9b5fec7d2d5e"
+            }
+          ],
+          "permalink": "replit-pre-seed--b1b71cdf",
+          "date": "2018-01-05",
+          "funding_date": "2018-01-05",
+          "amount_usd": 120000.0,
+          "investors": "Y Combinator",
+          "lead_investors": "Y Combinator"
+        },
+        {
+          "round_type": "seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            },
+            {
+              "categories": [
+                "corporate_venture_capital",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/bloomberg-beta",
+              "name": "Bloomberg Beta",
+              "permalink": "bloomberg-beta",
+              "type": "organization",
+              "uuid": "98c022ed-7618-e03e-ff49-8ba92924d58d"
+            },
+            {
+              "categories": [
+                "hedge_fund",
+                "private_equity_firm"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/coatue",
+              "name": "Coatue",
+              "permalink": "coatue",
+              "type": "organization",
+              "uuid": "d41a176d-2d63-8120-abdd-09962ffac419"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/reach-capital",
+              "name": "Reach Capital",
+              "permalink": "reach-capital",
+              "type": "organization",
+              "uuid": "03d0c2ea-f56a-bd52-ce54-0457905e0552"
+            },
+            {
+              "categories": [
+                "accelerator",
+                "co_working_space",
+                "incubator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/south-park-commons",
+              "name": "South Park Commons",
+              "permalink": "south-park-commons",
+              "type": "organization",
+              "uuid": "36409f11-4a22-2564-2708-5834206cf98c"
+            }
+          ],
+          "permalink": "replit-seed--e5441286",
+          "date": "2016-10-01",
+          "funding_date": "2016-10-01",
+          "amount_usd": null,
+          "investors": "Andreessen Horowitz, Bloomberg Beta, Coatue, Reach Capital, South Park Commons",
+          "lead_investors": null
+        },
+        {
+          "round_type": "pre_seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/reach-capital",
+              "name": "Reach Capital",
+              "permalink": "reach-capital",
+              "type": "organization",
+              "uuid": "03d0c2ea-f56a-bd52-ce54-0457905e0552"
+            }
+          ],
+          "permalink": "replit-pre-seed--1f9f0743",
+          "date": "2016-05-26",
+          "funding_date": "2016-05-26",
+          "amount_usd": 835000.0,
+          "investors": "Reach Capital",
+          "lead_investors": null
+        }
+      ],
+      "cause": "unknown"
+    },
+    "clerk.com": {
+      "company": "Clerk",
+      "press_release_date": "2025-07",
+      "press_release_round": "Series C",
+      "press_release_amount_usd": 50000000.0,
+      "crustdata_round_records": [
+        {
+          "round_type": "series_c",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/menlo-ventures",
+              "name": "Menlo Ventures",
+              "permalink": "menlo-ventures",
+              "type": "organization",
+              "uuid": "a34c63f0-c277-3e4b-bbfc-1868ca81596d"
+            },
+            {
+              "categories": [
+                ""
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/anthology-fund",
+              "name": "Anthology Fund",
+              "permalink": "anthology-fund",
+              "type": "organization",
+              "uuid": "6badbccf-6ac3-4f4f-9f7a-3fcae782b1da"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/georgian-partners",
+              "name": "Georgian",
+              "permalink": "georgian-partners",
+              "type": "organization",
+              "uuid": "f4054ae0-d294-50c2-37cf-539e3c0a8009"
+            }
+          ],
+          "permalink": "clerk-a9b8-series-c--b00eab33",
+          "date": "2025-10-15",
+          "funding_date": "2025-10-15",
+          "amount_usd": 50000000.0,
+          "investors": "Menlo Ventures, Anthology Fund, Georgian",
+          "lead_investors": "Menlo Ventures, Anthology Fund"
+        },
+        {
+          "round_type": "series_b",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/crvvc",
+              "name": "CRV",
+              "permalink": "crvvc",
+              "type": "organization",
+              "uuid": "1787528e-7bd3-a500-ba86-ac55205e7e21"
+            },
+            {
+              "categories": [
+                ""
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/stripe",
+              "name": "Stripe",
+              "permalink": "stripe",
+              "type": "organization",
+              "uuid": "6f83ddd7-d637-61f8-06b2-438a0037605f"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/madrona-venture-group",
+              "name": "Madrona",
+              "permalink": "madrona-venture-group",
+              "type": "organization",
+              "uuid": "cf253887-5eac-21a2-28d3-47db7311f7e9"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            }
+          ],
+          "permalink": "clerk-a9b8-series-b--766691b1",
+          "date": "2024-01-18",
+          "funding_date": "2024-01-18",
+          "amount_usd": 30000000.0,
+          "investors": "CRV, Stripe, Madrona, Andreessen Horowitz",
+          "lead_investors": "CRV"
+        },
+        {
+          "round_type": "series_b",
+          "is_fund": false,
+          "investors_detailed": [],
+          "permalink": "clerk-a9b8-series-b--78d469c0",
+          "date": "2023-06-30",
+          "funding_date": "2023-06-30",
+          "amount_usd": 28999976.0,
+          "investors": null,
+          "lead_investors": null
+        },
+        {
+          "round_type": "series_a",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/madrona-venture-group",
+              "name": "Madrona",
+              "permalink": "madrona-venture-group",
+              "type": "organization",
+              "uuid": "cf253887-5eac-21a2-28d3-47db7311f7e9"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/spectrum-28",
+              "name": "S28 Capital",
+              "permalink": "spectrum-28",
+              "type": "organization",
+              "uuid": "4245d639-0692-b905-f0dd-e521bf73d20c"
+            },
+            {
+              "categories": [
+                "micro_vc",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/mango-capital",
+              "name": "Mango Capital",
+              "permalink": "mango-capital",
+              "type": "organization",
+              "uuid": "ed3207b4-1b66-4812-81ac-d4058917c80c"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/guillermo-rauch",
+              "name": "Guillermo Rauch",
+              "permalink": "guillermo-rauch",
+              "type": "person",
+              "uuid": "356bd44c-09ca-54fb-9a0f-f30167968a6f"
+            },
+            {
+              "categories": [
+                "micro_vc"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/fathom-capital",
+              "name": "Fathom Capital",
+              "permalink": "fathom-capital",
+              "type": "organization",
+              "uuid": "e4b672d1-97f8-4bb1-6fbf-c0ca596e16d9"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            }
+          ],
+          "permalink": "clerk-a9b8-series-a--caff0700",
+          "date": "2023-03-22",
+          "funding_date": "2023-03-22",
+          "amount_usd": 15000000.0,
+          "investors": "Madrona, S28 Capital, Mango Capital, Guillermo Rauch, Fathom Capital, Andreessen Horowitz",
+          "lead_investors": "Madrona"
+        },
+        {
+          "round_type": "seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/andreessen-horowitz",
+              "name": "Andreessen Horowitz",
+              "permalink": "andreessen-horowitz",
+              "type": "organization",
+              "uuid": "ce91bad7-b6d8-e56e-0f45-4763c6c5ca29"
+            },
+            {
+              "categories": [
+                "accelerator",
+                "co_working_space",
+                "incubator",
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/south-park-commons",
+              "name": "South Park Commons",
+              "permalink": "south-park-commons",
+              "type": "organization",
+              "uuid": "36409f11-4a22-2564-2708-5834206cf98c"
+            },
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/spectrum-28",
+              "name": "S28 Capital",
+              "permalink": "spectrum-28",
+              "type": "organization",
+              "uuid": "4245d639-0692-b905-f0dd-e521bf73d20c"
+            },
+            {
+              "categories": [
+                "micro_vc"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/fathom-capital",
+              "name": "Fathom Capital",
+              "permalink": "fathom-capital",
+              "type": "organization",
+              "uuid": "e4b672d1-97f8-4bb1-6fbf-c0ca596e16d9"
+            }
+          ],
+          "permalink": "clerk-a9b8-seed--1b6b72e4",
+          "date": "2022-11-30",
+          "funding_date": "2022-11-30",
+          "amount_usd": 6200000.0,
+          "investors": "Andreessen Horowitz, South Park Commons, S28 Capital, Fathom Capital",
+          "lead_investors": "Andreessen Horowitz"
+        },
+        {
+          "round_type": "seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                ""
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/jamstack-innovation-fund",
+              "name": "Jamstack Innovation Fund",
+              "permalink": "jamstack-innovation-fund",
+              "type": "organization",
+              "uuid": "9db13d02-7c55-44af-a3ad-25cbcdcd20ef"
+            }
+          ],
+          "permalink": "clerk-a9b8-seed--ac713575",
+          "date": "2022-07-12",
+          "funding_date": "2022-07-12",
+          "amount_usd": 100000.0,
+          "investors": "Jamstack Innovation Fund",
+          "lead_investors": "Jamstack Innovation Fund"
+        },
+        {
+          "round_type": "seed",
+          "is_fund": false,
+          "investors_detailed": [
+            {
+              "categories": [
+                "venture_capital"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/spectrum-28",
+              "name": "S28 Capital",
+              "permalink": "spectrum-28",
+              "type": "organization",
+              "uuid": "4245d639-0692-b905-f0dd-e521bf73d20c"
+            },
+            {
+              "categories": [
+                ""
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/max-stoiber",
+              "name": "Max Stoiber",
+              "permalink": "max-stoiber",
+              "type": "person",
+              "uuid": "3bd79088-2d42-4a0e-4c72-e6991e258136"
+            },
+            {
+              "categories": [
+                "angel"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/ilya-volodarsky",
+              "name": "Ilya Volodarsky",
+              "permalink": "ilya-volodarsky",
+              "type": "person",
+              "uuid": "7ae07444-f0e0-bd86-b79a-38683cb36ea5"
+            },
+            {
+              "categories": [
+                "micro_vc"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/organization/fathom-capital",
+              "name": "Fathom Capital",
+              "permalink": "fathom-capital",
+              "type": "organization",
+              "uuid": "e4b672d1-97f8-4bb1-6fbf-c0ca596e16d9"
+            },
+            {
+              "categories": [
+                ""
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/darragh-buckley",
+              "name": "Darragh Buckley",
+              "permalink": "darragh-buckley",
+              "type": "person",
+              "uuid": "ae1417e4-781b-4a1b-92b1-abfce3d9a479"
+            },
+            {
+              "categories": [
+                "angel",
+                "investment_partner"
+              ],
+              "crunchbase_profile_url": "https://www.crunchbase.com/person/calvin-french-owen",
+              "name": "Calvin French-Owen",
+              "permalink": "calvin-french-owen",
+              "type": "person",
+              "uuid": "20ece561-ff54-fb7d-ef2e-a8203c8ea4ed"
+            }
+          ],
+          "permalink": "clerk-a9b8-seed--4e34567d",
+          "date": "2021-07-01",
+          "funding_date": "2021-07-01",
+          "amount_usd": 4000000.0,
+          "investors": "S28 Capital, Max Stoiber, Ilya Volodarsky, Fathom Capital, Darragh Buckley, Calvin French-Owen",
+          "lead_investors": "S28 Capital"
+        },
+        {
+          "round_type": "pre_seed",
+          "is_fund": false,
+          "investors_detailed": [],
+          "permalink": "clerk-a9b8-pre-seed--dd406145",
+          "date": "2019-03-01",
+          "funding_date": "2019-03-01",
+          "amount_usd": 200000.0,
+          "investors": null,
+          "lead_investors": null
+        }
+      ],
+      "cause": "unknown"
+    }
+  },
+  "enrichment_failures": [],
+  "diagnostics": [
+    {
+      "type": "data_source_disagreement",
+      "split": "train",
+      "tier": "truth",
+      "company": "Replit",
+      "claim_text": "The company secured a $250M Series C round in September 2025",
+      "ground_truth": null,
+      "crustdata_value": {
+        "round_type": "series_c",
+        "actual_amount_usd": 250000000.0,
+        "actual_date": "2025-07-30",
+        "claimed_amount_usd": 250000000.0,
+        "claimed_date": "september 2025"
+      },
+      "verdict": "contradicted",
+      "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $250,000,000 on 2025-07-30 (outside +-10% amount or +-1 month date tolerance).",
+      "second_pass_notes": null,
+      "which_side_is_wrong": "Crustdata disagrees with press release (Crustdata funding evidence differs from press release round: {'round_type': 'series_c', 'actual_amount_usd': 250000000.0, 'actual_date': '2025-07-30', 'claimed_amount_usd': 250000000.0, 'claimed_date': 'september 2025'})"
+    },
+    {
+      "type": "data_source_disagreement",
+      "split": "test",
+      "tier": "truth",
+      "company": "Clerk",
+      "claim_text": "The company secured a $50M Series C round in July 2025",
+      "ground_truth": null,
+      "crustdata_value": {
+        "round_type": "series_c",
+        "actual_amount_usd": 50000000.0,
+        "actual_date": "2025-10-15",
+        "claimed_amount_usd": 50000000.0,
+        "claimed_date": "july 2025"
+      },
+      "verdict": "contradicted",
+      "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $50,000,000 on 2025-10-15 (outside +-10% amount or +-1 month date tolerance).",
+      "second_pass_notes": null,
+      "which_side_is_wrong": "Crustdata disagrees with press release (Crustdata funding evidence differs from press release round: {'round_type': 'series_c', 'actual_amount_usd': 50000000.0, 'actual_date': '2025-10-15', 'claimed_amount_usd': 50000000.0, 'claimed_date': 'july 2025'})"
+    }
+  ],
+  "llm_usage": {
+    "run_cost_usd": 0.0,
+    "cumulative_cost_usd": 4.94997,
+    "budget_remaining_usd": 15.05003,
+    "by_role": {
+      "extract": {
+        "calls": 0,
+        "cache_hits": 30,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      },
+      "arbiter": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      },
+      "verify": {
+        "calls": 0,
+        "cache_hits": 17,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      },
+      "routine": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "supabase.com_truth",
+      "company": "Supabase",
+      "domain": "supabase.com",
+      "split": "train",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Supabase was founded in 2020",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The founding year of 2020 is directly supported by the year_founded field in both the provisional evidence and company evidence summary. Additionally, the earliest funding rounds (seed rounds dated 2020-08-25 and 2020-12-15) are consistent with a company founded in 2020, as seed funding typically occurs at or shortly after founding. No contradicting evidence is present in the retrieved data.",
+          "reasoning": "Claimed year 2020 exactly matches recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $500M Series F round in June 2026",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The historical rounds list explicitly contains a series_f round of $500,000,000 dated 2026-06-04. The claim states '$500M Series F in June 2026', which matches exactly on amount and falls within the +-1 month date tolerance (June 4, 2026). No contradicting evidence found in the provided data.",
+          "reasoning": "Historical round verified: series_f of $500,000,000 on 2026-06-04 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "supabase.com_planted_easy",
+      "company": "Supabase",
+      "domain": "supabase.com",
+      "split": "train",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Supabase was founded in 2016",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2016 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $1.2B Series C round in June 2027",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $80,000,000 on 2024-09-25 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "supabase.com_planted_hard",
+      "company": "Supabase",
+      "domain": "supabase.com",
+      "split": "train",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Supabase was founded in 2021",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2021 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $625M Series G round in September 2026",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_g' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "lovable.dev_truth",
+      "company": "Lovable",
+      "domain": "lovable.dev",
+      "split": "train",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Lovable was founded in 2023",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": true,
+          "verification_notes": "The founding year of 2023 is directly supported by the year_founded field in both the provisional evidence and company evidence summary. No contradicting data exists in the retrieved evidence. The earliest funding round (pre_seed) dates to October 2024, which is consistent with a 2023 founding year. No grounds to demote the verdict.",
+          "reasoning": "Claimed year 2023 exactly matches recorded founding year 2023."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $330M Series B round in December 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The historical rounds list explicitly contains a series_b round of $330,000,000 dated 2025-12-18, which exactly matches the claim of a $330M Series B in December 2025. No contradicting evidence is present in the retrieved data. The existence of a later Series C round does not invalidate this historical Series B entry.",
+          "reasoning": "Historical round verified: series_b of $330,000,000 on 2025-12-18 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "lovable.dev_planted_easy",
+      "company": "Lovable",
+      "domain": "lovable.dev",
+      "split": "train",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Lovable was founded in 2018",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2018 contradicts recorded founding year 2023 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $825M Series F round in December 2024",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_f' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "lovable.dev_planted_hard",
+      "company": "Lovable",
+      "domain": "lovable.dev",
+      "split": "train",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Lovable was founded in 2022",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2022 contradicts recorded founding year 2023 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $396M Series C round in September 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $400,000,000 on 2026-08-12 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "replit.com_truth",
+      "company": "Replit",
+      "domain": "replit.com",
+      "split": "train",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Replit was founded in 2016",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "second_pass_verified": true,
+          "verification_notes": "The company evidence summary explicitly records year_founded as 2016, directly matching the claim. The earliest funding rounds in the historical data are seed rounds from 2018, which is consistent with a 2016 founding (companies typically raise seed funding 1-2 years after founding). No contradicting evidence is present in the retrieved data.",
+          "reasoning": "Claimed year 2016 exactly matches recorded founding year 2016."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $250M Series C round in September 2025",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $250,000,000 on 2025-07-30 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "replit.com_planted_easy",
+      "company": "Replit",
+      "domain": "replit.com",
+      "split": "train",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Replit was founded in 2012",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2012 contradicts recorded founding year 2016 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $625M Series A round in September 2026",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is undisclosed on 2020-02-03 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "replit.com_planted_hard",
+      "company": "Replit",
+      "domain": "replit.com",
+      "split": "train",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Replit was founded in 2017",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2017 contradicts recorded founding year 2016 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $312M Series D round in December 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_d' found but contradicts claim: recorded amount is $400,000,000 on 2026-03-11 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "vercel.com_truth",
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "split": "train",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Vercel was founded in 2015",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "second_pass_verified": true,
+          "verification_notes": "The company evidence summary explicitly records year_founded as 2015, directly matching the claim. No contradicting data exists in the provided evidence. The funding history (earliest round dated 2018) is consistent with a 2015 founding. Confidence is high but not absolute as no additional corroborating fields (e.g., incorporation date) are present.",
+          "reasoning": "Claimed year 2015 exactly matches recorded founding year 2015."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $300M Series F round in September 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The historical rounds list explicitly contains a Series F round of $300,000,000 dated 2025-09-30, which exactly matches the claim of a $300M Series F in September 2025. Amount matches precisely (no tolerance needed), and the date falls within the claimed month. No contradicting evidence found in any field of the provided data.",
+          "reasoning": "Historical round verified: series_f of $300,000,000 on 2025-09-30 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "vercel.com_planted_easy",
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "split": "train",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Vercel was founded in 2010",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2010 contradicts recorded founding year 2015 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $750M Series C round in September 2024",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $102,000,000 on 2021-06-23 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "vercel.com_planted_hard",
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "split": "train",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Vercel was founded in 2014",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2014 contradicts recorded founding year 2015 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $360M Series G round in June 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_g' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "posthog.com_truth",
+      "company": "PostHog",
+      "domain": "posthog.com",
+      "split": "train",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "PostHog was founded in 2020",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The founding year of 2020 is directly supported by the year_founded field in both the provisional evidence and company evidence summary. Additionally, the historical funding rounds are consistent with a 2020 founding: the earliest round is a pre-seed of $150,000 dated 2020-03-16, followed by a seed round in June 2020 and a Series A in December 2020. No contradicting evidence exists in the retrieved data.",
+          "reasoning": "Claimed year 2020 exactly matches recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $75M Series E round in September 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The historical rounds data explicitly contains a series_e round of $75,000,000 dated 2025-09-29, which matches the claim of a $75M Series E in September 2025 exactly \u2014 both in amount and date. No contradicting evidence is present in the retrieved data. The claim is fully corroborated.",
+          "reasoning": "Historical round verified: series_e of $75,000,000 on 2025-09-29 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "posthog.com_planted_easy",
+      "company": "PostHog",
+      "domain": "posthog.com",
+      "split": "train",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "PostHog was founded in 2016",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2016 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $188M Series B round in September 2026",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_b' found but contradicts claim: recorded amount is $15,000,000 on 2021-06-10 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "posthog.com_planted_hard",
+      "company": "PostHog",
+      "domain": "posthog.com",
+      "split": "train",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "PostHog was founded in 2021",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2021 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $94M Series F round in December 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_f' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "clerk.com_truth",
+      "company": "Clerk",
+      "domain": "clerk.com",
+      "split": "test",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Clerk was founded in 2019",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.92,
+          "second_pass_verified": true,
+          "verification_notes": "The founding year of 2019 is consistently supported by both the provisional evidence and the company evidence summary (year_founded: 2019). Additionally, the earliest funding round in the historical data is a pre_seed round dated 2019-03-01, which is consistent with a company founded in 2019. No contradicting evidence is present in the retrieved data.",
+          "reasoning": "Claimed year 2019 exactly matches recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $50M Series C round in July 2025",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_c' found but contradicts claim: recorded amount is $50,000,000 on 2025-10-15 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "clerk.com_planted_easy",
+      "company": "Clerk",
+      "domain": "clerk.com",
+      "split": "test",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Clerk was founded in 2014",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2014 contradicts recorded founding year 2019 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $125M Series A round in July 2024",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is $15,000,000 on 2023-03-22 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "clerk.com_planted_hard",
+      "company": "Clerk",
+      "domain": "clerk.com",
+      "split": "test",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Clerk was founded in 2018",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2018 contradicts recorded founding year 2019 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $60M Series D round in April 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_d' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "linear.app_truth",
+      "company": "Linear",
+      "domain": "linear.app",
+      "split": "test",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Linear was founded in 2019",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "second_pass_verified": true,
+          "verification_notes": "The founding year of 2019 is directly supported by the year_founded field in both the provisional evidence and company evidence summary. Additionally, the earliest funding round (seed) is dated 2019-11-22, which is consistent with a company founded in 2019. No contradicting evidence is present in the retrieved data.",
+          "reasoning": "Claimed year 2019 exactly matches recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $82M Series C round in June 2025",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": true,
+          "verification_notes": "The historical rounds list contains an exact match: round_type='series_c', amount_usd=82,000,000, date='2025-06-10'. This precisely matches the claim of a $82M Series C in June 2025 with no tolerance needed. No contradicting evidence found in the provided data.",
+          "reasoning": "Historical round verified: series_c of $82,000,000 on 2025-06-10 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "linear.app_planted_easy",
+      "company": "Linear",
+      "domain": "linear.app",
+      "split": "test",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Linear was founded in 2015",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2015 contradicts recorded founding year 2019 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $205M Series A round in June 2026",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is $13,000,000 on 2020-12-08 (outside +-10% amount or +-1 month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "linear.app_planted_hard",
+      "company": "Linear",
+      "domain": "linear.app",
+      "split": "test",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Linear was founded in 2020",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2020 contradicts recorded founding year 2019 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $102M Series D round in September 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_d' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "railway.com_truth",
+      "company": "Railway",
+      "domain": "railway.com",
+      "split": "test",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Railway was founded in 2020",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "second_pass_verified": true,
+          "verification_notes": "The founding year of 2020 is directly supported by the year_founded field in both the provisional_evidence and company_evidence_summary. No contradicting data exists in the retrieved evidence. The funding timeline is consistent with a 2020 founding: a seed round in June 2021, Series A in May 2022, and Series B in January 2026 all follow logically from a 2020 founding date.",
+          "reasoning": "Claimed year 2020 exactly matches recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $100M Series B round in January 2026",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The historical_rounds data confirms a series_b round of exactly $100,000,000 on 2026-01-22, which matches the claim of a $100M Series B in January 2026 precisely \u2014 both amount and date fall within tolerance. The total funding of $120M is consistent with the sum of the Series A ($20M) and Series B ($100M). No contradicting evidence found in any provided data field.",
+          "reasoning": "Historical round verified: series_b of $100,000,000 on 2026-01-22 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "railway.com_planted_easy",
+      "company": "Railway",
+      "domain": "railway.com",
+      "split": "test",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Railway was founded in 2015",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2015 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $250M Series F round in January 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_f' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "railway.com_planted_hard",
+      "company": "Railway",
+      "domain": "railway.com",
+      "split": "test",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Railway was founded in 2019",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2019 contradicts recorded founding year 2020 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $120M Series C round in October 2025",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_c' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "resend.com_truth",
+      "company": "Resend",
+      "domain": "resend.com",
+      "split": "test",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "funding",
+          "text": "Resend secured a $18M Series A round in December 2024.",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The provisional evidence and company evidence summary both confirm a Series A round of exactly $18,000,000 dated 2024-12-04, which falls within December 2024. The claim matches on all key dimensions: round type (series_a), amount ($18M exact), and timing (December 2024). No contradicting data found in the retrieved evidence.",
+          "reasoning": "Historical round verified: series_a of $18,000,000 on 2024-12-04 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "resend.com_planted_easy",
+      "company": "Resend",
+      "domain": "resend.com",
+      "split": "test",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "funding",
+          "text": "Resend secured a $45M Series D round in December 2025.",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_d' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "resend.com_planted_hard",
+      "company": "Resend",
+      "domain": "resend.com",
+      "split": "test",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "funding",
+          "text": "Resend secured a $22M Series B round in March 2025.",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_b' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "cal.com_truth",
+      "company": "Cal.com",
+      "domain": "cal.com",
+      "split": "test",
+      "tier": "truth",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Cal.com was founded in 2021",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.92,
+          "second_pass_verified": true,
+          "verification_notes": "The founding year of 2021 is consistently supported by the provisional evidence and company evidence summary, both recording year_founded as 2021. The earliest funding round (seed) dated 2021-12-16 is consistent with a 2021 founding. No contradicting data exists in the retrieved evidence. Confidence is slightly below 1.0 only because no additional corroborating details (e.g., incorporation documents, founder statements) are present in the evidence to independently confirm the exact year.",
+          "reasoning": "Claimed year 2021 exactly matches recorded founding year 2021."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $25M Series A round in April 2022",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.97,
+          "second_pass_verified": true,
+          "verification_notes": "The provisional evidence and company_evidence_summary are fully consistent. Cal.com's historical rounds list explicitly records a series_a round of $25,000,000 dated 2022-04-15, which matches the claim of a $25M Series A in April 2022 exactly \u2014 both in amount (no deviation) and date (exact match within tolerance). Total funding of $32.4M aligns with the sum of the two recorded rounds ($25M + $7.4M = $32.4M), providing additional internal consistency. No contradicting data found anywhere in the retrieved evidence.",
+          "reasoning": "Historical round verified: series_a of $25,000,000 on 2022-04-15 matches within +-10% amount and +-1 month date tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "cal.com_planted_easy",
+      "company": "Cal.com",
+      "domain": "cal.com",
+      "split": "test",
+      "tier": "easy",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Cal.com was founded in 2016",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2016 contradicts recorded founding year 2021 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $62M Series D round in April 2021",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_d' round found in historical funding rounds."
+        }
+      ]
+    },
+    {
+      "case_id": "cal.com_planted_hard",
+      "company": "Cal.com",
+      "domain": "cal.com",
+      "split": "test",
+      "tier": "hard",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Cal.com was founded in 2020",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "Claimed founding year 2020 contradicts recorded founding year 2021 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $30M Series B round in January 2022",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.9,
+          "second_pass_verified": false,
+          "verification_notes": null,
+          "reasoning": "No matching 'series_b' round found in historical funding rounds."
+        }
+      ]
+    }
+  ]
+}

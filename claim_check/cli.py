@@ -1,4 +1,4 @@
-﻿"""Command Line Interface for Claim Check."""
+"""Command Line Interface for Claim Check."""
 
 from __future__ import annotations
 
@@ -61,6 +61,12 @@ def main():
         help="Permit using Claude Opus if requested in model router.",
     )
     parser.add_argument(
+        "--verifier-mode",
+        choices=["legacy", "evidence"],
+        default="evidence",
+        help="Verifier behavior mode ('legacy' allows memory-based doubt demotion; 'evidence' requires cited counter-evidence).",
+    )
+    parser.add_argument(
         "--format",
         choices=["terminal", "markdown", "json"],
         default="terminal",
@@ -95,6 +101,7 @@ def main():
     auditor = ClaimAuditor(
         offline=args.offline,
         allow_opus=args.allow_opus,
+        verifier_mode=args.verifier_mode,
     )
 
     resume_id = None

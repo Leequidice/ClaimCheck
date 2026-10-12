@@ -2,11 +2,17 @@
 
 Strictly sourced from eval/companies.csv (fields: company, domain, founded_year, round,
 round_amount_usd, round_date, source_url).
-All planted lies are generated programmatically:
-  - founded_year shifted 3 to 5 years
-  - round_amount_usd multiplied by 2.5
-  - wrong round type (e.g. Series A -> Series D, Seed -> Series B)
-  - wrong date by a year (e.g. +1 year or -1 year)
+All planted lies are generated programmatically across two difficulty tiers:
+  - Easy tier:
+      * founded_year shifted 3 to 5 years
+      * round_amount_usd multiplied by 2.5
+      * distant round type (e.g. Series A -> Series D, Seed -> Series B)
+      * wrong date by a full year (+1 or -1 year)
+  - Hard tier:
+      * round_amount_usd multiplied by 1.1x to 1.3x (1.20x–1.25x, strictly beyond +-10% tolerance)
+      * round date shifted by 2 to 4 months (+-3 months, strictly beyond +-1 month tolerance)
+      * founded_year shifted by exactly 1 year (strictly beyond exact match)
+      * plausible adjacent round type (e.g. Series B -> Series C, Series C -> Series D)
 """
 
 from __future__ import annotations
@@ -20,7 +26,7 @@ from typing import Any, Dict, List, Optional, Tuple
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CSV_PATH = ROOT_DIR / "eval" / "companies.csv"
 
-# Alternate round type substitution map
+# Distant round substitutions for easy tier
 ROUND_SUBSTITUTIONS = {
     "seed": "Series B",
     "series a": "Series D",
@@ -30,6 +36,20 @@ ROUND_SUBSTITUTIONS = {
     "series e": "Series B",
     "series f": "Series C",
     "series i": "Series B",
+}
+
+# Plausible adjacent round substitutions for hard tier
+ADJACENT_ROUNDS = {
+    "seed": "Series A",
+    "series a": "Series B",
+    "series b": "Series C",
+    "series c": "Series D",
+    "series d": "Series E",
+    "series e": "Series F",
+    "series f": "Series G",
+    "series g": "Series H",
+    "series h": "Series I",
+    "series i": "Series J",
 }
 
 
@@ -51,6 +71,7 @@ class EvalCase:
     domain: str
     pitch_text: str
     is_adversarial: bool
+    tier: str  # 'truth', 'easy', 'hard'
     split: str  # 'train' or 'test' (held-out)
     expected_verdicts: Dict[str, str]  # claim_category -> 'verified' | 'contradicted'
     metadata: Dict[str, Any]
@@ -117,7 +138,27 @@ def _shift_date_by_year(date_str: str, years: int = 1) -> str:
         rest = "-".join(parts[1:])
         return f"{yr}-{rest}" if rest else f"{yr}"
     except Exception:
-        return f"2018-01-01"
+        return "2018-01-01"
+
+
+def _shift_date_by_months(date_str: str, months: int = 3) -> str:
+    """Shift an ISO date string (YYYY-MM-DD or YYYY-MM) by N months."""
+    try:
+        parts = date_str.strip().split("-")
+        yr = int(parts[0])
+        mo = int(parts[1]) if len(parts) > 1 else 1
+        day = parts[2] if len(parts) > 2 else None
+
+        total_months = yr * 12 + (mo - 1) + months
+        new_yr = total_months // 12
+        new_mo = (total_months % 12) + 1
+
+        if day:
+            safe_day = min(int(day), 28)
+            return f"{new_yr:04d}-{new_mo:02d}-{safe_day:02d}"
+        return f"{new_yr:04d}-{new_mo:02d}"
+    except Exception:
+        return date_str
 
 
 def _format_usd_millions(amount: float) -> str:
@@ -130,14 +171,13 @@ def _format_usd_millions(amount: float) -> str:
 
 
 def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
-    """Generate paired truthful and programmatic planted lie cases.
+    """Generate truthful, easy planted lie, and hard planted lie cases.
     
     Split: first `train_count` companies -> 'train' (tune), remainder -> 'test' (held-out).
-    Programmatic planted lies:
-      - year shifted 3 to 5 (if founded_year exists)
-      - round amount x2.5
-      - wrong round type
-      - wrong date by a year
+    Each company produces:
+      1. Truthful case (tier='truth')
+      2. Easy planted lie case (tier='easy')
+      3. Hard planted lie case (tier='hard')
     """
     sourced = load_sourced_companies()
     cases: List[EvalCase] = []
@@ -152,6 +192,7 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
         # -------------------------------------------------------------
         expected_truth = {"funding": "verified"}
         meta_truth = {
+            "tier": "truth",
             "true_round": sc.round_type,
             "true_round_amount_usd": sc.round_amount_usd,
             "true_round_date": sc.round_date,
@@ -176,6 +217,7 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
                 domain=sc.domain,
                 pitch_text=truth_pitch,
                 is_adversarial=False,
+                tier="truth",
                 split=split,
                 expected_verdicts=expected_truth,
                 metadata=meta_truth,
@@ -183,23 +225,24 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
         )
 
         # -------------------------------------------------------------
-        # 2. Programmatic Planted Lie Case
+        # 2. Easy Planted Lie Case
         # -------------------------------------------------------------
         # Round amount x2.5
-        fake_amount = sc.round_amount_usd * 2.5
-        fake_amt_str = _format_usd_millions(fake_amount)
-        # Wrong round type
+        easy_amount = sc.round_amount_usd * 2.5
+        easy_amt_str = _format_usd_millions(easy_amount)
+        # Distant round type
         norm_r = sc.round_type.lower().strip()
-        fake_round = ROUND_SUBSTITUTIONS.get(norm_r, "Series Z")
+        easy_round = ROUND_SUBSTITUTIONS.get(norm_r, "Series Z")
         # Wrong date by a year
-        fake_iso_date = _shift_date_by_year(sc.round_date, years=1 if idx % 2 == 0 else -1)
-        fake_date_human = _format_date_human(fake_iso_date)
+        easy_iso_date = _shift_date_by_year(sc.round_date, years=1 if idx % 2 == 0 else -1)
+        easy_date_human = _format_date_human(easy_iso_date)
 
-        expected_lie = {"funding": "contradicted"}
-        meta_lie = {
-            "planted_round": fake_round,
-            "planted_amount_usd": fake_amount,
-            "planted_date": fake_iso_date,
+        expected_easy = {"funding": "contradicted"}
+        meta_easy = {
+            "tier": "easy",
+            "planted_round": easy_round,
+            "planted_amount_usd": easy_amount,
+            "planted_date": easy_iso_date,
             "true_round": sc.round_type,
             "true_amount_usd": sc.round_amount_usd,
             "true_date": sc.round_date,
@@ -207,29 +250,84 @@ def generate_eval_cases(train_count: int = 5) -> List[EvalCase]:
 
         if sc.founded_year is not None:
             # Year shifted 3 to 5 (alternating 4 or 5 years)
-            fake_year = sc.founded_year - (4 if idx % 2 == 0 else 5)
-            lie_pitch = (
-                f"{sc.company} was founded in {fake_year}. "
-                f"The company secured a {fake_amt_str} {fake_round} round in {fake_date_human}."
+            easy_year = sc.founded_year - (4 if idx % 2 == 0 else 5)
+            easy_pitch = (
+                f"{sc.company} was founded in {easy_year}. "
+                f"The company secured a {easy_amt_str} {easy_round} round in {easy_date_human}."
             )
-            expected_lie["founding_year"] = "contradicted"
-            meta_lie["planted_year"] = fake_year
-            meta_lie["true_year"] = sc.founded_year
+            expected_easy["founding_year"] = "contradicted"
+            meta_easy["planted_year"] = easy_year
+            meta_easy["true_year"] = sc.founded_year
         else:
-            lie_pitch = (
-                f"{sc.company} secured a {fake_amt_str} {fake_round} round in {fake_date_human}."
+            easy_pitch = (
+                f"{sc.company} secured a {easy_amt_str} {easy_round} round in {easy_date_human}."
             )
 
         cases.append(
             EvalCase(
-                case_id=f"{sc.domain}_planted_lie",
+                case_id=f"{sc.domain}_planted_easy",
                 company=sc.company,
                 domain=sc.domain,
-                pitch_text=lie_pitch,
+                pitch_text=easy_pitch,
                 is_adversarial=True,
+                tier="easy",
                 split=split,
-                expected_verdicts=expected_lie,
-                metadata=meta_lie,
+                expected_verdicts=expected_easy,
+                metadata=meta_easy,
+            )
+        )
+
+        # -------------------------------------------------------------
+        # 3. Hard Planted Lie Case
+        # -------------------------------------------------------------
+        # Amount multiplied by 1.1x to 1.3x (alternating 1.25x and 1.20x)
+        hard_factor = 1.25 if idx % 2 == 0 else 1.20
+        hard_amount = sc.round_amount_usd * hard_factor
+        hard_amt_str = _format_usd_millions(hard_amount)
+        # Plausible adjacent round type (e.g. Series B -> Series C, Series C -> Series D)
+        hard_round = ADJACENT_ROUNDS.get(norm_r, "Series B")
+        # Date shifted 2 to 4 months (alternating +3 months and -3 months)
+        shift_mo = 3 if idx % 2 == 0 else -3
+        hard_iso_date = _shift_date_by_months(sc.round_date, months=shift_mo)
+        hard_date_human = _format_date_human(hard_iso_date)
+
+        expected_hard = {"funding": "contradicted"}
+        meta_hard = {
+            "tier": "hard",
+            "planted_round": hard_round,
+            "planted_amount_usd": hard_amount,
+            "planted_date": hard_iso_date,
+            "true_round": sc.round_type,
+            "true_amount_usd": sc.round_amount_usd,
+            "true_date": sc.round_date,
+        }
+
+        if sc.founded_year is not None:
+            # Founded year shifted by exactly 1 year (+1 if even idx, -1 if odd)
+            hard_year = sc.founded_year + (1 if idx % 2 == 0 else -1)
+            hard_pitch = (
+                f"{sc.company} was founded in {hard_year}. "
+                f"The company secured a {hard_amt_str} {hard_round} round in {hard_date_human}."
+            )
+            expected_hard["founding_year"] = "contradicted"
+            meta_hard["planted_year"] = hard_year
+            meta_hard["true_year"] = sc.founded_year
+        else:
+            hard_pitch = (
+                f"{sc.company} secured a {hard_amt_str} {hard_round} round in {hard_date_human}."
+            )
+
+        cases.append(
+            EvalCase(
+                case_id=f"{sc.domain}_planted_hard",
+                company=sc.company,
+                domain=sc.domain,
+                pitch_text=hard_pitch,
+                is_adversarial=True,
+                tier="hard",
+                split=split,
+                expected_verdicts=expected_hard,
+                metadata=meta_hard,
             )
         )
 

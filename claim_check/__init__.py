@@ -1,4 +1,4 @@
-﻿"""Claim Check - AI agent that audits company public claims."""
+"""Claim Check - AI agent that audits company public claims."""
 
 from __future__ import annotations
 
@@ -9,6 +9,9 @@ try:
     import neatlogs
 except ImportError:
     neatlogs = None
+
+from claim_check.dns_fallback import install_dns_fallback
+install_dns_fallback()
 
 _NEATLOGS_INITIALIZED = False
 

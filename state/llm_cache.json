@@ -1,0 +1,10 @@
+{
+  "24f34c3185c7e0866f646bf17bde27a4e29ec1dc004f975b3ffdff6d6d9dbe83": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"founded in 2017\",\n    \"normalized_value\": 2017,\n    \"tolerance_min\": 2017,\n    \"tolerance_max\": 2017,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"location\",\n    \"original_text\": \"in San Francisco, CA\",\n    \"normalized_value\": \"San Francisco, CA\",\n    \"tolerance_min\": null,\n    \"tolerance_max\": null,\n    \"unit\": null,\n    \"planned_source\": \"crustdata.locations\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"400 employees\",\n    \"normalized_value\": 400,\n    \"tolerance_min\": 300,\n    \"tolerance_max\": 500,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 657,
+    "output_tokens": 292,
+    "cost_usd": 0.000529
+  }
+}

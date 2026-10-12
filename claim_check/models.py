@@ -1,4 +1,4 @@
-﻿"""Pydantic data models for Crustdata Company and Person Enrichment APIs.
+"""Pydantic data models for Crustdata Company and Person Enrichment APIs.
 
 All field names and structures strictly adhere to the official Crustdata OpenAPI
 documentation (API version 2025-11-01).
@@ -149,3 +149,65 @@ class PersonEnrichItem(BaseModel):
         if self.matches and self.matches[0].person_data:
             return self.matches[0].person_data
         return None
+
+
+# =====================================================================
+# Atomic Claim and Audit Models
+# =====================================================================
+
+from enum import Enum
+
+
+class ClaimCategory(str, Enum):
+    HEADCOUNT = "headcount"
+    FUNDING = "funding"
+    FOUNDING_YEAR = "founding_year"
+    LOCATION = "location"
+    FOUNDER_BACKGROUND = "founder_background"
+    CUSTOMER_COUNT = "customer_count"
+    OTHER = "other"
+
+
+class VerdictType(str, Enum):
+    VERIFIED = "verified"
+    CONTRADICTED = "contradicted"
+    UNVERIFIABLE = "unverifiable"
+
+
+class AtomicClaim(BaseModel):
+    id: str
+    category: ClaimCategory
+    original_text: str
+    normalized_value: Any
+    tolerance_min: Optional[float] = None
+    tolerance_max: Optional[float] = None
+    unit: Optional[str] = None
+    planned_source: str = "crustdata"
+    context: Optional[str] = None
+
+
+class ClaimAuditResult(BaseModel):
+    claim_id: str
+    claim: AtomicClaim
+    verdict: VerdictType
+    confidence: float = 0.0  # 0.0 to 1.0
+    evidence: Optional[Any] = None
+    source_cited: Optional[str] = None
+    reasoning: str
+    second_pass_verified: bool = False
+    verification_notes: Optional[str] = None
+
+
+class CompanyAuditReport(BaseModel):
+    company_name: Optional[str] = None
+    target_identifier: str  # URL, domain, or pitch title
+    run_timestamp: str
+    claims_total: int = 0
+    verified_count: int = 0
+    contradicted_count: int = 0
+    unverifiable_count: int = 0
+    results: List[ClaimAuditResult] = Field(default_factory=list)
+    llm_usage: Optional[Dict[str, Any]] = None
+    neatlogs_trace_id: Optional[str] = None
+    neatlogs_trace_url: Optional[str] = None
+

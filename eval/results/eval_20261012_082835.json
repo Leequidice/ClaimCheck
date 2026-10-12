@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-10-12T08:28:13.584703+00:00",
+  "offline": false,
+  "cases_count": 2,
+  "total_claims_evaluated": 6,
+  "metrics": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "false_alarm_count": 0,
+    "true_positives_lies_caught": 3,
+    "false_negatives_lies_missed": 0,
+    "true_negatives_truths_verified": 3,
+    "unverifiable_count": 0
+  },
+  "llm_usage": {
+    "run_cost_usd": 0.015414,
+    "cumulative_cost_usd": 4.328638,
+    "budget_remaining_usd": 15.671362,
+    "by_role": {
+      "extract": {
+        "calls": 2,
+        "cache_hits": 0,
+        "input_tokens": 1333,
+        "output_tokens": 631,
+        "cost_usd": 0.001122
+      },
+      "arbiter": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      },
+      "verify": {
+        "calls": 3,
+        "cache_hits": 0,
+        "input_tokens": 1579,
+        "output_tokens": 637,
+        "cost_usd": 0.014292
+      },
+      "routine": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "retool.com_truth",
+      "company": "Retool",
+      "domain": "retool.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded in 2017",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2017 matches recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $141M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $141,000,000 is within acceptable tolerance [$110,000,000, $170,000,000] of total investment ($141,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 416 employees",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 416 employees falls within acceptable range [312, 520] of actual count (416)."
+        }
+      ]
+    },
+    {
+      "case_id": "retool.com_planted_lie",
+      "company": "Retool",
+      "domain": "retool.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded back in 2002",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2002 contradicts recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $1410M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,410,000,000 conflicts with recorded total investment ($141,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 2080 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 2080 employees is outside acceptable range [1560, 2704] of authoritative headcount (416)."
+        }
+      ]
+    }
+  ]
+}

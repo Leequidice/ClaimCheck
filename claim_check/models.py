@@ -66,9 +66,9 @@ class CompanyPeople(BaseModel):
 
 
 class CompanyRevenue(BaseModel):
-    estimated: Optional[Dict[str, Any]] = None
-    public_markets: Optional[str] = None
-    acquisition_status: Optional[str] = None
+    estimated: Optional[Any] = None
+    public_markets: Optional[Any] = None
+    acquisition_status: Optional[Any] = None
 
 
 class CompanyData(BaseModel):

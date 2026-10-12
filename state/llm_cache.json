@@ -6,5 +6,245 @@
     "input_tokens": 657,
     "output_tokens": 292,
     "cost_usd": 0.000529
+  },
+  "9df6c4d7b6928f8ed86c50b8d96287db888305aae4cbf91fa1d7bdd9eaed66a7": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Retool was founded in 2017\",\n    \"normalized_value\": 2017,\n    \"tolerance_min\": 2017,\n    \"tolerance_max\": 2017,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"founder_background\",\n    \"original_text\": \"founded in 2017 by David Hsu\",\n    \"normalized_value\": \"David Hsu\",\n    \"tolerance_min\": null,\n    \"tolerance_max\": null,\n    \"unit\": null,\n    \"planned_source\": \"crustdata.people\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"location\",\n    \"original_text\": \"headquartered in San Francisco, CA\",\n    \"normalized_value\": \"San Francisco, CA\",\n    \"tolerance_min\": null,\n    \"tolerance_max\": null,\n    \"unit\": null,\n    \"planned_source\": \"crustdata.locations\"\n  },\n  {\n    \"id\": \"claim_4\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has 400 employees\",\n    \"normalized_value\": 400,\n    \"tolerance_min\": 320,\n    \"tolerance_max\": 480,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  },\n  {\n    \"id\": \"claim_5\",\n    \"category\": \"customer_count\",\n    \"original_text\": \"over 5,000 customers\",\n    \"normalized_value\": 5000,\n    \"tolerance_min\": 5000,\n    \"tolerance_max\": null,\n    \"unit\": \"customers\",\n    \"planned_source\": \"crustdata.company_data\"\n  }\n]\n```",
+    "input_tokens": 684,
+    "output_tokens": 497,
+    "cost_usd": 0.000792
+  },
+  "6f6932e74e495750491293206b4da71df28717599e5d6bf05dc169ac7d7e76a5": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"verified\",\n  \"confidence\": 0.95,\n  \"cited_source\": \"LinkedIn professional profile of David Hsu (linkedin.com/in/dvdhsu), sourced via CrustData, last updated 2026-10-10, showing 'Founder, CEO @ Retool' with employment start date of 2017-01-01\",\n  \"reasoning\": \"The claim states Retool was 'founded in 2017 by David Hsu.' The evidence directly corroborates both elements: (1) David Hsu's LinkedIn profile explicitly lists him as 'Founder, CEO' at Retool with a start date of 2017-01-01, and (2) the profile is recently timestamped (October 2026), making it highly authoritative as a primary professional record. The evidence also reveals a co-founder, Anthony G. (Founder, CTO), who also started at Retool on 2017-01-01, meaning the claim is not exhaustive but is not factually wrong \u2014 David Hsu is indeed a founder and the founding year of 2017 is confirmed. The claim's omission of Anthony G. as a co-founder is a simplification, not a contradiction. The founding year of 2017 is consistent across both founder profiles. Confidence is set at 0.95 rather than 1.0 solely because the claim singles out David Hsu as the sole founder when there is at least one co-founder, which is a minor incompleteness rather than an inaccuracy.\"\n}\n```",
+    "input_tokens": 3105,
+    "output_tokens": 364,
+    "cost_usd": 0.014775
+  },
+  "4fde9007a497977788303129621f7da8fa56c17d8b406585d29feda531460415": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.97,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2017 is strongly corroborated by multiple independent data points within the record: (1) the basic_info field explicitly states year_founded: 2017; (2) both founders (David Hsu and Anthony G.) show employee_start_date of 2017-01-01 at Retool, consistent with a 2017 founding; (3) no contradicting evidence found elsewhere in the record. The headcount shows a YoY decline (-11%) and six-month decline (-3.5%), but this is irrelevant to the founding year claim. No date misalignment, range boundary issue, or subsidiary/parent contradiction was identified.\"\n}\n```",
+    "input_tokens": 237682,
+    "output_tokens": 197,
+    "cost_usd": 0.716001
+  },
+  "b65bd970c96ac1e76dc93a5261e7837ba54d4ffcdccd8d52d4fe35b0f37214d4": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.88,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of 400 employees falls within the acceptable range [320, 480] of the actual headcount of 416. No contradicting evidence found: (1) The company's LinkedIn employee_count_range is listed as '201-500', which is consistent with 416 employees and does not contradict the claim of ~400. (2) The YoY growth shows a decline of -11.1% (from ~468 to 416), and the six-month growth is -3.5%, indicating the company has been shrinking slightly, but 400 remains a reasonable approximation of the current 416 figure. (3) No layoff events or subsidiary structures were found that would suggest the headcount data is stale or misleading. (4) The data appears current based on multiple employee profiles with start dates in 2026, confirming the headcount figure is recent. The only minor note is that the claim of 'currently has 400 employees' slightly understates the actual 416, but this is within the provisionally verified \u00b120% tolerance range.\"\n}\n```",
+    "input_tokens": 237708,
+    "output_tokens": 280,
+    "cost_usd": 0.717324
+  },
+  "0e8aec2a7e7559d76f05a836bbedfd648c7e602d1916db0021e957e2554d7903": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.97,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2017 is strongly corroborated by multiple independent data points within the company evidence: (1) the basic_info field explicitly records year_founded as 2017; (2) both founders (David Hsu as CEO and Anthony G. as CTO) show employee_start_date of 2017-01-01 at Retool with no end date, consistent with founding that year; (3) no contradicting evidence found elsewhere in the data (no earlier incorporation dates, no conflicting founding narratives). The headcount data shows a YoY decline of ~11% and a six-month decline, but this reflects current staffing trends and does not contradict the founding year. No date misalignment, range boundary issue, or subsidiary/parent conflict was identified.\"\n}\n```",
+    "input_tokens": 236526,
+    "output_tokens": 220,
+    "cost_usd": 0.712878
+  },
+  "c7e3382e4791bae6f26fc52a97b7fdad0f8e2fd0409108ebc55488d8716cc097": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.93,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"Stress-test findings: (1) David Hsu's LinkedIn profile (crustdata_person_id 14540, last updated 2026-10-10) explicitly lists him as 'Founder, CEO' at Retool with employee_start_date of 2017-01-01, directly confirming both the founder identity and the 2017 founding year. (2) The company's basic_info also lists year_founded as 2017, providing independent corroboration. (3) A co-founder Anthony G. (Founder, CTO) also shows a 2017-01-01 start date, confirming the founding year but indicating the claim is incomplete rather than wrong \u2014 David Hsu is indeed a founder. (4) A second 'David Hsu' profile (crustdata_person_id 231993991) exists with title 'CEO' but no start date and zero connections, suggesting it is a duplicate/secondary profile that does not contradict the primary record. (5) No evidence of David Hsu departing or being replaced as founder/CEO. (6) No date misalignment: the founding year 2017 is consistent across all data points. The only caveat is the claim's omission of Anthony G. as co-founder, which is an incompleteness, not a factual error.\"\n}\n```",
+    "input_tokens": 239477,
+    "output_tokens": 345,
+    "cost_usd": 0.723606
+  },
+  "295c9b5661baa77bb0e0faaf7bd8694369eea09315cd8c4e72f6ca8087e8285a": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.97,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"All available evidence consistently supports San Francisco, CA as Retool's headquarters. The structured location data explicitly states 'San Francisco, California, United States' with street address '1550 Bryant St, San Francisco, California.' The headcount regional breakdown shows 114 employees in 'San Francisco, CA' and 183 in 'San Francisco Bay Area,' the largest concentration. Multiple current employees (CPO Erica Galos Alioto, VP Professional Services Alex Macievich, VP Controller Luke Franklin, Head of Engineering Ryan Wong, CEO David Hsu) list San Francisco as their work location. The CTO's position is listed as 'San Francisco.' No contradicting evidence found \u2014 the New York and London offices are clearly secondary offices, not headquarters. The fact that some employees are remote or based elsewhere (Seattle, Austin, Boston) is consistent with a distributed workforce at a San Francisco-headquartered company.\"\n}\n```",
+    "input_tokens": 236541,
+    "output_tokens": 245,
+    "cost_usd": 0.713298
+  },
+  "449aff52bd2f57366630c51e290ba7a92c25e5b643716682d9d520651829298d": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.82,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of '400 employees' falls within the acceptable \u00b120% range [320, 480] of the actual measured headcount of 416. Key stress-test checks: (1) Data freshness \u2014 multiple employee profiles show start dates in 2026 (e.g., CMO starting Sept 2026, COO Nov 2025, CRO Nov 2025), confirming the headcount data is current, not stale. (2) YoY decline signal \u2014 growth data shows -11.1% YoY and -3.5% over six months, meaning the company has been shrinking from a higher peak. The peak implied by YoY data would be ~468 employees one year ago, consistent with the '201-500' LinkedIn range. No evidence of a recent large layoff event that would make 416 unreliable. (3) LinkedIn employee_count_range of '201-500' is consistent with 416. (4) The claim of 400 is a reasonable round-number approximation of 416, within 4% of actual. No contradicting evidence found.\"\n}\n```",
+    "input_tokens": 236552,
+    "output_tokens": 291,
+    "cost_usd": 0.714021
+  },
+  "9d5a56f769419827f348f4d40d3ce40e2aa3d3dc03e98f94b7ef07a0a9917dce": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Retool was founded in 2017\",\n    \"normalized_value\": 2017,\n    \"tolerance_min\": 2017,\n    \"tolerance_max\": 2017,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $141M in funding\",\n    \"normalized_value\": 141000000,\n    \"tolerance_min\": 110000000,\n    \"tolerance_max\": 170000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 416 employees\",\n    \"normalized_value\": 416,\n    \"tolerance_min\": 312,\n    \"tolerance_max\": 520,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 664,
+    "output_tokens": 311,
+    "cost_usd": 0.000555
+  },
+  "f082d681303b2a385a488851a42453a4dc17f275b6d01bb3d72100f354e73e92": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2017 is consistently recorded in the company evidence with no contradicting data points. Cross-checking other fields: the company has raised $141M total with a Series C last round of $45M, which is consistent with a company founded in 2017 reaching that funding stage. Headcount of 416 (within the 201-500 range) is plausible for a ~6-7 year old SaaS company at this funding level. No subsidiaries, parent company conflicts, or date misalignments were detected. The only caveat is that no independent corroborating source (e.g., incorporation records, press coverage) is present in the evidence \u2014 the founding year is sourced from a single data field \u2014 which slightly limits confidence, but no counter-evidence exists to challenge the claim.\"\n}\n```",
+    "input_tokens": 496,
+    "output_tokens": 226,
+    "cost_usd": 0.004878
+  },
+  "fe6ea76ba3d70bbb13f032a6d31365ca1acd57340aa749739c985d0be2dbd47d": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed funding of ~$141M matches exactly the recorded total_investment_usd of $141,000,000. The last round is Series C at $45M, which is consistent with a cumulative total of $141M across multiple rounds (seed, Series A, Series B, Series C). No contradicting figures appear elsewhere in the company data. The tolerance range of [$110M, $170M] is reasonably bounded and the exact match sits at the midpoint. No date misalignment issues are detectable from the provided data, and the employee headcount of 416 (within 201-500 range) is consistent with a Series C-stage company at this funding level. No red flags found.\"\n}\n```",
+    "input_tokens": 560,
+    "output_tokens": 201,
+    "cost_usd": 0.004695
+  },
+  "a4ecd6088e280a20920b29c2cd23303382b3d78d5085c4ee2aa6402cfe5dbc66": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed headcount of 416 exactly matches the recorded headcount_total of 416 in the company evidence. The acceptable range [312, 520] is a standard \u00b125% band around 416, which is reasonable and not misleadingly broad. The employee_range field ('201-500') is consistent with a headcount of 416, as 416 falls within that bracket. No layoff events, subsidiary structures, or date misalignments are indicated in the evidence that would undermine this figure. The only minor caveat is that no explicit timestamp is provided for when the headcount of 416 was recorded, so there is a small residual uncertainty about whether this figure is current. However, no contradicting evidence exists in the provided data.\"\n}\n```",
+    "input_tokens": 523,
+    "output_tokens": 210,
+    "cost_usd": 0.004719
+  },
+  "59372a52d82c3d626d6ddd96e5d12a2ad6e0b4ccbd5836442a8fd6c2fb8963b4": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Retool was founded back in 2002\",\n    \"normalized_value\": 2002,\n    \"tolerance_min\": 2001,\n    \"tolerance_max\": 2003,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $1410M in private capital\",\n    \"normalized_value\": 1410000000,\n    \"tolerance_min\": 1057500000,\n    \"tolerance_max\": 1762500000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 2080 employees\",\n    \"normalized_value\": 2080,\n    \"tolerance_min\": 1560,\n    \"tolerance_max\": 2704,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "d9e4d26a5798621333aeb03d53c003300c71ab642db502eaa1cbef15f7cf582c": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Stripe was founded in 2010\",\n    \"normalized_value\": 2010,\n    \"tolerance_min\": 2010,\n    \"tolerance_max\": 2010,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $8700M in funding\",\n    \"normalized_value\": 8700000000,\n    \"tolerance_min\": 7830000000,\n    \"tolerance_max\": 9570000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 7000 employees\",\n    \"normalized_value\": 7000,\n    \"tolerance_min\": 6300,\n    \"tolerance_max\": 7700,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 664,
+    "output_tokens": 318,
+    "cost_usd": 0.000563
+  },
+  "585e6085953e88248e8984adaeaa505b33603f630a9a56f46d12186090d4c28f": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"cited_source\": \"headcount.total (exact registered headcount: 17,058)\",\n  \"reasoning\": \"The claim states approximately 7,000 employees (tolerance range: 6,300\u20137,700). The most authoritative source is the exact registered headcount of 17,058, which is more than double the claimed figure and falls well outside the acceptable tolerance range. While the employee_count_range of '5001-10000' is a broad band that technically encompasses 7,000, it is a coarse categorical range and less authoritative than an exact headcount figure. The exact headcount of 17,058 does not fall within the '5001-10000' range either, suggesting the range data may be outdated or stale. The primary exact headcount figure of 17,058 decisively contradicts the claim of ~7,000 employees. The discrepancy (~143% above the claimed value) is too large to attribute to rounding, timing differences, or definitional variation. Confidence is set at 0.85 rather than higher because there is no explicit timestamp on the headcount data to confirm recency, leaving a small residual uncertainty.\"\n}\n```",
+    "input_tokens": 431,
+    "output_tokens": 289,
+    "cost_usd": 0.005628
+  },
+  "8a48a75e93d7957331fbce64f9256b6e520deb2c5336d623a781e700d07ca806": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2010 is consistent across the claim and the company evidence record. No contradicting date signals were found \u2014 the funding history, headcount scale, and company maturity are all consistent with a ~15-year-old company. One minor data quality flag noted: the employee_range field ('5001-10000') appears outdated relative to the headcount_total of 17,058, suggesting some fields may lag, but this does not affect the founding year claim. No counter-evidence found to demote the verdict.\"\n}\n```",
+    "input_tokens": 498,
+    "output_tokens": 162,
+    "cost_usd": 0.003924
+  },
+  "55ac1b59d892aac829b8990f2f1dd4131b9e40dfd00dc2dd094ecf35830b37c2": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Stripe was founded back in 1995\",\n    \"normalized_value\": 1995,\n    \"tolerance_min\": 1994,\n    \"tolerance_max\": 1996,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $87000M in private capital\",\n    \"normalized_value\": 87000000000,\n    \"tolerance_min\": 65250000000,\n    \"tolerance_max\": 108750000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 35000 employees\",\n    \"normalized_value\": 35000,\n    \"tolerance_min\": 26250,\n    \"tolerance_max\": 43750,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 667,
+    "output_tokens": 319,
+    "cost_usd": 0.000566
+  },
+  "3be61645a621a0ccd96e299600bf05b162c036e09535228b269374ea2a526eb4": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.95,\n  \"cited_source\": \"headcount.total (exact registered figure: 17,058 employees)\",\n  \"reasoning\": \"The claim asserts a workforce of 35,000 employees, with a tolerance range of 26,250\u201343,750. Both available evidence sources directly contradict this. The exact headcount figure of 17,058 is less than half the claimed value and falls well outside the tolerance range. The employee count range of '5,001\u201310,000' further corroborates a significantly smaller workforce, though it appears to be an outdated or coarser categorical estimate. The exact headcount figure (17,058) is treated as the most authoritative source due to its specificity and precision. Even granting the most generous interpretation, 17,058 does not approach the lower tolerance bound of 26,250. The claim overstates the workforce by approximately 2x relative to the exact figure, making this a clear and substantive contradiction rather than a marginal discrepancy.\"\n}\n```",
+    "input_tokens": 433,
+    "output_tokens": 249,
+    "cost_usd": 0.005034
+  },
+  "62ec2959a8688a3d13ba84164a5d69b6bbb0a4f5d75ca1c77f5e637a4d5ca314": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Figma was founded in 2012\",\n    \"normalized_value\": 2012,\n    \"tolerance_min\": 2012,\n    \"tolerance_max\": 2012,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $333M in funding\",\n    \"normalized_value\": 333000000,\n    \"tolerance_min\": 299700000,\n    \"tolerance_max\": 366300000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 1300 employees\",\n    \"normalized_value\": 1300,\n    \"tolerance_min\": 1170,\n    \"tolerance_max\": 1430,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 665,
+    "output_tokens": 315,
+    "cost_usd": 0.00056
+  },
+  "0b39d0afe7d9ce18750a10106c635b8e4f0a684405294054c805398be43f0e9b": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2012 is consistent across the company evidence. No contradicting data points were found within the provided record. Corroborating context: Figma is publicly known to have been founded in 2012 by Dylan Field and Evan Wallace, who began development while at Brown University. The funding profile ($1.45B total, last round type 'post_ipo_equity' at $700M) and headcount (~3,135) are consistent with a company of Figma's maturity and scale for a 2012 founding. No date misalignments, range boundary issues, or subsidiary/parent conflicts were identified. Confidence is slightly below 1.0 only because the founders list is empty and headquarters is null, leaving minor gaps in corroborating detail, but neither contradicts the founding year claim.\"\n}\n```",
+    "input_tokens": 503,
+    "output_tokens": 230,
+    "cost_usd": 0.004959
+  },
+  "ceafb6c1d2a850713237e0bd227552ba25a6047f5a384ca785dce4827d6563ff": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Figma was founded back in 1997\",\n    \"normalized_value\": 1997,\n    \"tolerance_min\": 1997,\n    \"tolerance_max\": 1997,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $3330M in private capital\",\n    \"normalized_value\": 3330000000,\n    \"tolerance_min\": 2664000000,\n    \"tolerance_max\": 3996000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 6500 employees\",\n    \"normalized_value\": 6500,\n    \"tolerance_min\": 5200,\n    \"tolerance_max\": 7800,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "cf6ebbd41947a70394ce3956f3cf910911bd740493c027ae245be91e3eba2a1d": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Stripe was founded in 2010\",\n    \"normalized_value\": 2010,\n    \"tolerance_min\": 2010,\n    \"tolerance_max\": 2010,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $10440M in funding\",\n    \"normalized_value\": 10440000000,\n    \"tolerance_min\": 8352000000,\n    \"tolerance_max\": 12528000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 17058 employees\",\n    \"normalized_value\": 17058,\n    \"tolerance_min\": 13646,\n    \"tolerance_max\": 20470,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 664,
+    "output_tokens": 318,
+    "cost_usd": 0.000563
+  },
+  "72866b4d1b10afac164410d4fd6def723b49d18d938097445d12b90b599af2b7": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"unverifiable\",\n  \"confidence\": 0.45,\n  \"cited_source\": \"headcount.total (exact figure: 17058) vs basic_info.employee_count_range (5001-10000)\",\n  \"reasoning\": \"There is a direct conflict between the two available evidence sources. The exact headcount figure (17058) precisely matches the claim, which would normally constitute strong verification. However, the employee_count_range field reports '5001-10000', which is substantially lower and entirely inconsistent with 17058 \u2014 the claimed figure falls well outside this range. This discrepancy raises serious data integrity concerns: either the exact headcount figure is stale/erroneous, or the range classification has not been updated to reflect current headcount. Without timestamps or provenance metadata to determine which source is more recent or authoritative, it is impossible to adjudicate confidently. The exact figure aligns perfectly with the claim numerically, but the contradicting range (which would imply a headcount roughly 40-70% lower) undermines confidence. The claim cannot be cleanly verified or contradicted given this internal inconsistency across sources.\"\n}\n```",
+    "input_tokens": 431,
+    "output_tokens": 268,
+    "cost_usd": 0.005313
+  },
+  "ce828115826500f592d046472bae87ce99de95dd3d4fe391e662731a9845f6fe": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed funding of ~$10,440M matches the recorded total_investment_usd of $10,440,247,725 with negligible rounding difference (~$247,725, or <0.003%). The tolerance range of [$8.35B, $12.53B] is appropriately centered on the actual figure. The last round type is 'secondary_market' with $694M, which is consistent with Stripe's known secondary market transactions. No contradicting funding figures were found elsewhere in the company data. One minor flag: the headcount_total (17,058) falls outside the stated employee_range of '5001-10000', suggesting the headcount data may be stale or the range field is outdated \u2014 however, this discrepancy pertains to headcount, not funding, and does not affect the funding claim. The funding figure itself is internally consistent and verified.\"\n}\n```",
+    "input_tokens": 574,
+    "output_tokens": 241,
+    "cost_usd": 0.005337
+  },
+  "8a160876987e381aa29e5e0e8d8ad408ccda5f0f7e60a3556564a0d4339dd41d": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Stripe was founded back in 1995\",\n    \"normalized_value\": 1995,\n    \"tolerance_min\": 1994,\n    \"tolerance_max\": 1996,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $104402M in private capital\",\n    \"normalized_value\": 104402000000,\n    \"tolerance_min\": 83521600000,\n    \"tolerance_max\": 125282400000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 85290 employees\",\n    \"normalized_value\": 85290,\n    \"tolerance_min\": 68232,\n    \"tolerance_max\": 102348,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 667,
+    "output_tokens": 319,
+    "cost_usd": 0.000566
+  },
+  "64aeb692b09c68f7e574d35176632e3ee6b59b16962aec86afc6f057947935da": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.95,\n  \"cited_source\": \"headcount.total (exact registered headcount: 17,058) and basic_info.employee_count_range (5,001\u201310,000)\",\n  \"reasoning\": \"The claim asserts a workforce of 85,290 employees, with a tolerance band of 68,232\u2013102,348. Both available evidence sources directly contradict this. The exact headcount figure of 17,058 is approximately 5x smaller than the claimed value and falls well outside the tolerance range. The employee count range of 5,001\u201310,000 further corroborates a much smaller organization, with an upper bound of 10,000 that is still nearly 7x below the tolerance minimum of 68,232. The two independent data sources are mutually consistent with each other (17,058 is slightly above the stated range, suggesting the range may be slightly outdated, but both are in the same order of magnitude), which increases confidence in their reliability. The claimed figure of 85,290 is not plausible under any reasonable interpretation of the evidence. The discrepancy is too large to attribute to rounding, timing differences, or definitional variation.\"\n}\n```",
+    "input_tokens": 433,
+    "output_tokens": 288,
+    "cost_usd": 0.005619
+  },
+  "35a65b6a1e84fd6f274ec9d6451935b9c75236d69e7cd3107901e15b0228307c": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Figma was founded in 2012\",\n    \"normalized_value\": 2012,\n    \"tolerance_min\": 2012,\n    \"tolerance_max\": 2012,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $1449M in funding\",\n    \"normalized_value\": 1449000000,\n    \"tolerance_min\": 1304100000,\n    \"tolerance_max\": 1593900000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 3135 employees\",\n    \"normalized_value\": 3135,\n    \"tolerance_min\": 2401,\n    \"tolerance_max\": 3869,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 666,
+    "output_tokens": 319,
+    "cost_usd": 0.000565
+  },
+  "ae7ec8186dcc307dfec8d1d0914bb9916d841b0df8bddc74e541d966fce0216a": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed funding of ~$1,449M is extremely close to the recorded total investment of $1,448,624,736 \u2014 a difference of only ~$375,264 (~0.026%), well within the stated \u00b110% tolerance band of [$1,304.1M, $1,593.9M]. No contradicting evidence found in the supporting data: the last round type is 'post_ipo_equity' at $700M, which is consistent with a large cumulative raise for a company of Figma's profile. The employee headcount (3,135, within the 1001\u20135000 range) and founding year (2012) are internally consistent and do not raise red flags about data staleness relative to the funding figure. One minor note: Figma's proposed acquisition by Adobe was terminated in late 2023, and the 'post_ipo_equity' round label is slightly unusual for a private company, but this does not contradict the funding total itself. Overall, the claim holds up under scrutiny.\"\n}\n```",
+    "input_tokens": 581,
+    "output_tokens": 276,
+    "cost_usd": 0.005883
+  },
+  "6e45fb809547af950a33513c49ab0c734fa19209700ba7848e703059d20f248b": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.82,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed headcount of 3135 is an exact match to the recorded headcount_total of 3135 in the company evidence. It falls well within the acceptable range [2401, 3869] and is consistent with the reported employee_range of '1001-5000'. No contradicting signals found: Figma's funding profile (~$1.45B total, last round $700M post-IPO equity) is consistent with a company of this scale. No layoff events, subsidiary structures, or date misalignments are indicated in the evidence. The primary caveat is that the data timestamp is unknown, so currency of the headcount figure cannot be fully confirmed, but no internal contradictions exist to demote the verdict.\"\n}\n```",
+    "input_tokens": 539,
+    "output_tokens": 206,
+    "cost_usd": 0.004707
+  },
+  "82e6757231bd790982d929349aae5575342e83f4a957e11054a4d2db5695bd77": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Figma was founded back in 1997\",\n    \"normalized_value\": 1997,\n    \"tolerance_min\": 1995,\n    \"tolerance_max\": 1999,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $14486M in private capital\",\n    \"normalized_value\": 14486000000,\n    \"tolerance_min\": 11588800000,\n    \"tolerance_max\": 17783200000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 15675 employees\",\n    \"normalized_value\": 15675,\n    \"tolerance_min\": 12540,\n    \"tolerance_max\": 18810,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
   }
 }

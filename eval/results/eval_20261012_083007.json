@@ -1,0 +1,262 @@
+{
+  "timestamp": "2026-10-12T08:29:25.506780+00:00",
+  "offline": false,
+  "cases_count": 6,
+  "total_claims_evaluated": 18,
+  "metrics": {
+    "precision": 0.6923,
+    "recall": 1.0,
+    "false_alarm_count": 4,
+    "true_positives_lies_caught": 9,
+    "false_negatives_lies_missed": 0,
+    "true_negatives_truths_verified": 5,
+    "unverifiable_count": 0
+  },
+  "llm_usage": {
+    "run_cost_usd": 0.021801,
+    "cumulative_cost_usd": 4.350439,
+    "budget_remaining_usd": 15.649561,
+    "by_role": {
+      "extract": {
+        "calls": 4,
+        "cache_hits": 2,
+        "input_tokens": 2665,
+        "output_tokens": 1272,
+        "cost_usd": 0.002256
+      },
+      "arbiter": {
+        "calls": 2,
+        "cache_hits": 0,
+        "input_tokens": 864,
+        "output_tokens": 538,
+        "cost_usd": 0.010662
+      },
+      "verify": {
+        "calls": 2,
+        "cache_hits": 3,
+        "input_tokens": 1001,
+        "output_tokens": 392,
+        "cost_usd": 0.008883
+      },
+      "routine": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "retool.com_truth",
+      "company": "Retool",
+      "domain": "retool.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded in 2017",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2017 matches recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $141M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $141,000,000 is within acceptable tolerance [$110,000,000, $170,000,000] of total investment ($141,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 416 employees",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 416 employees falls within acceptable range [312, 520] of actual count (416)."
+        }
+      ]
+    },
+    {
+      "case_id": "retool.com_planted_lie",
+      "company": "Retool",
+      "domain": "retool.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded back in 2002",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2002 contradicts recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $1410M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,410,000,000 conflicts with recorded total investment ($141,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 2080 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 2080 employees is outside acceptable range [1560, 2704] of authoritative headcount (416)."
+        }
+      ]
+    },
+    {
+      "case_id": "stripe.com_truth",
+      "company": "Stripe",
+      "domain": "stripe.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Stripe was founded in 2010",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2010 matches recorded founding year 2010."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $8700M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $8,700,000,000 conflicts with recorded total investment ($10,440,247,725)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 7000 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.85,
+          "reasoning": "The claim states approximately 7,000 employees (tolerance range: 6,300\u20137,700). The most authoritative source is the exact registered headcount of 17,058, which is more than double the claimed figure and falls well outside the acceptable tolerance range. While the employee_count_range of '5001-10000' is a broad band that technically encompasses 7,000, it is a coarse categorical range and less authoritative than an exact headcount figure. The exact headcount of 17,058 does not fall within the '5001-10000' range either, suggesting the range data may be outdated or stale. The primary exact headcount figure of 17,058 decisively contradicts the claim of ~7,000 employees. The discrepancy (~143% above the claimed value) is too large to attribute to rounding, timing differences, or definitional variation. Confidence is set at 0.85 rather than higher because there is no explicit timestamp on the headcount data to confirm recency, leaving a small residual uncertainty."
+        }
+      ]
+    },
+    {
+      "case_id": "stripe.com_planted_lie",
+      "company": "Stripe",
+      "domain": "stripe.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Stripe was founded back in 1995",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1995 contradicts recorded founding year 2010."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $87000M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $87,000,000,000 conflicts with recorded total investment ($10,440,247,725)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 35000 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "The claim asserts a workforce of 35,000 employees, with a tolerance range of 26,250\u201343,750. Both available evidence sources directly contradict this. The exact headcount figure of 17,058 is less than half the claimed value and falls well outside the tolerance range. The employee count range of '5,001\u201310,000' further corroborates a significantly smaller workforce, though it appears to be an outdated or coarser categorical estimate. The exact headcount figure (17,058) is treated as the most authoritative source due to its specificity and precision. Even granting the most generous interpretation, 17,058 does not approach the lower tolerance bound of 26,250. The claim overstates the workforce by approximately 2x relative to the exact figure, making this a clear and substantive contradiction rather than a marginal discrepancy."
+        }
+      ]
+    },
+    {
+      "case_id": "figma.com_truth",
+      "company": "Figma",
+      "domain": "figma.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Figma was founded in 2012",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2012 matches recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $333M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $333,000,000 conflicts with recorded total investment ($1,448,624,736)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 1300 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 1300 employees is outside acceptable range [1170, 1430] of authoritative headcount (3135)."
+        }
+      ]
+    },
+    {
+      "case_id": "figma.com_planted_lie",
+      "company": "Figma",
+      "domain": "figma.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Figma was founded back in 1997",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1997 contradicts recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $3330M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $3,330,000,000 conflicts with recorded total investment ($1,448,624,736)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 6500 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 6500 employees is outside acceptable range [5200, 7800] of authoritative headcount (3135)."
+        }
+      ]
+    }
+  ]
+}

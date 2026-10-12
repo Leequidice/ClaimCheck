@@ -1,0 +1,1452 @@
+{
+  "timestamp": "2026-10-12T08:48:02.963685+00:00",
+  "offline": false,
+  "cases_count": 40,
+  "total_claims_evaluated": 120,
+  "metrics": {
+    "precision": 0.6506,
+    "recall": 0.9474,
+    "false_alarm_count": 29,
+    "true_positives_lies_caught": 54,
+    "false_negatives_lies_missed": 3,
+    "true_negatives_truths_verified": 27,
+    "unverifiable_count": 7
+  },
+  "llm_usage": {
+    "run_cost_usd": 0.218766,
+    "cumulative_cost_usd": 4.637533,
+    "budget_remaining_usd": 15.362467,
+    "by_role": {
+      "extract": {
+        "calls": 34,
+        "cache_hits": 6,
+        "input_tokens": 22664,
+        "output_tokens": 10738,
+        "cost_usd": 0.019089
+      },
+      "arbiter": {
+        "calls": 12,
+        "cache_hits": 2,
+        "input_tokens": 5161,
+        "output_tokens": 3444,
+        "cost_usd": 0.067143
+      },
+      "verify": {
+        "calls": 27,
+        "cache_hits": 8,
+        "input_tokens": 14113,
+        "output_tokens": 6013,
+        "cost_usd": 0.132534
+      },
+      "routine": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "retool.com_truth",
+      "company": "Retool",
+      "domain": "retool.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded in 2017",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2017 matches recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $141M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $141,000,000 is within acceptable tolerance [$110,000,000, $170,000,000] of total investment ($141,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 416 employees",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 416 employees falls within acceptable range [312, 520] of actual count (416)."
+        }
+      ]
+    },
+    {
+      "case_id": "retool.com_planted_lie",
+      "company": "Retool",
+      "domain": "retool.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded back in 2002",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2002 contradicts recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $1410M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,410,000,000 conflicts with recorded total investment ($141,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 2080 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 2080 employees is outside acceptable range [1560, 2704] of authoritative headcount (416)."
+        }
+      ]
+    },
+    {
+      "case_id": "stripe.com_truth",
+      "company": "Stripe",
+      "domain": "stripe.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Stripe was founded in 2010",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2010 matches recorded founding year 2010."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $10440M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $10,440,000,000 is within acceptable tolerance [$8,352,000,000, $12,528,000,000] of total investment ($10,440,247,725)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 17058 employees",
+          "verdict": "unverifiable",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.45,
+          "reasoning": "There is a direct conflict between the two available evidence sources. The exact headcount figure (17058) precisely matches the claim, which would normally constitute strong verification. However, the employee_count_range field reports '5001-10000', which is substantially lower and entirely inconsistent with 17058 \u2014 the claimed figure falls well outside this range. This discrepancy raises serious data integrity concerns: either the exact headcount figure is stale/erroneous, or the range classification has not been updated to reflect current headcount. Without timestamps or provenance metadata to determine which source is more recent or authoritative, it is impossible to adjudicate confidently. The exact figure aligns perfectly with the claim numerically, but the contradicting range (which would imply a headcount roughly 40-70% lower) undermines confidence. The claim cannot be cleanly verified or contradicted given this internal inconsistency across sources."
+        }
+      ]
+    },
+    {
+      "case_id": "stripe.com_planted_lie",
+      "company": "Stripe",
+      "domain": "stripe.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Stripe was founded back in 1995",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1995 contradicts recorded founding year 2010."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $104402M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $104,402,000,000 conflicts with recorded total investment ($10,440,247,725)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 85290 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "The claim asserts a workforce of 85,290 employees, with a tolerance band of 68,232\u2013102,348. Both available evidence sources directly contradict this. The exact headcount figure of 17,058 is approximately 5x smaller than the claimed value and falls well outside the tolerance range. The employee count range of 5,001\u201310,000 further corroborates a much smaller organization, with an upper bound of 10,000 that is still nearly 7x below the tolerance minimum of 68,232. The two independent data sources are mutually consistent with each other (17,058 is slightly above the stated range, suggesting the range may be slightly outdated, but both are in the same order of magnitude), which increases confidence in their reliability. The claimed figure of 85,290 is not plausible under any reasonable interpretation of the evidence. The discrepancy is too large to attribute to rounding, timing differences, or definitional variation."
+        }
+      ]
+    },
+    {
+      "case_id": "figma.com_truth",
+      "company": "Figma",
+      "domain": "figma.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Figma was founded in 2012",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2012 matches recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $1449M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,449,000,000 is within acceptable tolerance [$1,304,100,000, $1,593,900,000] of total investment ($1,448,624,736)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 3135 employees",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 3135 employees falls within acceptable range [2401, 3869] of actual count (3135)."
+        }
+      ]
+    },
+    {
+      "case_id": "figma.com_planted_lie",
+      "company": "Figma",
+      "domain": "figma.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Figma was founded back in 1997",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1997 contradicts recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $14486M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $14,486,000,000 conflicts with recorded total investment ($1,448,624,736)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 15675 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 15675 employees is outside acceptable range [12540, 18810] of authoritative headcount (3135)."
+        }
+      ]
+    },
+    {
+      "case_id": "notion.so_truth",
+      "company": "Notion",
+      "domain": "notion.so",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Notion was founded in 2013",
+          "verdict": "unverifiable",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.0,
+          "reasoning": "No evidence available: company record was not found in Crustdata dataset."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $343M in funding",
+          "verdict": "unverifiable",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.0,
+          "reasoning": "No evidence available: company record was not found in Crustdata dataset."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 600 employees",
+          "verdict": "unverifiable",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.0,
+          "reasoning": "No evidence available: company record was not found in Crustdata dataset."
+        }
+      ]
+    },
+    {
+      "case_id": "notion.so_planted_lie",
+      "company": "Notion",
+      "domain": "notion.so",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Notion was founded back in 1998",
+          "verdict": "unverifiable",
+          "expected": "contradicted",
+          "is_correct": false,
+          "confidence": 0.0,
+          "reasoning": "No evidence available: company record was not found in Crustdata dataset."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $3430M in private capital",
+          "verdict": "unverifiable",
+          "expected": "contradicted",
+          "is_correct": false,
+          "confidence": 0.0,
+          "reasoning": "No evidence available: company record was not found in Crustdata dataset."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 3000 employees",
+          "verdict": "unverifiable",
+          "expected": "contradicted",
+          "is_correct": false,
+          "confidence": 0.0,
+          "reasoning": "No evidence available: company record was not found in Crustdata dataset."
+        }
+      ]
+    },
+    {
+      "case_id": "supabase.com_truth",
+      "company": "Supabase",
+      "domain": "supabase.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Supabase was founded in 2020",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2020 matches recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $116M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $116,000,000 conflicts with recorded total investment ($1,189,224,796)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 110 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 110 employees is outside acceptable range [88, 132] of authoritative headcount (439)."
+        }
+      ]
+    },
+    {
+      "case_id": "supabase.com_planted_lie",
+      "company": "Supabase",
+      "domain": "supabase.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Supabase was founded back in 2005",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2005 contradicts recorded founding year 2020."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $1160M in private capital",
+          "verdict": "verified",
+          "expected": "contradicted",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,160,000,000 is within acceptable tolerance [$900,000,000, $1,450,000,000] of total investment ($1,189,224,796)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 550 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.92,
+          "reasoning": "Claimed 550 employees falls within acceptable range [400, 700] of actual count (439). [Second Pass Note: Multiple contradictions found. (1) The actual headcount is 439, not 550. The claim of 550 overstates the workforce by ~25%, which is a material misrepresentation. (2) The company's own self-reported employee range is '201-500', which explicitly excludes 550 \u2014 the claimed figure falls outside this band entirely. (3) The provisional reasoning accepted a very broad acceptable range of [400, 700], but the upper bound of 700 is unjustifiably wide and masks the fact that 550 sits 25% above the actual count of 439. The range boundary is too permissive and misleading. (4) The descriptor 'massive workforce' is qualitatively misleading for a ~439-person company. Taken together, the claimed value of 550 is contradicted by both the actual headcount (439) and the company's own reported employee range ceiling (500).]"
+        }
+      ]
+    },
+    {
+      "case_id": "vercel.com_truth",
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Vercel was founded in 2015",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2015 matches recorded founding year 2015."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $563M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $563,000,000 conflicts with recorded total investment ($863,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 550 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 550 employees is outside acceptable range [412, 688] of authoritative headcount (1014)."
+        }
+      ]
+    },
+    {
+      "case_id": "vercel.com_planted_lie",
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Vercel was founded back in 2000",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2000 contradicts recorded founding year 2015."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $5630M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $5,630,000,000 conflicts with recorded total investment ($863,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 2750 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 2750 employees is outside acceptable range [2062, 3437] of authoritative headcount (1014)."
+        }
+      ]
+    },
+    {
+      "case_id": "datadoghq.com_truth",
+      "company": "Datadog",
+      "domain": "datadoghq.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Datadog was founded in 2010",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2010 matches recorded founding year 2010."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $148M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $148,000,000 conflicts with recorded total investment ($1,017,900,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 5200 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.85,
+          "reasoning": "The claim states approximately 5,200 employees, with a tolerance range of 4,160\u20136,240. Two conflicting data points exist: (1) an exact headcount figure of 10,482, and (2) an employee count range of '1001\u20135000'. The exact headcount figure (10,482) is treated as the more authoritative source because it is a specific, timestamped numerical value rather than a categorical range, which is typically self-reported and less frequently updated. The exact figure of 10,482 falls well outside the claim's tolerance range (4,160\u20136,240), substantively refuting the claim. Notably, even the categorical range '1001\u20135000' is inconsistent with the exact figure of 10,482, suggesting the range data may be outdated. The exact headcount is nearly double the claimed value, which is not attributable to rounding or estimation error. Confidence is set at 0.85 rather than higher because there is some residual uncertainty about the recency of the exact headcount figure, but the magnitude of the discrepancy (>4,000 employees above the tolerance ceiling) makes contradiction the clear verdict."
+        }
+      ]
+    },
+    {
+      "case_id": "datadoghq.com_planted_lie",
+      "company": "Datadog",
+      "domain": "datadoghq.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Datadog was founded back in 1995",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1995 contradicts recorded founding year 2010."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $1480M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,480,000,000 conflicts with recorded total investment ($1,017,900,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 26000 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.93,
+          "reasoning": "The claim asserts a workforce of 26,000 employees, with a tolerance band of 20,000\u201332,000. The most authoritative source is the exact headcount figure of 10,482, which is a precise registered data point and substantially more reliable than a narrative claim. This figure is less than half the claimed lower tolerance bound of 20,000 and represents only ~40% of the stated 26,000. The corroborating employee_count_range of '1001\u20135000' further undermines the claim, though it appears inconsistent with the exact figure of 10,482 (suggesting the range data may be outdated or from a different classification system). Regardless, both data points converge in rejecting the 26,000 figure \u2014 neither supports a workforce anywhere near that scale. The discrepancy is not a marginal rounding difference but a factor of ~2.5x, which is substantively significant. The claim is therefore contradicted with high confidence."
+        }
+      ]
+    },
+    {
+      "case_id": "snowflake.com_truth",
+      "company": "Snowflake",
+      "domain": "snowflake.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Snowflake was founded in 2012",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2012 matches recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $2100M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $2,100,000,000 conflicts with recorded total investment ($6,155,453,914)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 7000 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 7000 employees is outside acceptable range [6300, 7700] of authoritative headcount (12592)."
+        }
+      ]
+    },
+    {
+      "case_id": "snowflake.com_planted_lie",
+      "company": "Snowflake",
+      "domain": "snowflake.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Snowflake was founded back in 1997",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1997 contradicts recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $21000M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $21,000,000,000 conflicts with recorded total investment ($6,155,453,914)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 35000 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 35000 employees is outside acceptable range [28000, 42000] of authoritative headcount (12592)."
+        }
+      ]
+    },
+    {
+      "case_id": "canva.com_truth",
+      "company": "Canva",
+      "domain": "canva.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Canva was founded in 2012",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2012 matches recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $570M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $570,000,000 conflicts with recorded total investment ($2,533,450,682)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 4500 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.85,
+          "reasoning": "The claim states approximately 4,500 employees, with a tolerance range of 3,600\u20135,400. The exact headcount data reports 19,252 employees, which is more than 4x the claimed figure and falls far outside the tolerance range. This is the most authoritative source as it represents a specific, registered headcount value rather than a broad categorical range. The employee_count_range of '1001-5000' is a coarse categorical bucket that technically encompasses 4,500, but it is clearly outdated or imprecise given the exact headcount of 19,252 \u2014 which itself falls outside that range, suggesting the range data is stale. The exact headcount figure of 19,252 directly contradicts the claim of ~4,500 employees. The discrepancy is too large (>300% difference) to be attributed to measurement timing or rounding differences."
+        }
+      ]
+    },
+    {
+      "case_id": "canva.com_planted_lie",
+      "company": "Canva",
+      "domain": "canva.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Canva was founded back in 1997",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1997 contradicts recorded founding year 2012."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $5700M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $5,700,000,000 conflicts with recorded total investment ($2,533,450,682)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 22500 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.85,
+          "reasoning": "The claim asserts a workforce of 22,500 employees. The most authoritative source is the exact registered headcount of 19,252, which falls below the claim's tolerance minimum of 18,750 \u2014 actually within tolerance range, but the secondary source (employee_count_range: '1001-5000') creates a significant conflict. The exact headcount of 19,252 is the primary authoritative figure and does fall within the tolerance band (18,750\u201326,250), which would normally suggest 'verified.' However, the employee_count_range of '1001-5000' is dramatically inconsistent with both the claim (22,500) and the exact headcount (19,252), suggesting possible data quality issues or that the range refers to a subsidiary/division rather than the full entity. Despite the exact headcount technically falling within tolerance, the claim uses the descriptor 'massive workforce of 22,500' which implies a precise figure. The exact headcount of 19,252 represents a ~14.4% shortfall from the claimed 22,500, and the corroborating range data (1001-5000) provides no support for the claim's magnitude. The combination of the exact figure being below the claimed value and the range data being orders of magnitude smaller undermines confidence in the claim. The verdict is 'contradicted' primarily because the exact headcount does not match 22,500 and the range data further erodes credibility of the claim."
+        }
+      ]
+    },
+    {
+      "case_id": "postman.com_truth",
+      "company": "Postman",
+      "domain": "postman.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Postman was founded in 2014",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2014 matches recorded founding year 2014."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $433M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $433,000,000 is within acceptable tolerance [$389,700,000, $476,300,000] of total investment ($433,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 600 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.85,
+          "reasoning": "The claim states approximately 600 employees, with a tolerance range of 480\u2013720. The exact headcount data reports 3,547 employees, which is nearly 6x the claimed figure and falls far outside the tolerance range. This is the most authoritative source as it represents a precise, registered headcount figure. The employee_count_range of '501-1000' is a coarser categorical band that could superficially appear consistent with ~600, but it is clearly outdated or less precise compared to the exact figure of 3,547. The discrepancy between the range (501-1000) and the exact count (3,547) also suggests the range data is stale. The exact headcount of 3,547 decisively contradicts the claim of ~600 employees. Confidence is set at 0.85 rather than higher because there is a minor possibility the exact headcount figure aggregates subsidiaries or contractors not reflected in the claim's scope, but absent any such qualification, the contradiction stands."
+        }
+      ]
+    },
+    {
+      "case_id": "postman.com_planted_lie",
+      "company": "Postman",
+      "domain": "postman.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Postman was founded back in 1999",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1999 contradicts recorded founding year 2014."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $4330M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $4,330,000,000 conflicts with recorded total investment ($433,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 3000 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.72,
+          "reasoning": "There is a direct conflict between the two evidence sources. The exact headcount figure of 3547 falls within the claim's tolerance range (2250\u20133750), which would nominally support the claim of ~3000 employees. However, the employee_count_range of '501-1000' is categorically inconsistent with both the claim (3000) and the exact headcount (3547), suggesting a significant data quality issue. The exact headcount figure (3547) is treated as more authoritative than a categorical range, as it is a specific numeric value rather than a broad bucket. That said, the '501-1000' range \u2014 which is typically sourced from self-reported or third-party database classifications \u2014 strongly contradicts the 3000 claim and raises doubt about the reliability of the exact headcount figure as well. Given that the categorical range is off by a factor of 3\u20136x from the claim, and the exact headcount, while within tolerance, may itself be unreliable given the conflicting range signal, the claim cannot be verified with confidence. The most defensible verdict is 'contradicted' based on the employee_count_range, which is a commonly used and independently sourced classification, while acknowledging the ambiguity introduced by the conflicting exact figure."
+        }
+      ]
+    },
+    {
+      "case_id": "airtable.com_truth",
+      "company": "Airtable",
+      "domain": "airtable.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Airtable was founded in 2012",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.97,
+          "reasoning": "Claimed year 2012 matches recorded founding year 2013. [Second Pass Note: The provisional reasoning contains an internal inconsistency: it states the claimed year 2012 'matches' the recorded founding year 2013, which is factually incorrect \u2014 2012 \u2260 2013. The company evidence clearly records year_founded as 2013, directly contradicting the claim that Airtable was founded in 2012. Airtable was incorporated/founded in 2013 by Howie Liu, Andrew Ofstad, and Emmett Nicholas. The claim of 2012 is off by one year and must be demoted.]"
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $1400M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,400,000,000 is within acceptable tolerance [$1,190,000,000, $1,610,000,000] of total investment ($1,352,600,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 900 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.92,
+          "reasoning": "There is a stark conflict between the two evidence sources. The employee_count_range of '501-1000' is broadly consistent with the claim of ~900 employees (which falls within that range). However, the exact registered headcount of 8,052 is nearly 9x the claimed value and falls far outside the tolerance band of 765\u20131,035. The exact headcount figure (8,052) is treated as the more authoritative source because it is a precise, timestamped data point rather than a coarse categorical range. The range '501-1000' is likely outdated or a legacy classification that was never updated as the company scaled. Given the magnitude of the discrepancy (8,052 vs. ~900), the claim is substantively contradicted by the most authoritative evidence. A small confidence deduction is applied to account for the possibility that the exact headcount figure reflects a parent entity or consolidated group rather than the specific entity being described."
+        }
+      ]
+    },
+    {
+      "case_id": "airtable.com_planted_lie",
+      "company": "Airtable",
+      "domain": "airtable.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Airtable was founded back in 1997",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1997 contradicts recorded founding year 2013."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $14000M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $14,000,000,000 conflicts with recorded total investment ($1,352,600,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 4500 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.92,
+          "reasoning": "The claim of 4,500 employees falls outside the acceptable tolerance range of 3,375\u20135,625 when compared against the exact headcount figure of 8,052. The registered headcount (8,052) is nearly 1.8x the claimed value and exceeds the upper tolerance bound by over 43%. As a precise, timestamped data point, the exact headcount figure is treated as the most authoritative source. Notably, there is also an internal conflict between the two evidence sources: the employee_count_range of '501\u20131,000' is dramatically inconsistent with the exact headcount of 8,052, suggesting the range data is either severely outdated or sourced from a different entity/subsidiary. Given this internal inconsistency, the exact headcount figure is weighted more heavily as it is a specific numeric value rather than a categorical range. Neither source supports the claim of 4,500 employees \u2014 the exact figure contradicts it by being far too high, and the range contradicts it by being far too low. The claim is therefore contradicted by the most authoritative available evidence."
+        }
+      ]
+    },
+    {
+      "case_id": "gitlab.com_truth",
+      "company": "GitLab",
+      "domain": "gitlab.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "GitLab was founded in 2011",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2011 contradicts recorded founding year 2014."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $413M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $413,000,000 is within acceptable tolerance [$371,700,000, $454,300,000] of total investment ($413,500,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 2100 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 2100 employees is outside acceptable range [1890, 2310] of authoritative headcount (3436)."
+        }
+      ]
+    },
+    {
+      "case_id": "gitlab.com_planted_lie",
+      "company": "GitLab",
+      "domain": "gitlab.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "GitLab was founded back in 1996",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1996 contradicts recorded founding year 2014."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $4130M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $4,130,000,000 conflicts with recorded total investment ($413,500,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 10500 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 10500 employees is outside acceptable range [8000, 13000] of authoritative headcount (3436)."
+        }
+      ]
+    },
+    {
+      "case_id": "sentry.io_truth",
+      "company": "Sentry",
+      "domain": "sentry.io",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Sentry was founded in 2012",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed year 2012 matches recorded founding year 2011. [Second Pass Note: The claim states Sentry was founded in 2012, but the company evidence explicitly records year_founded as 2011. The provisional reasoning even acknowledges this mismatch ('Claimed year 2012 matches recorded founding year 2011') yet incorrectly marked it as verified. The one-year discrepancy is a direct factual contradiction between the claim (2012) and the recorded founding year (2011). The claim should be demoted accordingly.]"
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $217M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $217,000,000 is within acceptable tolerance [$172,000,000, $262,000,000] of total investment ($217,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 400 employees",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 400 employees falls within acceptable range [300, 500] of actual count (448)."
+        }
+      ]
+    },
+    {
+      "case_id": "sentry.io_planted_lie",
+      "company": "Sentry",
+      "domain": "sentry.io",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Sentry was founded back in 1997",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 1997 contradicts recorded founding year 2011."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $2170M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $2,170,000,000 conflicts with recorded total investment ($217,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 2000 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 2000 employees is outside acceptable range [1500, 2500] of authoritative headcount (448)."
+        }
+      ]
+    },
+    {
+      "case_id": "temporal.io_truth",
+      "company": "Temporal",
+      "domain": "temporal.io",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Temporal was founded in 2019",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2019 matches recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $120M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $120,000,000 conflicts with recorded total investment ($1,304,500,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 180 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 180 employees is outside acceptable range [135, 225] of authoritative headcount (611)."
+        }
+      ]
+    },
+    {
+      "case_id": "temporal.io_planted_lie",
+      "company": "Temporal",
+      "domain": "temporal.io",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Temporal was founded back in 2004",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2004 contradicts recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $1200M in private capital",
+          "verdict": "verified",
+          "expected": "contradicted",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,200,000,000 is within acceptable tolerance [$900,000,000, $1,500,000,000] of total investment ($1,304,500,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 900 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 900 employees is outside acceptable range [675, 1125] of authoritative headcount (611)."
+        }
+      ]
+    },
+    {
+      "case_id": "linear.app_truth",
+      "company": "Linear",
+      "domain": "linear.app",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Linear was founded in 2019",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2019 matches recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $52M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $52,000,000 conflicts with recorded total investment ($233,200,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 60 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 60 employees is outside acceptable range [48, 72] of authoritative headcount (291)."
+        }
+      ]
+    },
+    {
+      "case_id": "linear.app_planted_lie",
+      "company": "Linear",
+      "domain": "linear.app",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Linear was founded back in 2004",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2004 contradicts recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $520M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $520,000,000 conflicts with recorded total investment ($233,200,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 300 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.92,
+          "reasoning": "Claimed 300 employees falls within acceptable range [225, 375] of actual count (291). [Second Pass Note: Two contradicting signals undermine the 'verified' status. First, the company's own self-reported employee_range is '51-200', which directly conflicts with a headcount of 291 (and the claimed 300). A company with 291 employees would typically report '201-500', making the '51-200' band a red flag that the 291 figure may be stale, inflated, or sourced from a different dataset than the official range. Second, the claim uses the phrase 'massive workforce of 300 employees', which is editorially misleading \u2014 300 employees is not a 'massive workforce' by any standard industry definition, suggesting the claim may be exaggerating or misrepresenting the company's scale. The provisional verification accepted 291 as ground truth and checked only whether 300 fell within \u00b125% of it, but failed to cross-check against the self-reported employee_range band, which is a direct contradiction. Until the discrepancy between the '51-200' reported range and the 291 headcount figure is resolved, the underlying headcount data cannot be treated as reliable, and the claim of 300 employees cannot be confirmed.]"
+        }
+      ]
+    },
+    {
+      "case_id": "pinecone.io_truth",
+      "company": "Pinecone",
+      "domain": "pinecone.io",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Pinecone was founded in 2019",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2019 matches recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $138M in funding",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $138,000,000 is within acceptable tolerance [$110,400,000, $165,600,000] of total investment ($138,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 120 employees",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 120 employees falls within acceptable range [96, 144] of actual count (135)."
+        }
+      ]
+    },
+    {
+      "case_id": "pinecone.io_planted_lie",
+      "company": "Pinecone",
+      "domain": "pinecone.io",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Pinecone was founded back in 2004",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2004 contradicts recorded founding year 2019."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $1380M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,380,000,000 conflicts with recorded total investment ($138,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 600 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 600 employees is outside acceptable range [480, 720] of authoritative headcount (135)."
+        }
+      ]
+    },
+    {
+      "case_id": "langchain.com_truth",
+      "company": "LangChain",
+      "domain": "langchain.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "LangChain was founded in 2022",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2022 matches recorded founding year 2022."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $35M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $35,000,000 conflicts with recorded total investment ($160,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 45 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 45 employees is outside acceptable range [36, 54] of authoritative headcount (429)."
+        }
+      ]
+    },
+    {
+      "case_id": "langchain.com_planted_lie",
+      "company": "LangChain",
+      "domain": "langchain.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "LangChain was founded back in 2007",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2007 contradicts recorded founding year 2022."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $350M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $350,000,000 conflicts with recorded total investment ($160,000,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 225 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 225 employees is outside acceptable range [180, 270] of authoritative headcount (429)."
+        }
+      ]
+    },
+    {
+      "case_id": "anthropic.com_truth",
+      "company": "Anthropic",
+      "domain": "anthropic.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Anthropic was founded in 2021",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.85,
+          "reasoning": "Claimed year 2021 matches recorded founding year 2021. [Second Pass Note: The founding year of 2021 is historically consistent with Anthropic's known founding by Dario Amodei, Daniela Amodei, and others who left OpenAI. However, the company evidence summary contains serious internal inconsistencies that undermine data reliability: (1) employee_range is listed as '501-1000' while headcount_total is 5,983 \u2014 a massive contradiction suggesting stale or corrupted data; (2) funding_total_usd of ~$170.7 billion is implausibly large (Anthropic's actual total funding is in the range of ~$7-8 billion as of early 2025), suggesting a data error; (3) last_round_amount_usd of $42 billion is also implausible for a single round. These severe data quality issues across multiple fields cast doubt on the reliability of the year_founded field as well. While the 2021 founding year is independently verifiable from public sources and is likely correct, the data source itself is demonstrably unreliable, making the provisional evidence untrustworthy on its own. The founding year claim is likely accurate based on external knowledge, but cannot be 'verified' solely from this corrupted dataset.]"
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $7600M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $7,600,000,000 conflicts with recorded total investment ($170,740,377,627)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 500 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.92,
+          "reasoning": "The claim states approximately 500 employees, with a tolerance range of 400\u2013600. The most authoritative source is the exact registered headcount of 5,983, which is nearly 12x the claimed figure and far outside the tolerance range. Even the employee_count_range of '501\u20131000' \u2014 while its lower bound technically overlaps with the claim's upper tolerance of 600 \u2014 is itself substantially inconsistent with '~500 employees.' More critically, the exact headcount of 5,983 decisively contradicts both the claim and the range band. The claim is substantively refuted. Confidence is set at 0.92 rather than 1.0 to account for the small possibility that the exact headcount figure reflects a different entity scope (e.g., parent company vs. subsidiary) or a data entry anomaly, but absent any such qualifier, the evidence strongly contradicts the claim."
+        }
+      ]
+    },
+    {
+      "case_id": "anthropic.com_planted_lie",
+      "company": "Anthropic",
+      "domain": "anthropic.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Anthropic was founded back in 2006",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2006 contradicts recorded founding year 2021."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $76000M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $76,000,000,000 conflicts with recorded total investment ($170,740,377,627)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 2500 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.92,
+          "reasoning": "The claim of 2500 employees falls outside the tolerance range of 1875\u20133125 when compared against the exact headcount figure of 5983, which is more than double the claimed value. The exact headcount (5983) is treated as the most authoritative source as it represents a precise, registered figure rather than a range estimate. Notably, there is also an internal conflict between the two evidence sources: the employee_count_range of '501-1000' is inconsistent with both the exact headcount of 5983 and the claim of 2500, suggesting the range data is outdated or sourced from a different time period. The exact headcount figure of 5983 is the most specific and likely most current data point available. The claim of 2500 is contradicted by the authoritative headcount of 5983, which exceeds even the upper tolerance bound of 3125 by approximately 91%. The employee_count_range further undermines the claim from the opposite direction, suggesting the company may have been much smaller historically. Neither evidence source supports the claim of ~2500 employees."
+        }
+      ]
+    },
+    {
+      "case_id": "scale.com_truth",
+      "company": "Scale AI",
+      "domain": "scale.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Scale AI was founded in 2016",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2016 matches recorded founding year 2016."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $1600M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,600,000,000 conflicts with recorded total investment ($15,902,620,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 900 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.85,
+          "reasoning": "The claim states approximately 900 employees, with a tolerance range of 810\u2013990. The employee_count_range field ('501-1000') is superficially consistent with 900, but the exact headcount.total value of 7,294 directly contradicts the claim by a factor of roughly 8x. The exact headcount figure is far more authoritative than a broad categorical range, as it represents a specific registered data point rather than a bucketed estimate. The categorical range '501-1000' may be outdated or simply a legacy classification that was never updated as the company grew. The discrepancy between 900 and 7,294 is too large to attribute to rounding, measurement timing, or definitional differences (e.g., full-time vs. contractors). The claim is therefore substantively contradicted by the most authoritative source."
+        }
+      ]
+    },
+    {
+      "case_id": "scale.com_planted_lie",
+      "company": "Scale AI",
+      "domain": "scale.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Scale AI was founded back in 2001",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2001 contradicts recorded founding year 2016."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $16000M in private capital",
+          "verdict": "verified",
+          "expected": "contradicted",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $16,000,000,000 is within acceptable tolerance [$12,000,000,000, $20,000,000,000] of total investment ($15,902,620,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 4500 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.92,
+          "reasoning": "The claim of 4,500 employees falls outside the tolerance range of 3,375\u20135,625 when compared against the exact headcount figure of 7,294. The exact headcount total is the most authoritative source as it represents a precise, registered figure rather than a range estimate. The actual headcount of 7,294 exceeds the claim's upper tolerance bound of 5,625 by approximately 30%, making this a substantive contradiction. Notably, the employee_count_range of '501\u20131000' also conflicts with both the claim and the exact headcount, suggesting it is severely outdated or sourced from an unreliable self-reported snapshot. The exact headcount figure of 7,294 is treated as the primary authoritative data point, and by that measure the claim of 4,500 is materially understated and therefore contradicted."
+        }
+      ]
+    },
+    {
+      "case_id": "brex.com_truth",
+      "company": "Brex",
+      "domain": "brex.com",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Brex was founded in 2017",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed year 2017 matches recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "The company has raised approximately $1500M in funding",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $1,500,000,000 conflicts with recorded total investment ($1,699,120,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "currently has around 1100 employees",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.95,
+          "reasoning": "Claimed 1100 employees is outside acceptable range [990, 1210] of authoritative headcount (7017)."
+        }
+      ]
+    },
+    {
+      "case_id": "brex.com_planted_lie",
+      "company": "Brex",
+      "domain": "brex.com",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Brex was founded back in 2002",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Claimed founding year 2002 contradicts recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "secured over $15000M in private capital",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed funding $15,000,000,000 conflicts with recorded total investment ($1,699,120,000)."
+        },
+        {
+          "category": "headcount",
+          "text": "employ a massive workforce of 5500 employees",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.95,
+          "reasoning": "Claimed 5500 employees is outside acceptable range [4400, 6600] of authoritative headcount (7017)."
+        }
+      ]
+    }
+  ]
+}

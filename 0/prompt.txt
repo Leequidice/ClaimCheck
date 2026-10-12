@@ -1,0 +1,14 @@
+Task: capture Entire evidence (time-box: 15 minutes). Do not change any product code.
+
+Rules: Don’t rewrite or force-push main. Don’t guess Entire commands: read entire --help, the Entire docs, and the entire-graph README, and use only what they document. Never print or commit secrets. If any step is blocked, stop and report why instead of working around it.
+
+1. Repository map. Install and run entire-graph on this repo, following its docs. Save the raw output and any generated files under docs/entire-graph/. Add a short docs/entire-graph/README.md stating the exact command run, the date, and what the output shows (3 to 5 sentences, only things visible in the output). Commit through Entire.
+
+2. Pull request for the verifier change (commit 16ddbe4). Check git remote -v first. If there is no GitHub remote, stop this step and tell me. Otherwise:
+
+Create a base branch at the parent of 16ddbe4 (pr-base, from 16ddbe4~1) and push it.
+Create a branch pr/evidence-verifier from pr-base, cherry-pick 16ddbe4 onto it, and commit through Entire so a new checkpoint is attached. Resolve conflicts only inside the verifier change. If it doesn’t apply cleanly, stop and report.
+Push the branch and open a pull request from pr/evidence-verifier into pr-base, using the gh CLI if it’s installed. If it isn’t, print the GitHub compare URL for me to open.
+PR title: “Verifier may demote a verdict only with cited evidence”. PR description: the problem (the second-pass verifier overturned correct verdicts on memory-based doubt: Vercel’s $300M Series F and PostHog’s $75M Series E), the fix (demotion requires counter-evidence from the retrieved data), the result (train false alarms 2 → 0, held-out 0 → 0, hard-tier lies 19 of 19 still caught), the four neatlogs trace URLs from the README, and the Entire checkpoint IDs for this branch and for commit 1796b94 (01M4QYXMQXPN8XWBJ9XCKCEXRA).
+
+3. Report back with: the entire-graph command and output location, the PR URL (or compare URL), the new checkpoint ID, and the output of entire status and git log --oneline -15. List anything you could not do and why.

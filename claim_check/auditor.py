@@ -1,4 +1,4 @@
-﻿"""Core Audit Engine for Claim Check.
+"""Core Audit Engine for Claim Check.
 
 Orchestrates the entire claim verification pipeline:
   (a) Extract atomic, checkable claims
@@ -165,13 +165,18 @@ class ClaimAuditor:
         # Step 3: Evidence Planning & Fetching
         plan = EvidencePlan(claims)
         company_data: Optional[CompanyData] = None
+        enrichment_error_msg: Optional[str] = None
+
         try:
             enrichment_item = self.crustdata.enrich_company(
                 domain=domain,
                 fields=plan.fields_list,
             )
             company_data = enrichment_item.primary_match
+            if not company_data:
+                enrichment_error_msg = f"No matched company record returned by Crustdata for {domain}."
         except Exception as exc:
+            enrichment_error_msg = f"Crustdata API enrichment failed: {exc}"
             logger.warning(f"Crustdata enrichment failed for {domain}: {exc}")
             if neatlogs:
                 try:
@@ -185,18 +190,30 @@ class ClaimAuditor:
                 logger.debug(f"Resuming: claim {claim.id} already completed, skipping.")
                 continue
 
-            try:
-                result = self.reasoner.evaluate_claim(claim, company_data=company_data)
-            except Exception as exc:
-                logger.error(f"Error evaluating claim {claim.id}: {exc}")
-                # A single failed claim must not abort the run!
+            if enrichment_error_msg:
+                # Rule: A failed enrichment must be recorded as error with reason and never show as OK/unverifiable
                 result = ClaimAuditResult(
                     claim_id=claim.id,
                     claim=claim,
-                    verdict=VerdictType.UNVERIFIABLE,
+                    verdict=VerdictType.ERROR,
                     confidence=0.0,
-                    reasoning=f"Audit failed due to error: {exc}",
+                    evidence=None,
+                    source_cited="crustdata",
+                    reasoning=f"Enrichment failure: {enrichment_error_msg}",
                 )
+            else:
+                try:
+                    result = self.reasoner.evaluate_claim(claim, company_data=company_data)
+                except Exception as exc:
+                    logger.error(f"Error evaluating claim {claim.id}: {exc}")
+                    # A single failed claim must not abort the run!
+                    result = ClaimAuditResult(
+                        claim_id=claim.id,
+                        claim=claim,
+                        verdict=VerdictType.ERROR,
+                        confidence=0.0,
+                        reasoning=f"Audit failed due to error: {exc}",
+                    )
 
             # Save state immediately per claim
             self.state.record_claim_result(run_id, result)
@@ -213,7 +230,7 @@ class ClaimAuditor:
                 except Exception:
                     pass
 
-        # Step 5: Second verification pass on verified claims
+        # Step 5: Second verification pass on verified claims (only if company_data is valid)
         all_results = list(results_by_id.values())
         finalized_results = self.verifier.verify_all(all_results, company_data=company_data)
 
@@ -224,6 +241,7 @@ class ClaimAuditor:
         v_count = sum(1 for r in finalized_results if r.verdict == VerdictType.VERIFIED)
         c_count = sum(1 for r in finalized_results if r.verdict == VerdictType.CONTRADICTED)
         u_count = sum(1 for r in finalized_results if r.verdict == VerdictType.UNVERIFIABLE)
+        e_count = sum(1 for r in finalized_results if r.verdict == VerdictType.ERROR)
 
         report = CompanyAuditReport(
             company_name=company_name,
@@ -233,6 +251,8 @@ class ClaimAuditor:
             verified_count=v_count,
             contradicted_count=c_count,
             unverifiable_count=u_count,
+            error_count=e_count,
+            enrichment_error=enrichment_error_msg,
             results=finalized_results,
             llm_usage=self.llm.get_summary(),
             neatlogs_trace_id=trace_id,

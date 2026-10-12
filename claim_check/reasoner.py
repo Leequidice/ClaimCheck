@@ -186,7 +186,7 @@ class ClaimReasoner:
 
     def _evaluate_funding(self, claim: AtomicClaim, data: CompanyData) -> ClaimAuditResult:
         funding = data.funding
-        if not funding or (funding.total_investment_usd is None and not funding.funding_rounds):
+        if not funding:
             return ClaimAuditResult(
                 claim_id=claim.id,
                 claim=claim,
@@ -197,31 +197,134 @@ class ClaimReasoner:
                 reasoning="No funding records found in Crustdata for this company.",
             )
 
-        total_usd = funding.total_investment_usd
+        # Retrieve all historical funding rounds (from funding_rounds or milestone events)
+        all_rounds = funding.funding_rounds or [
+            m for m in funding.milestones if m.get("round_type") or m.get("amount_usd")
+        ]
+
         val = claim.normalized_value
 
-        if isinstance(val, (int, float)) and total_usd is not None:
-            claimed_usd = float(val)
-            t_min = claim.tolerance_min if claim.tolerance_min is not None else claimed_usd * 0.80
-            t_max = claim.tolerance_max if claim.tolerance_max is not None else claimed_usd * 1.20
+        # Historical-round claim check: e.g. "raised $82M Series C in June 2025" or structured dict
+        # Checked against Crustdata's funding_rounds list (amount +-10%, date within the month)
+        is_round_claim = False
+        claimed_round_type = None
+        claimed_round_amount = None
+        claimed_round_date = None
 
-            evidence_dict = {
-                "total_investment_usd": total_usd,
-                "last_round_type": funding.last_round_type,
-                "last_round_amount_usd": funding.last_round_amount_usd,
-            }
+        if isinstance(val, dict) and ("round" in val or "round_type" in val or "round_amount_usd" in val):
+            is_round_claim = True
+            claimed_round_type = val.get("round") or val.get("round_type")
+            claimed_round_amount = val.get("round_amount_usd") or val.get("amount_usd")
+            claimed_round_date = val.get("round_date") or val.get("date")
+        else:
+            # Parse from original text if text mentions a round series/type and an amount
+            text = claim.original_text.lower()
+            round_match = re.search(r"\b(series\s+[a-i]|seed|angel|pre-seed|debt\s+financing|private\s+equity)\b", text, re.IGNORECASE)
+            if round_match:
+                is_round_claim = True
+                claimed_round_type = round_match.group(1).lower().replace(" ", "_")
+                # Look for amount in normalized_value or regex
+                if isinstance(val, (int, float)):
+                    claimed_round_amount = float(val)
+                else:
+                    amt_m = re.search(r"\$(\d+(?:\.\d+)?)\s*(m|million|b|billion|k)?", text, re.IGNORECASE)
+                    if amt_m:
+                        num = float(amt_m.group(1))
+                        unit = (amt_m.group(2) or "").lower()
+                        if unit.startswith("b"):
+                            claimed_round_amount = num * 1_000_000_000
+                        elif unit.startswith("m"):
+                            claimed_round_amount = num * 1_000_000
+                        elif unit.startswith("k"):
+                            claimed_round_amount = num * 1_000
+                        else:
+                            claimed_round_amount = num
 
-            if t_min <= total_usd <= t_max:
+                # Look for year/month
+                dt_m = re.search(r"\b(january|february|march|april|may|june|july|august|september|october|november|december)?\s*(\d{4})\b", text, re.IGNORECASE)
+                if dt_m:
+                    claimed_round_date = dt_m.group(0).strip()
+
+        if is_round_claim and all_rounds:
+            norm_target_round = (claimed_round_type or "").lower().replace(" ", "_").replace("-", "_")
+
+            # Search across Crustdata historical rounds
+            matched_round = None
+            type_matched_round = None
+
+            for r in all_rounds:
+                r_type = str(r.get("round_type") or "").lower().replace(" ", "_").replace("-", "_")
+                r_amt = r.get("amount_usd")
+                r_date = str(r.get("date") or r.get("funding_date") or "")
+
+                if norm_target_round and (norm_target_round in r_type or r_type in norm_target_round):
+                    type_matched_round = r
+
+                    # Check amount +-10% if amount claimed
+                    amt_ok = True
+                    if claimed_round_amount is not None and r_amt is not None:
+                        try:
+                            c_amt = float(claimed_round_amount)
+                            r_amt_f = float(r_amt)
+                            amt_ok = (0.90 * c_amt <= r_amt_f <= 1.10 * c_amt)
+                        except Exception:
+                            amt_ok = False
+
+                    # Check date within the month if date claimed
+                    date_ok = True
+                    if claimed_round_date and r_date:
+                        # Normalize date strings to YYYY-MM
+                        claimed_ym = self._extract_year_month(claimed_round_date)
+                        actual_ym = self._extract_year_month(r_date)
+                        if claimed_ym and actual_ym:
+                            date_ok = (claimed_ym == actual_ym)
+                        elif claimed_ym:
+                            date_ok = claimed_ym[:4] in r_date
+
+                    if amt_ok and date_ok:
+                        matched_round = r
+                        break
+
+            if matched_round:
+                trimmed_evidence = {
+                    "round_type": matched_round.get("round_type"),
+                    "amount_usd": matched_round.get("amount_usd"),
+                    "date": matched_round.get("date") or matched_round.get("funding_date"),
+                }
                 return ClaimAuditResult(
                     claim_id=claim.id,
                     claim=claim,
                     verdict=VerdictType.VERIFIED,
-                    confidence=0.95,
-                    evidence=evidence_dict,
-                    source_cited="crustdata.funding.total_investment_usd",
+                    confidence=0.98,
+                    evidence=trimmed_evidence,
+                    source_cited="crustdata.funding.funding_rounds",
                     reasoning=(
-                        f"Claimed funding ${claimed_usd:,.0f} is within acceptable tolerance "
-                        f"[${t_min:,.0f}, ${t_max:,.0f}] of total investment (${total_usd:,.0f})."
+                        f"Historical round verified: {trimmed_evidence['round_type']} "
+                        f"of ${trimmed_evidence['amount_usd']:,.0f} on {trimmed_evidence['date']} "
+                        f"matches within +-10% amount and month tolerance."
+                    ),
+                )
+            elif type_matched_round:
+                actual_amt = type_matched_round.get("amount_usd")
+                actual_dt = type_matched_round.get("date") or type_matched_round.get("funding_date")
+                trimmed_evidence = {
+                    "round_type": type_matched_round.get("round_type"),
+                    "actual_amount_usd": actual_amt,
+                    "actual_date": actual_dt,
+                    "claimed_amount_usd": claimed_round_amount,
+                    "claimed_date": claimed_round_date,
+                }
+                amt_disp = f"${actual_amt:,.0f}" if isinstance(actual_amt, (int, float)) else "undisclosed"
+                return ClaimAuditResult(
+                    claim_id=claim.id,
+                    claim=claim,
+                    verdict=VerdictType.CONTRADICTED,
+                    confidence=0.98,
+                    evidence=trimmed_evidence,
+                    source_cited="crustdata.funding.funding_rounds",
+                    reasoning=(
+                        f"Round '{norm_target_round}' found but contradicts claim: recorded amount "
+                        f"is {amt_disp} on {actual_dt} (outside +-10% amount or month date tolerance)."
                     ),
                 )
             else:
@@ -229,28 +332,84 @@ class ClaimReasoner:
                     claim_id=claim.id,
                     claim=claim,
                     verdict=VerdictType.CONTRADICTED,
-                    confidence=0.95,
+                    confidence=0.90,
+                    evidence={"recorded_rounds": [r.get("round_type") for r in all_rounds if r.get("round_type")]},
+                    source_cited="crustdata.funding.funding_rounds",
+                    reasoning=f"No matching '{norm_target_round}' round found in historical funding rounds.",
+                )
+
+        # Informational check for total funding (tolerance +-25%)
+        total_usd = funding.total_investment_usd
+        if isinstance(val, (int, float)) and total_usd is not None:
+            claimed_usd = float(val)
+            t_min = claim.tolerance_min if claim.tolerance_min is not None else claimed_usd * 0.75
+            t_max = claim.tolerance_max if claim.tolerance_max is not None else claimed_usd * 1.25
+
+            evidence_dict = {
+                "total_investment_usd": total_usd,
+                "as_of_date": funding.last_fundraise_date,
+            }
+
+            if t_min <= total_usd <= t_max:
+                return ClaimAuditResult(
+                    claim_id=claim.id,
+                    claim=claim,
+                    verdict=VerdictType.VERIFIED,
+                    confidence=0.90,
                     evidence=evidence_dict,
                     source_cited="crustdata.funding.total_investment_usd",
                     reasoning=(
-                        f"Claimed funding ${claimed_usd:,.0f} conflicts with recorded "
+                        f"[Informational] Claimed total funding ${claimed_usd:,.0f} is within +-25% "
+                        f"tolerance of recorded total investment (${total_usd:,.0f})."
+                    ),
+                )
+            else:
+                return ClaimAuditResult(
+                    claim_id=claim.id,
+                    claim=claim,
+                    verdict=VerdictType.CONTRADICTED,
+                    confidence=0.90,
+                    evidence=evidence_dict,
+                    source_cited="crustdata.funding.total_investment_usd",
+                    reasoning=(
+                        f"[Informational] Claimed total funding ${claimed_usd:,.0f} conflicts with recorded "
                         f"total investment (${total_usd:,.0f})."
                     ),
                 )
 
-        # Check round type if qualitative
-        if funding.last_round_type and isinstance(val, str) and val.lower() in funding.last_round_type.lower():
-            return ClaimAuditResult(
-                claim_id=claim.id,
-                claim=claim,
-                verdict=VerdictType.VERIFIED,
-                confidence=0.90,
-                evidence={"last_round_type": funding.last_round_type},
-                source_cited="crustdata.funding.last_round_type",
-                reasoning=f"Round type '{val}' matches recorded round '{funding.last_round_type}'.",
-            )
+        # Fallback to LLM arbitration if qualitative or complex
+        trimmed_funding = {
+            "total_investment_usd": funding.total_investment_usd,
+            "last_round_type": funding.last_round_type,
+            "last_round_amount_usd": funding.last_round_amount_usd,
+            "rounds": [{"type": r.get("round_type"), "amount": r.get("amount_usd"), "date": r.get("date")} for r in all_rounds[:5]],
+        }
+        return self._arbitrate_with_llm(claim, {"funding": trimmed_funding})
 
-        return self._arbitrate_with_llm(claim, {"funding": funding.model_dump()})
+    def _extract_year_month(self, text: str) -> Optional[str]:
+        """Extract YYYY-MM from ISO date (2022-07-27) or text ('June 2022')."""
+        if not text:
+            return None
+        iso_m = re.search(r"(\d{4})-(\d{2})", text)
+        if iso_m:
+            return f"{iso_m.group(1)}-{iso_m.group(2)}"
+        months = {
+            "january": "01", "jan": "01", "february": "02", "feb": "02",
+            "march": "03", "mar": "03", "april": "04", "apr": "04",
+            "may": "05", "june": "06", "jun": "06", "july": "07", "jul": "07",
+            "august": "08", "aug": "08", "september": "09", "sep": "09",
+            "october": "10", "oct": "10", "november": "11", "nov": "11",
+            "december": "12", "dec": "12",
+        }
+        text_lower = text.lower()
+        yr_m = re.search(r"\b(\d{4})\b", text_lower)
+        if yr_m:
+            yr = yr_m.group(1)
+            for m_name, m_num in months.items():
+                if m_name in text_lower:
+                    return f"{yr}-{m_num}"
+            return f"{yr}"
+        return None
 
     def _evaluate_founding_year(self, claim: AtomicClaim, data: CompanyData) -> ClaimAuditResult:
         actual_year = data.basic_info.year_founded if data.basic_info else None
@@ -268,27 +427,27 @@ class ClaimReasoner:
         claimed_year = claim.normalized_value
         try:
             claimed_int = int(claimed_year)
-            if abs(claimed_int - actual_year) <= 1:
+            if claimed_int == actual_year:
                 return ClaimAuditResult(
                     claim_id=claim.id,
                     claim=claim,
                     verdict=VerdictType.VERIFIED,
-                    confidence=0.98,
+                    confidence=1.0,
                     evidence={"year_founded": actual_year},
                     source_cited="crustdata.basic_info.year_founded",
-                    reasoning=f"Claimed year {claimed_int} matches recorded founding year {actual_year}.",
+                    reasoning=f"Claimed year {claimed_int} exactly matches recorded founding year {actual_year}.",
                 )
             else:
                 return ClaimAuditResult(
                     claim_id=claim.id,
                     claim=claim,
                     verdict=VerdictType.CONTRADICTED,
-                    confidence=0.98,
+                    confidence=1.0,
                     evidence={"year_founded": actual_year},
                     source_cited="crustdata.basic_info.year_founded",
                     reasoning=(
                         f"Claimed founding year {claimed_int} contradicts recorded "
-                        f"founding year {actual_year}."
+                        f"founding year {actual_year} (exact match required)."
                     ),
                 )
         except (ValueError, TypeError):
@@ -360,18 +519,23 @@ class ClaimReasoner:
             if person_data and matched_founder.get("profile_url") in person_data:
                 p_profile = person_data[matched_founder["profile_url"]]
 
+            trimmed_founder = {
+                "name": matched_founder.get("name"),
+                "title": matched_founder.get("title") or matched_founder.get("current_title"),
+            }
+
             if p_profile and ("attended" in claimed_str or "grad" in claimed_str or "oxford" in claimed_str or "stanford" in claimed_str):
-                schools = [str(s.get("school_name", "")).lower() for s in p_profile.education.schools] if p_profile.education else []
-                school_matched = any(s in claimed_str or any(part in claimed_str for part in s.split()) for s in schools)
+                schools = [str(s.get("school_name", "")).strip() for s in p_profile.education.schools if s.get("school_name")] if p_profile.education else []
+                school_matched = any(s.lower() in claimed_str or any(part in claimed_str for part in s.lower().split()) for s in schools)
                 if school_matched:
                     return ClaimAuditResult(
                         claim_id=claim.id,
                         claim=claim,
                         verdict=VerdictType.VERIFIED,
                         confidence=0.95,
-                        evidence={"founder": matched_founder, "education": schools},
+                        evidence={"founder": trimmed_founder, "education": schools},
                         source_cited="crustdata.people & crustdata.person.education",
-                        reasoning=f"Verified founder {matched_founder.get('name')} and educational credentials.",
+                        reasoning=f"Verified founder {trimmed_founder.get('name')} and educational credentials.",
                     )
 
             return ClaimAuditResult(
@@ -379,9 +543,9 @@ class ClaimReasoner:
                 claim=claim,
                 verdict=VerdictType.VERIFIED,
                 confidence=0.92,
-                evidence={"founder": matched_founder},
+                evidence={"founder": trimmed_founder},
                 source_cited="crustdata.people.founders",
-                reasoning=f"Verified founder: '{matched_founder.get('name')}' is listed as founder.",
+                reasoning=f"Verified founder: '{trimmed_founder.get('name')}' is listed as founder.",
             )
 
         if not founders:

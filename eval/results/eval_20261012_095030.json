@@ -1,0 +1,201 @@
+{
+  "timestamp": "2026-10-12T09:49:52.858238+00:00",
+  "offline": false,
+  "cases_count": 4,
+  "overall_metrics": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "false_alarms": 1,
+    "true_positives": 4,
+    "false_negatives": 0,
+    "true_negatives": 3,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "total_claims": 8
+  },
+  "train_metrics": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "false_alarms": 1,
+    "true_positives": 4,
+    "false_negatives": 0,
+    "true_negatives": 3,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "total_claims": 8
+  },
+  "held_out_test_metrics": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "false_alarms": 0,
+    "true_positives": 0,
+    "false_negatives": 0,
+    "true_negatives": 0,
+    "unverifiable": 0,
+    "enrichment_errors": 0,
+    "total_claims": 0
+  },
+  "enrichment_failures": [],
+  "diagnostics": [
+    {
+      "type": "false_alarm",
+      "split": "train",
+      "company": "Retool",
+      "claim_text": "The company secured a $45M Series C round in July 2022",
+      "ground_truth": null,
+      "crustdata_value": {
+        "round_type": "series_c",
+        "amount_usd": 45000000.0,
+        "date": "2022-07-27"
+      },
+      "verdict": "contradicted",
+      "reasoning": "Historical round verified: series_c of $45,000,000 on 2022-07-27 matches within +-10% amount and month tolerance. [Second Pass Note: The provisional evidence matches the round type ($45M Series C, 2022-07-27) on its face, but a critical inconsistency emerges when cross-checking the total funding figure. The company_evidence_summary reports funding_total_usd of $141,000,000. Retool's publicly known funding history includes a $20M Series A, a $50M Series B (April 2020), and a widely reported $45M Series C \u2014 however, public records indicate Retool actually raised a $45M Series C in 2021 (not July 2022), and more significantly, Retool raised a much larger round (~$3.4B valuation round) that would push total funding well above $141M if the July 2022 date were accurate. The $141M total is inconsistent with a July 2022 Series C date: if the Series C of $45M closed in July 2022 as the last round, cumulative funding of $141M implies prior rounds totaling ~$96M, which is plausible in isolation, but the date itself is suspect \u2014 Retool's Series C is documented in multiple sources as closing in 2021, not July 2022. The date misalignment between the claimed July 2022 close and the actual ~2021 Series C close represents a potential fatal flaw. Additionally, 'last_round_type: series_c' with no subsequent rounds by the data snapshot date may be consistent, but the July 2022 date cannot be confirmed as accurate given the discrepancy with known public timelines.]",
+      "which_side_is_wrong": "auditor contradicted truthful claim (false alarm)"
+    }
+  ],
+  "llm_usage": {
+    "run_cost_usd": 0.024703,
+    "cumulative_cost_usd": 4.662236,
+    "budget_remaining_usd": 15.337764,
+    "by_role": {
+      "extract": {
+        "calls": 4,
+        "cache_hits": 0,
+        "input_tokens": 2644,
+        "output_tokens": 888,
+        "cost_usd": 0.001771
+      },
+      "arbiter": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      },
+      "verify": {
+        "calls": 4,
+        "cache_hits": 0,
+        "input_tokens": 2094,
+        "output_tokens": 1110,
+        "cost_usd": 0.022932
+      },
+      "routine": {
+        "calls": 0,
+        "cache_hits": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "retool.com_truth",
+      "company": "Retool",
+      "domain": "retool.com",
+      "split": "train",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded in 2017",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed year 2017 exactly matches recorded founding year 2017."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $45M Series C round in July 2022",
+          "verdict": "contradicted",
+          "expected": "verified",
+          "is_correct": false,
+          "confidence": 0.85,
+          "reasoning": "Historical round verified: series_c of $45,000,000 on 2022-07-27 matches within +-10% amount and month tolerance. [Second Pass Note: The provisional evidence matches the round type ($45M Series C, 2022-07-27) on its face, but a critical inconsistency emerges when cross-checking the total funding figure. The company_evidence_summary reports funding_total_usd of $141,000,000. Retool's publicly known funding history includes a $20M Series A, a $50M Series B (April 2020), and a widely reported $45M Series C \u2014 however, public records indicate Retool actually raised a $45M Series C in 2021 (not July 2022), and more significantly, Retool raised a much larger round (~$3.4B valuation round) that would push total funding well above $141M if the July 2022 date were accurate. The $141M total is inconsistent with a July 2022 Series C date: if the Series C of $45M closed in July 2022 as the last round, cumulative funding of $141M implies prior rounds totaling ~$96M, which is plausible in isolation, but the date itself is suspect \u2014 Retool's Series C is documented in multiple sources as closing in 2021, not July 2022. The date misalignment between the claimed July 2022 close and the actual ~2021 Series C close represents a potential fatal flaw. Additionally, 'last_round_type: series_c' with no subsequent rounds by the data snapshot date may be consistent, but the July 2022 date cannot be confirmed as accurate given the discrepancy with known public timelines.]"
+        }
+      ]
+    },
+    {
+      "case_id": "retool.com_planted_lie",
+      "company": "Retool",
+      "domain": "retool.com",
+      "split": "train",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Retool was founded in 2013",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2013 contradicts recorded founding year 2017 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $112M Series A round in July 2023",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is $25,000,000 on 2019-04-01 (outside +-10% amount or month date tolerance)."
+        }
+      ]
+    },
+    {
+      "case_id": "postman.com_truth",
+      "company": "Postman",
+      "domain": "postman.com",
+      "split": "train",
+      "is_adversarial": false,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Postman was founded in 2014",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed year 2014 exactly matches recorded founding year 2014."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $225M Series D round in August 2021",
+          "verdict": "verified",
+          "expected": "verified",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Historical round verified: series_d of $225,000,000 on 2021-08-18 matches within +-10% amount and month tolerance."
+        }
+      ]
+    },
+    {
+      "case_id": "postman.com_planted_lie",
+      "company": "Postman",
+      "domain": "postman.com",
+      "split": "train",
+      "is_adversarial": true,
+      "claims": [
+        {
+          "category": "founding_year",
+          "text": "Postman was founded in 2009",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 1.0,
+          "reasoning": "Claimed founding year 2009 contradicts recorded founding year 2014 (exact match required)."
+        },
+        {
+          "category": "funding",
+          "text": "The company secured a $562M Series A round in August 2020",
+          "verdict": "contradicted",
+          "expected": "contradicted",
+          "is_correct": true,
+          "confidence": 0.98,
+          "reasoning": "Round 'series_a' found but contradicts claim: recorded amount is $7,000,000 on 2016-10-13 (outside +-10% amount or month date tolerance)."
+        }
+      ]
+    }
+  ]
+}

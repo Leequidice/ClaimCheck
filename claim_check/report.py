@@ -1,4 +1,4 @@
-﻿"""Report formatting for Claim Check audits."""
+"""Report formatting for Claim Check audits."""
 
 from __future__ import annotations
 
@@ -19,8 +19,11 @@ def format_terminal_report(report: CompanyAuditReport) -> str:
     lines.append(
         f"Verdicts:     VERIFIED: {report.verified_count} | "
         f"CONTRADICTED: {report.contradicted_count} | "
-        f"UNVERIFIABLE: {report.unverifiable_count}"
+        f"UNVERIFIABLE: {report.unverifiable_count} | "
+        f"ERRORS: {report.error_count}"
     )
+    if report.enrichment_error:
+        lines.append(f"Enrichment:   [FAILURE] {report.enrichment_error}")
 
     if report.neatlogs_trace_url:
         lines.append(f"Trace Link:   {report.neatlogs_trace_url}")
@@ -76,8 +79,11 @@ def format_markdown_report(report: CompanyAuditReport) -> str:
     lines.append(
         f"- **Summary:** Verified: **{report.verified_count}** | "
         f"Contradicted: **{report.contradicted_count}** | "
-        f"Unverifiable: **{report.unverifiable_count}**"
+        f"Unverifiable: **{report.unverifiable_count}** | "
+        f"Errors: **{report.error_count}**"
     )
+    if report.enrichment_error:
+        lines.append(f"- **Enrichment Failure:** `{report.enrichment_error}`")
     if report.neatlogs_trace_url:
         lines.append(f"- **Neatlogs Trace:** [{report.neatlogs_trace_url}]({report.neatlogs_trace_url})")
 

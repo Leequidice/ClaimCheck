@@ -246,5 +246,949 @@
     "input_tokens": 669,
     "output_tokens": 320,
     "cost_usd": 0.000567
+  },
+  "f640e7b88d2535c195078d04ccd38ef0a24dda2a874839ada7e1b1fca3d9ae68": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Retool was founded in 2017\",\n    \"normalized_value\": 2017,\n    \"tolerance_min\": 2017,\n    \"tolerance_max\": 2017,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"location\",\n    \"original_text\": \"founded in 2017 in SF\",\n    \"normalized_value\": \"San Francisco, CA, USA\",\n    \"tolerance_min\": null,\n    \"tolerance_max\": null,\n    \"unit\": null,\n    \"planned_source\": \"crustdata.locations\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"founder_background\",\n    \"original_text\": \"founded in 2017 in SF by David Hsu\",\n    \"normalized_value\": \"David Hsu\",\n    \"tolerance_min\": null,\n    \"tolerance_max\": null,\n    \"unit\": null,\n    \"planned_source\": \"crustdata.people\"\n  },\n  {\n    \"id\": \"claim_4\",\n    \"category\": \"headcount\",\n    \"original_text\": \"They have 700 employees\",\n    \"normalized_value\": 700,\n    \"tolerance_min\": 525,\n    \"tolerance_max\": 875,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 660,
+    "output_tokens": 404,
+    "cost_usd": 0.00067
+  },
+  "ce2d9f025ea8d621070be013306fb877930c0a7a3e16ac4f419809b949ca36e4": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"verified\",\n  \"confidence\": 0.95,\n  \"cited_source\": \"LinkedIn profile of David Hsu (crustdata_person_id: 14540), showing 'Founder, CEO @ Retool' with employment start date of 2017-01-01, located in San Francisco Bay Area, last updated 2026-10-10.\",\n  \"reasoning\": \"The claim states Retool was 'founded in 2017 in SF by David Hsu.' The evidence directly corroborates all three elements: (1) David Hsu is confirmed as a founder via his LinkedIn profile with the title 'Founder, CEO @ Retool'; (2) his employment start date at Retool is recorded as 2017-01-01, consistent with a 2017 founding; (3) his location is listed as 'San Francisco Bay Area,' consistent with the 'SF' claim. The data is sourced from a professional network profile recently updated in October 2026, making it highly authoritative. A secondary founder (Anthony G., Founder/CTO) is also present in the evidence, but this does not contradict the claim \u2014 it merely indicates co-founders exist. The claim singles out David Hsu as a founder, which is accurate. Minor ambiguity exists around whether 'founded by David Hsu' implies sole founding, but this is a common simplification and does not substantively contradict the evidence.\"\n}\n```",
+    "input_tokens": 3107,
+    "output_tokens": 338,
+    "cost_usd": 0.014391
+  },
+  "91323dfa9f6ec089eb5eb9e4b1839796a3fb9c521def9ebdf42e487b115ad2f1": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.82,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2017 is internally consistent across the company evidence summary. No contradicting dates are present in the dataset. The headcount (416, within the 201-500 range) and headquarters data are plausible for a company of this age and stage. One notable data gap: the founders array contains null values, which prevents cross-checking founding year against founder biographies or LinkedIn histories. Additionally, funding_total_usd and last_round_type are null, so no round date misalignment can be checked. External knowledge corroborates Retool (formerly 'Retool') being founded in 2017 by David Hsu and Martin Rauchwerk, consistent with this claim. No fatal flaws or counter-evidence found; verdict remains verified, with slight confidence reduction due to null founder and funding fields limiting full triangulation.\"\n}\n```",
+    "input_tokens": 500,
+    "output_tokens": 232,
+    "cost_usd": 0.00498
+  },
+  "7c927052edb6a4959e754001000b3b57219ce3c08155640eeb80353802f4f3a5": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.88,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed location of San Francisco, CA, USA is consistently supported by the headquarters field ('San Francisco, California, United States') with no contradicting location data elsewhere in the record. The founding year of 2017 is also confirmed by the year_founded field. No subsidiary/parent location conflicts, no date misalignments, and no range boundary issues are present. Minor confidence reduction reflects the null funding fields and null founder entries, which limit full corroboration of the founding context, but these gaps do not contradict the location claim itself.\"\n}\n```",
+    "input_tokens": 517,
+    "output_tokens": 161,
+    "cost_usd": 0.003966
+  },
+  "6019c61be41a90dd644fcb7c80c5f5f7118199ca541d130154cba51924f54da3": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.93,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"All three elements of the claim hold up under scrutiny. (1) David Hsu as founder: confirmed by LinkedIn profile with title 'Founder, CEO @ Retool', start date 2017-01-01, and company headquarters listed as 'San Francisco, California, United States'. (2) 2017 founding year: corroborated by both David Hsu's and Anthony G.'s employment start dates of 2017-01-01, and the company_evidence_summary field 'year_founded: 2017'. (3) SF location: headquarters confirmed as 'San Francisco, California, United States'; David Hsu's location is 'San Francisco Bay Area'. No contradicting evidence found. The presence of a co-founder (Anthony G., Founder/CTO, also starting 2017-01-01) does not contradict the claim \u2014 the claim singles out David Hsu as a founder, which is accurate. The null values in company_evidence_summary 'founders' array are a data artifact and do not contradict the founder profiles present in the evidence. The data freshness is strong (last updated October 2026 for David Hsu's profile). No date misalignments, range boundary issues, or subsidiary/parent conflicts detected.\"\n}\n```",
+    "input_tokens": 3427,
+    "output_tokens": 328,
+    "cost_usd": 0.015201
+  },
+  "6d5a25e65bc0d60e277a69fd7c0a9898e1e9f42f5d8810a329ff974d6bb27db5": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Notion was founded in 2013\",\n    \"normalized_value\": 2013,\n    \"tolerance_min\": 2013,\n    \"tolerance_max\": 2013,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $343M in funding\",\n    \"normalized_value\": 343000000,\n    \"tolerance_min\": 308700000,\n    \"tolerance_max\": 377300000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 600 employees\",\n    \"normalized_value\": 600,\n    \"tolerance_min\": 480,\n    \"tolerance_max\": 720,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 662,
+    "output_tokens": 310,
+    "cost_usd": 0.000553
+  },
+  "9e64ab53783bd216298db990e92e2dc6a60677b3a8ac549018b0b783638e58c2": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Notion was founded back in 1998\",\n    \"normalized_value\": 1998,\n    \"tolerance_min\": 1998,\n    \"tolerance_max\": 1998,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $3430M in private capital\",\n    \"normalized_value\": 3430000000,\n    \"tolerance_min\": 2720000000,\n    \"tolerance_max\": 4146000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 3000 employees\",\n    \"normalized_value\": 3000,\n    \"tolerance_min\": 2250,\n    \"tolerance_max\": 3750,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 667,
+    "output_tokens": 319,
+    "cost_usd": 0.000566
+  },
+  "ccf95521848eab552768a0c7ced8532c120c06a775b100d8dfa77f177b94dcf3": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Supabase was founded in 2020\",\n    \"normalized_value\": 2020,\n    \"tolerance_min\": 2020,\n    \"tolerance_max\": 2020,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $116M in funding\",\n    \"normalized_value\": 116000000,\n    \"tolerance_min\": 92800000,\n    \"tolerance_max\": 139200000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 110 employees\",\n    \"normalized_value\": 110,\n    \"tolerance_min\": 88,\n    \"tolerance_max\": 132,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 666,
+    "output_tokens": 312,
+    "cost_usd": 0.000557
+  },
+  "aef7cf330387d1fe03788b7dae0061bffbd19fc1a9ef5b711650343664ce1d9b": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.88,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2020 is internally consistent across the company evidence. No contradicting data points were found: the headcount of 439 (within the 201-500 range) is plausible for a ~4-5 year old startup; the total funding of ~$1.19B is consistent with a well-funded post-2020 startup that has gone through multiple rounds; the last round type of 'series_unknown' with $150M does not conflict with a 2020 founding. No subsidiary/parent structure or date misalignments were detected. The absence of headquarters and founders data is noted but does not contradict the founding year. External knowledge also corroborates Supabase being founded in 2020 by Paul Copplestone and Ant Wilson, with their Y Combinator batch in 2020 further supporting this date.\"\n}\n```",
+    "input_tokens": 499,
+    "output_tokens": 238,
+    "cost_usd": 0.005067
+  },
+  "06552c801929695656b2411bb29c346db047bd0b39e0b1a75b802fb0dddfdba9": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Supabase was founded back in 2005\",\n    \"normalized_value\": 2005,\n    \"tolerance_min\": 2004,\n    \"tolerance_max\": 2006,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $1160M in private capital\",\n    \"normalized_value\": 1160000000,\n    \"tolerance_min\": 900000000,\n    \"tolerance_max\": 1450000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 550 employees\",\n    \"normalized_value\": 550,\n    \"tolerance_min\": 400,\n    \"tolerance_max\": 700,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 670,
+    "output_tokens": 316,
+    "cost_usd": 0.000562
+  },
+  "d6de4a2d992f263e57cad6c1739b3f0b5829034b9675e13e52bdf64c486c2a7c": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.87,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of 'over $1,160M in private capital' is consistent with the recorded total investment of $1,189,224,796. The phrase 'over $1,160M' is technically accurate as $1,189M does exceed $1,160M, and the delta is only ~$29M (~2.5%), well within normal rounding/reporting variance. The tolerance range [$900M\u2013$1,450M] is broad but the actual figure sits comfortably above the claimed threshold. No contradicting evidence found: the last round of $150M (series_unknown) is plausibly a recent raise that contributed to the total. No layoff signals, subsidiary complications, or date misalignments were detected. The company was founded in 2020 and has 439 employees, consistent with a growth-stage startup that has raised ~$1.19B. One minor note: 'series_unknown' for the last round type introduces slight uncertainty about whether all capital is truly 'private' (e.g., could include debt), but no evidence contradicts the private capital characterization.\"\n}\n```",
+    "input_tokens": 569,
+    "output_tokens": 289,
+    "cost_usd": 0.006042
+  },
+  "67d46843e7f6225f7fbe8ca9d7c8eed61f03a67342ed0fcd13630e86b10d41e0": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"Multiple contradictions found. (1) The actual headcount is 439, not 550. The claim of 550 overstates the workforce by ~25%, which is a material misrepresentation. (2) The company's own self-reported employee range is '201-500', which explicitly excludes 550 \u2014 the claimed figure falls outside this band entirely. (3) The provisional reasoning accepted a very broad acceptable range of [400, 700], but the upper bound of 700 is unjustifiably wide and masks the fact that 550 sits 25% above the actual count of 439. The range boundary is too permissive and misleading. (4) The descriptor 'massive workforce' is qualitatively misleading for a ~439-person company. Taken together, the claimed value of 550 is contradicted by both the actual headcount (439) and the company's own reported employee range ceiling (500).\"\n}\n```",
+    "input_tokens": 527,
+    "output_tokens": 254,
+    "cost_usd": 0.005391
+  },
+  "46ab841b99a23fa68f89dec4f02640c81d6199795e5ce82b8e64454bb091212e": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Vercel was founded in 2015\",\n    \"normalized_value\": 2015,\n    \"tolerance_min\": 2015,\n    \"tolerance_max\": 2015,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $563M in funding\",\n    \"normalized_value\": 563000000,\n    \"tolerance_min\": 506700000,\n    \"tolerance_max\": 619300000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 550 employees\",\n    \"normalized_value\": 550,\n    \"tolerance_min\": 412,\n    \"tolerance_max\": 688,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 664,
+    "output_tokens": 311,
+    "cost_usd": 0.000555
+  },
+  "1dbc1e3152e3d1ad2565d38b422c7f2d1e5e0dc5953251b0d26ba82f9e5ad90c": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2015 is consistently recorded in the company evidence with no contradicting data points. Vercel (originally launched as ZEIT in 2015 by Guillermo Rauch and Tony Edwards) aligns with this year. The company's funding trajectory (Series F at $863M total) and headcount (~1014) are consistent with a company founded in 2015 that has had ~8 years to scale. No date misalignments or contradicting evidence found within the provided data. Minor caveat: founders list is empty in the evidence, so founder-based corroboration is unavailable, but this does not contradict the founding year claim.\"\n}\n```",
+    "input_tokens": 498,
+    "output_tokens": 194,
+    "cost_usd": 0.004404
+  },
+  "9332d2b83b404cbce66dbf482304b20aca4087d65205b57c15470864e9b2949f": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Vercel was founded back in 2000\",\n    \"normalized_value\": 2000,\n    \"tolerance_min\": 1999,\n    \"tolerance_max\": 2001,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $5630M in private capital\",\n    \"normalized_value\": 5630000000,\n    \"tolerance_min\": 4422500000,\n    \"tolerance_max\": 6837500000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 2750 employees\",\n    \"normalized_value\": 2750,\n    \"tolerance_min\": 2062,\n    \"tolerance_max\": 3437,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "397b781456ba593d5701f3ccdfaf34ed694216c3fba13eff7f0fbfcfa3814310": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Datadog was founded in 2010\",\n    \"normalized_value\": 2010,\n    \"tolerance_min\": 2010,\n    \"tolerance_max\": 2010,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $148M in funding\",\n    \"normalized_value\": 148000000,\n    \"tolerance_min\": 118400000,\n    \"tolerance_max\": 177600000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 5200 employees\",\n    \"normalized_value\": 5200,\n    \"tolerance_min\": 4160,\n    \"tolerance_max\": 6240,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 665,
+    "output_tokens": 315,
+    "cost_usd": 0.00056
+  },
+  "ec27f0e717c35ddfbcaa6f957f4307e200af8e5f5947065eeec066280dd138e3": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"cited_source\": \"headcount.total (exact registered headcount: 10,482)\",\n  \"reasoning\": \"The claim states approximately 5,200 employees, with a tolerance range of 4,160\u20136,240. Two conflicting data points exist: (1) an exact headcount figure of 10,482, and (2) an employee count range of '1001\u20135000'. The exact headcount figure (10,482) is treated as the more authoritative source because it is a specific, timestamped numerical value rather than a categorical range, which is typically self-reported and less frequently updated. The exact figure of 10,482 falls well outside the claim's tolerance range (4,160\u20136,240), substantively refuting the claim. Notably, even the categorical range '1001\u20135000' is inconsistent with the exact figure of 10,482, suggesting the range data may be outdated. The exact headcount is nearly double the claimed value, which is not attributable to rounding or estimation error. Confidence is set at 0.85 rather than higher because there is some residual uncertainty about the recency of the exact headcount figure, but the magnitude of the discrepancy (>4,000 employees above the tolerance ceiling) makes contradiction the clear verdict.\"\n}\n```",
+    "input_tokens": 431,
+    "output_tokens": 316,
+    "cost_usd": 0.006033
+  },
+  "f4be52c4030a66fd9588c3dff1aa8bb8ef7b4f9758a7391cb8d988ad66cf85b9": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2010 is consistent with the provisional evidence and aligns with publicly known facts about Datadog (founded in New York in 2010 by Olivier Pomel and Alexis L\u00ea-Qu\u00f4c). No contradicting evidence found in the company data. Minor data quality issues noted (employee_range of '1001-5000' appears stale given headcount_total of 10,482, and headquarters is null), but these do not affect the founding year claim. The post-IPO debt round type is consistent with Datadog's 2019 IPO timeline, further supporting a 2010 founding. No fatal flaws identified.\"\n}\n```",
+    "input_tokens": 503,
+    "output_tokens": 196,
+    "cost_usd": 0.004449
+  },
+  "20b0067c7d91c748c5bf47f26130e2452bccdd8cc09d7467e2a8b07a9f0482ac": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Datadog was founded back in 1995\",\n    \"normalized_value\": 1995,\n    \"tolerance_min\": 1995,\n    \"tolerance_max\": 1995,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $1480M in private capital\",\n    \"normalized_value\": 1480000000,\n    \"tolerance_min\": 1200000000,\n    \"tolerance_max\": 1800000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 26000 employees\",\n    \"normalized_value\": 26000,\n    \"tolerance_min\": 20000,\n    \"tolerance_max\": 32000,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "cca61b82b0e6d8f14f86955fcf6eefda75c93edd1e30cf6dd91c8c8252df1cbd": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.93,\n  \"cited_source\": \"headcount.total (exact registered figure: 10,482 employees) corroborated by employee_count_range '1001-5000'\",\n  \"reasoning\": \"The claim asserts a workforce of 26,000 employees, with a tolerance band of 20,000\u201332,000. The most authoritative source is the exact headcount figure of 10,482, which is a precise registered data point and substantially more reliable than a narrative claim. This figure is less than half the claimed lower tolerance bound of 20,000 and represents only ~40% of the stated 26,000. The corroborating employee_count_range of '1001\u20135000' further undermines the claim, though it appears inconsistent with the exact figure of 10,482 (suggesting the range data may be outdated or from a different classification system). Regardless, both data points converge in rejecting the 26,000 figure \u2014 neither supports a workforce anywhere near that scale. The discrepancy is not a marginal rounding difference but a factor of ~2.5x, which is substantively significant. The claim is therefore contradicted with high confidence.\"\n}\n```",
+    "input_tokens": 433,
+    "output_tokens": 291,
+    "cost_usd": 0.005664
+  },
+  "38c82dadc75b965df061a4202e8b677773ca7e14f6c4c9f495058c1ba8dadfad": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Snowflake was founded in 2012\",\n    \"normalized_value\": 2012,\n    \"tolerance_min\": 2012,\n    \"tolerance_max\": 2012,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $2100M in funding\",\n    \"normalized_value\": 2100000000,\n    \"tolerance_min\": 1890000000,\n    \"tolerance_max\": 2310000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 7000 employees\",\n    \"normalized_value\": 7000,\n    \"tolerance_min\": 6300,\n    \"tolerance_max\": 7700,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 668,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "d29850829ebfec39c2798a4f04cf17742341f3a0d811ccace75d51b5b35f78d7": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.95,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2012 is consistent across the company evidence. No contradicting data points were found within the provided record. Snowflake is publicly known to have been founded in July 2012 by Benoit Dageville, Thierry Cruanes, and Marcin Zukowski, which aligns with the normalized value. The other data points (post-IPO status, large funding total, headcount) are consistent with a company founded in 2012 that has since gone public \u2014 no anachronisms or timeline conflicts detected. Minor note: the employee_range field ('5001-10000') appears outdated relative to the headcount_total of 12,592, but this does not affect the founding year claim.\"\n}\n```",
+    "input_tokens": 506,
+    "output_tokens": 208,
+    "cost_usd": 0.004638
+  },
+  "58ad67fed42fbe7c2222d80c8f095e1f2670d1843079b0e64d14ff143458df46": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Snowflake was founded back in 1997\",\n    \"normalized_value\": 1997,\n    \"tolerance_min\": 1997,\n    \"tolerance_max\": 1997,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $21000M in private capital\",\n    \"normalized_value\": 21000000000,\n    \"tolerance_min\": 16800000000,\n    \"tolerance_max\": 25200000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 35000 employees\",\n    \"normalized_value\": 35000,\n    \"tolerance_min\": 28000,\n    \"tolerance_max\": 42000,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 671,
+    "output_tokens": 321,
+    "cost_usd": 0.000569
+  },
+  "5dd3af08c860ac60bad77850ea9bf7d6ad4e1c5dd435fc92c68d8dfdc77f1dde": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Canva was founded in 2012\",\n    \"normalized_value\": 2012,\n    \"tolerance_min\": 2012,\n    \"tolerance_max\": 2012,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $570M in funding\",\n    \"normalized_value\": 570000000,\n    \"tolerance_min\": 456000000,\n    \"tolerance_max\": 684000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 4500 employees\",\n    \"normalized_value\": 4500,\n    \"tolerance_min\": 3600,\n    \"tolerance_max\": 5400,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 665,
+    "output_tokens": 315,
+    "cost_usd": 0.00056
+  },
+  "7fa01f29f4bb2039907fac24bb0a929b3f50468d56a56e9c7cc583b2381b84f0": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"cited_source\": \"headcount.total (exact registered headcount: 19,252)\",\n  \"reasoning\": \"The claim states approximately 4,500 employees, with a tolerance range of 3,600\u20135,400. The exact headcount data reports 19,252 employees, which is more than 4x the claimed figure and falls far outside the tolerance range. This is the most authoritative source as it represents a specific, registered headcount value rather than a broad categorical range. The employee_count_range of '1001-5000' is a coarse categorical bucket that technically encompasses 4,500, but it is clearly outdated or imprecise given the exact headcount of 19,252 \u2014 which itself falls outside that range, suggesting the range data is stale. The exact headcount figure of 19,252 directly contradicts the claim of ~4,500 employees. The discrepancy is too large (>300% difference) to be attributed to measurement timing or rounding differences.\"\n}\n```",
+    "input_tokens": 431,
+    "output_tokens": 252,
+    "cost_usd": 0.005073
+  },
+  "628ff71eebb011a3750e7a49859cb2a9bce7d0b6241c7b643540de56cb1ae3e5": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2012 is consistently recorded in the company evidence and aligns with publicly known facts about Canva's founding by Melanie Perkins, Cliff Obrecht, and Cameron Adams. No contradicting date evidence found within the provided data. Minor flags noted for data quality (e.g., employee_range of '1001-5000' appears stale given headcount_total of 19,252, and founders list is empty), but these inconsistencies relate to other fields and do not bear on the founding year claim itself. The founding year of 2012 stands as verified.\"\n}\n```",
+    "input_tokens": 500,
+    "output_tokens": 179,
+    "cost_usd": 0.004185
+  },
+  "99638ce738781463a8705934d26e49a4c44c44cd585f49d5f00fe421333a23cd": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Canva was founded back in 1997\",\n    \"normalized_value\": 1997,\n    \"tolerance_min\": 1995,\n    \"tolerance_max\": 1999,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $5700M in private capital\",\n    \"normalized_value\": 5700000000,\n    \"tolerance_min\": 4750000000,\n    \"tolerance_max\": 6650000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 22500 employees\",\n    \"normalized_value\": 22500,\n    \"tolerance_min\": 18750,\n    \"tolerance_max\": 26250,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "f290e5bf9152ff62159e8d576e3c10014dc6992128662b62acfa6b02a55ec741": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"cited_source\": \"headcount.total (exact registered headcount: 19,252)\",\n  \"reasoning\": \"The claim asserts a workforce of 22,500 employees. The most authoritative source is the exact registered headcount of 19,252, which falls below the claim's tolerance minimum of 18,750 \u2014 actually within tolerance range, but the secondary source (employee_count_range: '1001-5000') creates a significant conflict. The exact headcount of 19,252 is the primary authoritative figure and does fall within the tolerance band (18,750\u201326,250), which would normally suggest 'verified.' However, the employee_count_range of '1001-5000' is dramatically inconsistent with both the claim (22,500) and the exact headcount (19,252), suggesting possible data quality issues or that the range refers to a subsidiary/division rather than the full entity. Despite the exact headcount technically falling within tolerance, the claim uses the descriptor 'massive workforce of 22,500' which implies a precise figure. The exact headcount of 19,252 represents a ~14.4% shortfall from the claimed 22,500, and the corroborating range data (1001-5000) provides no support for the claim's magnitude. The combination of the exact figure being below the claimed value and the range data being orders of magnitude smaller undermines confidence in the claim. The verdict is 'contradicted' primarily because the exact headcount does not match 22,500 and the range data further erodes credibility of the claim.\"\n}\n```",
+    "input_tokens": 433,
+    "output_tokens": 377,
+    "cost_usd": 0.006954
+  },
+  "b00ab8e9665d130bb729738d31d222fdd3b2e0105a22ad2f7bb073bf380fd4f7": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Postman was founded in 2014\",\n    \"normalized_value\": 2014,\n    \"tolerance_min\": 2014,\n    \"tolerance_max\": 2014,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $433M in funding\",\n    \"normalized_value\": 433000000,\n    \"tolerance_min\": 389700000,\n    \"tolerance_max\": 476300000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 600 employees\",\n    \"normalized_value\": 600,\n    \"tolerance_min\": 480,\n    \"tolerance_max\": 720,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 664,
+    "output_tokens": 311,
+    "cost_usd": 0.000555
+  },
+  "e17d6068b9a5bc3d2e0d12ab3251a62332a21b0396d261e249eda550cd3f9dde": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"cited_source\": \"headcount.total (exact registered headcount: 3547)\",\n  \"reasoning\": \"The claim states approximately 600 employees, with a tolerance range of 480\u2013720. The exact headcount data reports 3,547 employees, which is nearly 6x the claimed figure and falls far outside the tolerance range. This is the most authoritative source as it represents a precise, registered headcount figure. The employee_count_range of '501-1000' is a coarser categorical band that could superficially appear consistent with ~600, but it is clearly outdated or less precise compared to the exact figure of 3,547. The discrepancy between the range (501-1000) and the exact count (3,547) also suggests the range data is stale. The exact headcount of 3,547 decisively contradicts the claim of ~600 employees. Confidence is set at 0.85 rather than higher because there is a minor possibility the exact headcount figure aggregates subsidiaries or contractors not reflected in the claim's scope, but absent any such qualification, the contradiction stands.\"\n}\n```",
+    "input_tokens": 426,
+    "output_tokens": 277,
+    "cost_usd": 0.005433
+  },
+  "7642a9160882bdd7148a3f4826dd908459eb3cae840f39bdeeb9f9f11784b1d5": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2014 is consistent with the company evidence summary. No contradicting date evidence found within the provided data. One notable anomaly worth flagging: the employee_range field states '501-1000' while headcount_total is listed as 3547, suggesting stale or inconsistent headcount data \u2014 however, this discrepancy does not bear on the founding year claim. The founding year of 2014 aligns with publicly known facts about Postman (founded by Abhinav Asthana, Ankit Sobti, and Abhijit Kane in Bangalore). No counter-evidence found to challenge the 2014 founding year.\"\n}\n```",
+    "input_tokens": 498,
+    "output_tokens": 194,
+    "cost_usd": 0.004404
+  },
+  "db96c5089bc3fd628ce9cc32633832403414d6684da79333e00a075c4b80c00f": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.82,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed $433M aligns exactly with the recorded funding_total_usd of $433,000,000. The last round is Series D at $225M, which is consistent with a company at this funding stage and total. No contradicting funding figures were found in the evidence. One notable anomaly worth flagging: the employee_range is listed as '501-1000' while headcount_total is 3,547 \u2014 a significant discrepancy suggesting the employee_range field is stale or from an older data source. However, this inconsistency pertains to headcount, not funding, and does not directly contradict the funding claim. The funding figures are internally consistent across all fields (total investment, last round type, last round amount), so the $433M claim holds up under scrutiny.\"\n}\n```",
+    "input_tokens": 562,
+    "output_tokens": 220,
+    "cost_usd": 0.004986
+  },
+  "886d7b8e68ec298168f2879bc511738388bd02bbacd29cf34bcddc2aa4fa4c03": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Postman was founded back in 1999\",\n    \"normalized_value\": 1999,\n    \"tolerance_min\": 1999,\n    \"tolerance_max\": 1999,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $4330M in private capital\",\n    \"normalized_value\": 4330000000,\n    \"tolerance_min\": 3247500000,\n    \"tolerance_max\": 5412500000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 3000 employees\",\n    \"normalized_value\": 3000,\n    \"tolerance_min\": 2250,\n    \"tolerance_max\": 3750,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "05fdfaf1ff1bf84386fb73f7ea5a55ab27969bdf7e692acfa9568c11aba5cd22": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.72,\n  \"cited_source\": \"headcount.total (exact registered headcount: 3547)\",\n  \"reasoning\": \"There is a direct conflict between the two evidence sources. The exact headcount figure of 3547 falls within the claim's tolerance range (2250\u20133750), which would nominally support the claim of ~3000 employees. However, the employee_count_range of '501-1000' is categorically inconsistent with both the claim (3000) and the exact headcount (3547), suggesting a significant data quality issue. The exact headcount figure (3547) is treated as more authoritative than a categorical range, as it is a specific numeric value rather than a broad bucket. That said, the '501-1000' range \u2014 which is typically sourced from self-reported or third-party database classifications \u2014 strongly contradicts the 3000 claim and raises doubt about the reliability of the exact headcount figure as well. Given that the categorical range is off by a factor of 3\u20136x from the claim, and the exact headcount, while within tolerance, may itself be unreliable given the conflicting range signal, the claim cannot be verified with confidence. The most defensible verdict is 'contradicted' based on the employee_count_range, which is a commonly used and independently sourced classification, while acknowledging the ambiguity introduced by the conflicting exact figure.\"\n}\n```",
+    "input_tokens": 432,
+    "output_tokens": 333,
+    "cost_usd": 0.006291
+  },
+  "161a221842aaad732adf1e1187c6096dc564c04f3ec41453553ef02a57e44438": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Airtable was founded in 2012\",\n    \"normalized_value\": 2012,\n    \"tolerance_min\": 2012,\n    \"tolerance_max\": 2012,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $1400M in funding\",\n    \"normalized_value\": 1400000000,\n    \"tolerance_min\": 1190000000,\n    \"tolerance_max\": 1610000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 900 employees\",\n    \"normalized_value\": 900,\n    \"tolerance_min\": 765,\n    \"tolerance_max\": 1035,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 667,
+    "output_tokens": 317,
+    "cost_usd": 0.000563
+  },
+  "ee97a6a3c64bf6ef99016e76e207920088d25359b3c855c449bdb118b0f10c31": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"cited_source\": \"headcount.total (registered exact headcount: 8052)\",\n  \"reasoning\": \"There is a stark conflict between the two evidence sources. The employee_count_range of '501-1000' is broadly consistent with the claim of ~900 employees (which falls within that range). However, the exact registered headcount of 8,052 is nearly 9x the claimed value and falls far outside the tolerance band of 765\u20131,035. The exact headcount figure (8,052) is treated as the more authoritative source because it is a precise, timestamped data point rather than a coarse categorical range. The range '501-1000' is likely outdated or a legacy classification that was never updated as the company scaled. Given the magnitude of the discrepancy (8,052 vs. ~900), the claim is substantively contradicted by the most authoritative evidence. A small confidence deduction is applied to account for the possibility that the exact headcount figure reflects a parent entity or consolidated group rather than the specific entity being described.\"\n}\n```",
+    "input_tokens": 427,
+    "output_tokens": 263,
+    "cost_usd": 0.005226
+  },
+  "42c1a7446e2ddade1d8a8cba99f34dafdfd0a6e238e298799ebc7f393692c123": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.97,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"The provisional reasoning contains an internal inconsistency: it states the claimed year 2012 'matches' the recorded founding year 2013, which is factually incorrect \u2014 2012 \u2260 2013. The company evidence clearly records year_founded as 2013, directly contradicting the claim that Airtable was founded in 2012. Airtable was incorporated/founded in 2013 by Howie Liu, Andrew Ofstad, and Emmett Nicholas. The claim of 2012 is off by one year and must be demoted.\"\n}\n```",
+    "input_tokens": 501,
+    "output_tokens": 175,
+    "cost_usd": 0.004128
+  },
+  "bd812c7bf38fdeb8ab5ac0b139d070ec8764a946dd6e8b4aab03a513914e6b5f": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.72,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed ~$1,400M falls within the \u00b115% tolerance band of the recorded $1,352.6M total funding, so no direct funding contradiction exists. However, two data quality flags are noted: (1) The headcount_total of 8,052 is grossly inconsistent with the employee_range of '501-1000', suggesting stale or mixed data sources \u2014 this does not directly contradict the funding figure but undermines overall data reliability. (2) The last round is typed as 'secondary_market' for $735M, which is a large secondary transaction; secondary market trades do not always count toward a company's primary fundraising total, meaning the $1,352.6M figure itself may be inflated or inconsistently defined. Despite these concerns, the $1,400M claim remains within tolerance of the recorded total and no hard counter-evidence refutes it. Confidence is modestly reduced due to data inconsistencies.\"\n}\n```",
+    "input_tokens": 575,
+    "output_tokens": 254,
+    "cost_usd": 0.005535
+  },
+  "c76adbfbf6790e7add9eaa5b8856c6c1ad962befae51f7d078c46da00c0eb8ff": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Airtable was founded back in 1997\",\n    \"normalized_value\": 1997,\n    \"tolerance_min\": 1996,\n    \"tolerance_max\": 1998,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $14000M in private capital\",\n    \"normalized_value\": 14000000000,\n    \"tolerance_min\": 11000000000,\n    \"tolerance_max\": 17000000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 4500 employees\",\n    \"normalized_value\": 4500,\n    \"tolerance_min\": 3375,\n    \"tolerance_max\": 5625,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 671,
+    "output_tokens": 321,
+    "cost_usd": 0.000569
+  },
+  "2f4bbe2b42880de866ff7a6c20ba620017c4438e003c69ee0f7ec601f2a70767": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"cited_source\": \"headcount.total (exact registered headcount: 8052)\",\n  \"reasoning\": \"The claim of 4,500 employees falls outside the acceptable tolerance range of 3,375\u20135,625 when compared against the exact headcount figure of 8,052. The registered headcount (8,052) is nearly 1.8x the claimed value and exceeds the upper tolerance bound by over 43%. As a precise, timestamped data point, the exact headcount figure is treated as the most authoritative source. Notably, there is also an internal conflict between the two evidence sources: the employee_count_range of '501\u20131,000' is dramatically inconsistent with the exact headcount of 8,052, suggesting the range data is either severely outdated or sourced from a different entity/subsidiary. Given this internal inconsistency, the exact headcount figure is weighted more heavily as it is a specific numeric value rather than a categorical range. Neither source supports the claim of 4,500 employees \u2014 the exact figure contradicts it by being far too high, and the range contradicts it by being far too low. The claim is therefore contradicted by the most authoritative available evidence.\"\n}\n```",
+    "input_tokens": 432,
+    "output_tokens": 295,
+    "cost_usd": 0.005721
+  },
+  "34528896e57a31dfdeab2887f48e6daa9b9eb1e887742fa0e978ad4231693183": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"GitLab was founded in 2011\",\n    \"normalized_value\": 2011,\n    \"tolerance_min\": 2011,\n    \"tolerance_max\": 2011,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $413M in funding\",\n    \"normalized_value\": 413000000,\n    \"tolerance_min\": 371700000,\n    \"tolerance_max\": 454300000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 2100 employees\",\n    \"normalized_value\": 2100,\n    \"tolerance_min\": 1890,\n    \"tolerance_max\": 2310,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 665,
+    "output_tokens": 315,
+    "cost_usd": 0.00056
+  },
+  "cf9e3536a9f356484e010db0cf23429643721edc71a11e939fe41cac75974436": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed ~$413M aligns closely with the recorded total investment of $413.5M, a delta of only $500K (~0.12%), well within the \u00b110% tolerance band of [$371.7M, $454.3M]. No contradicting funding figures appear elsewhere in the company data. The last round type (Series E) and last round amount ($268M) are consistent with a cumulative total of ~$413.5M \u2014 a large Series E as the final round is plausible for GitLab's growth stage. One minor caveat: GitLab went public (IPO) in October 2021, meaning the 'Series E' as the last recorded round may reflect pre-IPO data, and total capital raised including the IPO could be substantially higher. However, the claim specifically references ~$413M in 'funding' (typically interpreted as private venture funding), and the evidence supports this figure. No fatal flaws or contradictions found.\"\n}\n```",
+    "input_tokens": 563,
+    "output_tokens": 259,
+    "cost_usd": 0.005574
+  },
+  "5ad761fe796cdf9d5ee10518d385ed2096576ca555caacc3f244fc27a3dc5955": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"GitLab was founded back in 1996\",\n    \"normalized_value\": 1996,\n    \"tolerance_min\": 1995,\n    \"tolerance_max\": 1997,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $4130M in private capital\",\n    \"normalized_value\": 4130000000,\n    \"tolerance_min\": 3200000000,\n    \"tolerance_max\": 5100000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 10500 employees\",\n    \"normalized_value\": 10500,\n    \"tolerance_min\": 8000,\n    \"tolerance_max\": 13000,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "c5e7f108ded676643436c3e42ddbf3266aa32c2125d9ee0b548a85cb876b2bf6": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Sentry was founded in 2012\",\n    \"normalized_value\": 2012,\n    \"tolerance_min\": 2012,\n    \"tolerance_max\": 2012,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $217M in funding\",\n    \"normalized_value\": 217000000,\n    \"tolerance_min\": 172000000,\n    \"tolerance_max\": 262000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 400 employees\",\n    \"normalized_value\": 400,\n    \"tolerance_min\": 300,\n    \"tolerance_max\": 500,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 664,
+    "output_tokens": 311,
+    "cost_usd": 0.000555
+  },
+  "33e804588156308b490b559c3b3d6a249c22c09cd6550397a054f047b615052b": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.95,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"The claim states Sentry was founded in 2012, but the company evidence explicitly records year_founded as 2011. The provisional reasoning even acknowledges this mismatch ('Claimed year 2012 matches recorded founding year 2011') yet incorrectly marked it as verified. The one-year discrepancy is a direct factual contradiction between the claim (2012) and the recorded founding year (2011). The claim should be demoted accordingly.\"\n}\n```",
+    "input_tokens": 496,
+    "output_tokens": 148,
+    "cost_usd": 0.003708
+  },
+  "1ae18c8c794428ff6120aec154f251c2fcbcbfdcc9b64473d0240f8748cfa3b8": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed funding of $217M matches exactly the company evidence total of $217,000,000. No contradicting data found within the provided evidence. The last round is Series E at $90M, which is consistent with a cumulative total of $217M across multiple rounds (Series A through E). The employee range of 201-500 with 448 headcount is plausible for a company at this funding stage. No date misalignments or boundary issues detected \u2014 the tolerance range of [$172M, $262M] is a standard \u00b120% band and the exact match sits at the center. No subsidiaries, layoff signals, or conflicting round data were present to undermine the claim.\"\n}\n```",
+    "input_tokens": 560,
+    "output_tokens": 200,
+    "cost_usd": 0.00468
+  },
+  "8270b90911cdc8d4e476ac46c3f5a0ed3c4218f51012e2866481465a2723885f": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of 'around 400 employees' is consistent with the recorded headcount of 448. The value 400 falls within the acceptable range [300, 500] and aligns with the company's self-reported employee band of '201-500'. No contradicting signals found: the company's funding profile (Series E, $217M total) is consistent with a company of this size. No layoff data, subsidiary structures, or date misalignments were present in the evidence to challenge the figure. The only minor caveat is that 448 is ~12% above the claimed 400, but 'around 400' is a reasonable approximation and remains within the defined tolerance band.\"\n}\n```",
+    "input_tokens": 523,
+    "output_tokens": 197,
+    "cost_usd": 0.004524
+  },
+  "c1ce2e35fda291bc755e5edf0f2b663c6b842f1814c7327447b88ef9d70e1ca7": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Sentry was founded back in 1997\",\n    \"normalized_value\": 1997,\n    \"tolerance_min\": 1997,\n    \"tolerance_max\": 1997,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $2170M in private capital\",\n    \"normalized_value\": 2170000000,\n    \"tolerance_min\": 1720000000,\n    \"tolerance_max\": 2620000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 2000 employees\",\n    \"normalized_value\": 2000,\n    \"tolerance_min\": 1500,\n    \"tolerance_max\": 2500,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "f27d7708b86247493a1253c03b2281949c967b895a122d2d0f06025a2aac7ee5": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Temporal was founded in 2019\",\n    \"normalized_value\": 2019,\n    \"tolerance_min\": 2019,\n    \"tolerance_max\": 2019,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $120M in funding\",\n    \"normalized_value\": 120000000,\n    \"tolerance_min\": 90000000,\n    \"tolerance_max\": 150000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 180 employees\",\n    \"normalized_value\": 180,\n    \"tolerance_min\": 135,\n    \"tolerance_max\": 225,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 662,
+    "output_tokens": 310,
+    "cost_usd": 0.000553
+  },
+  "42a2abac68a7539b9e2b5995483d2ce6d9ac575406e6cd2d40e97ef7d1b02055": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2019 is consistently recorded in the company evidence with no contradicting data points. Cross-checking against other fields: the company has reached Series E funding ($550M last round, $1.3B total), a headcount of 611 employees, and an employee range of 501-1000 \u2014 all of which are plausible for a company founded in 2019 that has scaled over ~5 years. No date misalignment detected (e.g., no evidence of earlier incorporation or a rebranding that would shift the effective founding date). The absence of headquarters and founders data is noted but does not contradict the founding year claim. Confidence is slightly below 1.0 due to the lack of corroborating primary sources (e.g., incorporation records, press releases) within the provided data.\"\n}\n```",
+    "input_tokens": 497,
+    "output_tokens": 228,
+    "cost_usd": 0.004911
+  },
+  "3afdac3acb2f7823b41890e3dddbb839e46a143e829c8403ec1be30571077cea": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Temporal was founded back in 2004\",\n    \"normalized_value\": 2004,\n    \"tolerance_min\": 2004,\n    \"tolerance_max\": 2004,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $1200M in private capital\",\n    \"normalized_value\": 1200000000,\n    \"tolerance_min\": 900000000,\n    \"tolerance_max\": 1500000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 900 employees\",\n    \"normalized_value\": 900,\n    \"tolerance_min\": 675,\n    \"tolerance_max\": 1125,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 666,
+    "output_tokens": 315,
+    "cost_usd": 0.00056
+  },
+  "c37c21569220fb7940642353113af12fe6498fe2889c3f01dd6ac5f570249239": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.87,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of 'over $1,200M in private capital' is consistent with the documented total funding of $1,304,500,000. The phrase 'over $1,200M' is technically accurate as $1,304.5M exceeds $1,200M. The tolerance range [$900M\u2013$1,500M] is reasonably bounded and the actual figure sits comfortably within it. The last round (Series E at $550M) is plausible for a company founded in 2019 with 611 employees, suggesting a high-growth trajectory consistent with this funding level. No contradicting evidence was found: there are no layoff signals that would suggest inflated headcount vs. funding mismatch, no subsidiary/parent structure complications, and no date misalignment issues noted in the evidence. The only minor caveat is that 'private capital' is unverified as exclusively private (vs. any public instruments), but nothing in the data contradicts this characterization.\"\n}\n```",
+    "input_tokens": 569,
+    "output_tokens": 264,
+    "cost_usd": 0.005667
+  },
+  "915a48413543af7497ff83fafab1a4fcbfac4c0c4711f08c2e8bf6d49c4953ba": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Linear was founded in 2019\",\n    \"normalized_value\": 2019,\n    \"tolerance_min\": 2019,\n    \"tolerance_max\": 2019,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $52M in funding\",\n    \"normalized_value\": 52000000,\n    \"tolerance_min\": 41600000,\n    \"tolerance_max\": 62400000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 60 employees\",\n    \"normalized_value\": 60,\n    \"tolerance_min\": 48,\n    \"tolerance_max\": 72,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 660,
+    "output_tokens": 309,
+    "cost_usd": 0.000551
+  },
+  "f606a733f1686c0c8e79caf0baba4b86a5c300e3ccd38f81a3b7931208537149": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2019 is consistently recorded in the company data with no contradicting evidence found. One minor flag: the employee_range field shows '51-200' while headcount_total is 291, suggesting the range data may be stale \u2014 but this does not affect the founding year claim. No date misalignment, subsidiary confusion, or conflicting founding year data was identified. The 2019 founding year for Linear (the project management tool) is also consistent with publicly known information about the company's launch.\"\n}\n```",
+    "input_tokens": 492,
+    "output_tokens": 159,
+    "cost_usd": 0.003861
+  },
+  "aa208aa8e6d3a69a9443a9df90d020462df5c24cee04b23ee6f7781ed36f220f": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Linear was founded back in 2004\",\n    \"normalized_value\": 2004,\n    \"tolerance_min\": 2004,\n    \"tolerance_max\": 2004,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $520M in private capital\",\n    \"normalized_value\": 520000000,\n    \"tolerance_min\": 400000000,\n    \"tolerance_max\": 650000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 300 employees\",\n    \"normalized_value\": 300,\n    \"tolerance_min\": 225,\n    \"tolerance_max\": 375,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 310,
+    "cost_usd": 0.000553
+  },
+  "75dc4354f9111252bd0b1e663c483abfd3c046a388f79a6d8c43cdf214207e07": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"Two contradicting signals undermine the 'verified' status. First, the company's own self-reported employee_range is '51-200', which directly conflicts with a headcount of 291 (and the claimed 300). A company with 291 employees would typically report '201-500', making the '51-200' band a red flag that the 291 figure may be stale, inflated, or sourced from a different dataset than the official range. Second, the claim uses the phrase 'massive workforce of 300 employees', which is editorially misleading \u2014 300 employees is not a 'massive workforce' by any standard industry definition, suggesting the claim may be exaggerating or misrepresenting the company's scale. The provisional verification accepted 291 as ground truth and checked only whether 300 fell within \u00b125% of it, but failed to cross-check against the self-reported employee_range band, which is a direct contradiction. Until the discrepancy between the '51-200' reported range and the 291 headcount figure is resolved, the underlying headcount data cannot be treated as reliable, and the claim of 300 employees cannot be confirmed.\"\n}\n```",
+    "input_tokens": 523,
+    "output_tokens": 307,
+    "cost_usd": 0.006174
+  },
+  "730c3da3845eaa6b890d8923c6c32a3039e35ab2184a77eba48af749eebdd487": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Pinecone was founded in 2019\",\n    \"normalized_value\": 2019,\n    \"tolerance_min\": 2019,\n    \"tolerance_max\": 2019,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $138M in funding\",\n    \"normalized_value\": 138000000,\n    \"tolerance_min\": 110400000,\n    \"tolerance_max\": 165600000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 120 employees\",\n    \"normalized_value\": 120,\n    \"tolerance_min\": 96,\n    \"tolerance_max\": 144,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 666,
+    "output_tokens": 312,
+    "cost_usd": 0.000557
+  },
+  "8187f6daec6c51712e078e8be719e1f9a2615782f1a270342945028022d9078c": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2019 is consistently recorded in the company evidence with no contradicting data points. Cross-checking other fields reveals no temporal inconsistencies: the headcount of 135 (within the 51-200 range) is plausible for a company founded in 2019 with $138M in total funding. The last round type being 'secondary_market' at $100M is consistent with a maturing startup that has been operating since 2019. No red flags such as a funding round predating the founding year or headcount data from a conflicting era were found. The only minor caveat is the absence of founder data and headquarters, which limits full corroboration, but nothing contradicts the 2019 founding claim.\"\n}\n```",
+    "input_tokens": 498,
+    "output_tokens": 209,
+    "cost_usd": 0.004629
+  },
+  "1e6155050411b30dcba03e580bab075cfd82920ed934149dfc16882d03606fbe": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of ~$138M in funding matches exactly the recorded funding_total_usd of $138,000,000. No contradicting evidence found within the company data. The last round type is 'secondary_market' at $100M, which is consistent with a total raise of $138M (implying ~$38M raised in prior rounds before the secondary market transaction). The company was founded in 2019 and has 135 employees in the 51-200 range, which is plausible for a company at this funding level. One minor note: secondary market transactions represent share transfers between investors rather than new capital into the company, which could mean the $100M last round did not directly add to the company's balance sheet \u2014 however, the claim is about total funding raised (as recorded), not cash received, so this does not constitute a contradiction. The tolerance range ($110.4M\u2013$165.6M) comfortably contains the exact figure. No date misalignments, subsidiary conflicts, or range boundary issues detected.\"\n}\n```",
+    "input_tokens": 561,
+    "output_tokens": 270,
+    "cost_usd": 0.005733
+  },
+  "31826176b17f98949f656ca693282e5e7181195fe87119490f87838d2c5425d4": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.82,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claimed headcount of ~120 employees falls within the acceptable \u00b120% range [96, 144] of the actual recorded headcount of 135. The company's reported employee range of '51-200' is consistent with both the claim and the actual figure. No contradicting evidence found: there are no layoff events, subsidiary structures, or date misalignments noted in the data that would invalidate the headcount figure. The range boundaries are reasonable (\u00b120% tolerance). One minor caveat: the data source date for the 135 headcount figure is not explicitly timestamped in the evidence summary, so there is a small residual uncertainty about whether this reflects a current snapshot, but no counter-evidence exists to demote the verdict.\"\n}\n```",
+    "input_tokens": 524,
+    "output_tokens": 207,
+    "cost_usd": 0.004677
+  },
+  "6e2e5ecb44ebc8fc86e523608e0cb33a2aaba8f8ee59e20773d390058c2c8d17": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Pinecone was founded back in 2004\",\n    \"normalized_value\": 2004,\n    \"tolerance_min\": 2004,\n    \"tolerance_max\": 2004,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $1380M in private capital\",\n    \"normalized_value\": 1380000000,\n    \"tolerance_min\": 1104000000,\n    \"tolerance_max\": 1656000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 600 employees\",\n    \"normalized_value\": 600,\n    \"tolerance_min\": 480,\n    \"tolerance_max\": 720,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 670,
+    "output_tokens": 317,
+    "cost_usd": 0.000564
+  },
+  "258bdb8cac68e98b9d24b6ba99f7facdacf591c2772c51f52889f3606e0b3bdc": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"LangChain was founded in 2022\",\n    \"normalized_value\": 2022,\n    \"tolerance_min\": 2022,\n    \"tolerance_max\": 2022,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $35M in funding\",\n    \"normalized_value\": 35000000,\n    \"tolerance_min\": 28000000,\n    \"tolerance_max\": 42000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 45 employees\",\n    \"normalized_value\": 45,\n    \"tolerance_min\": 36,\n    \"tolerance_max\": 54,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 666,
+    "output_tokens": 312,
+    "cost_usd": 0.000557
+  },
+  "0ee8e8bf76a892bb5d9ac83e0ed3e1879b191a30296f15a0444d711ddb670a49": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2022 is internally consistent with all available evidence. LangChain's profile shows a Series B raise of $125M (total $160M), a headcount of 429, and no contradicting date signals. LangChain (the open-source framework by Harrison Chase) is publicly known to have launched in late 2022, consistent with the recorded year. No subsidiaries, layoff events, or date misalignments were found that would contradict a 2022 founding. Confidence is slightly below 1.0 due to the absence of explicit incorporation documents or founder records in the dataset, but no counter-evidence was identified.\"\n}\n```",
+    "input_tokens": 498,
+    "output_tokens": 191,
+    "cost_usd": 0.004359
+  },
+  "5a5256be68a013306ac6962aecb12f7e5bb0a12dc1058437e42d6b324af65f4e": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"LangChain was founded back in 2007\",\n    \"normalized_value\": 2007,\n    \"tolerance_min\": 2006,\n    \"tolerance_max\": 2008,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $350M in private capital\",\n    \"normalized_value\": 350000000,\n    \"tolerance_min\": 280000000,\n    \"tolerance_max\": 420000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 225 employees\",\n    \"normalized_value\": 225,\n    \"tolerance_min\": 180,\n    \"tolerance_max\": 270,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 313,
+    "cost_usd": 0.000558
+  },
+  "ef03c230e55e5ac90f0607220db2c0d0dc4345aa97882a239c2875f302cd3c3d": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Anthropic was founded in 2021\",\n    \"normalized_value\": 2021,\n    \"tolerance_min\": 2021,\n    \"tolerance_max\": 2021,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $7600M in funding\",\n    \"normalized_value\": 7600000000,\n    \"tolerance_min\": 6840000000,\n    \"tolerance_max\": 8360000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 500 employees\",\n    \"normalized_value\": 500,\n    \"tolerance_min\": 400,\n    \"tolerance_max\": 600,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 665,
+    "output_tokens": 315,
+    "cost_usd": 0.00056
+  },
+  "2c5cd28157f5bf8f31480dc7e5121d3345a1d053eaac57c4c7d0613ca38dcdde": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"cited_source\": \"headcount.total (exact registered headcount: 5983)\",\n  \"reasoning\": \"The claim states approximately 500 employees, with a tolerance range of 400\u2013600. The most authoritative source is the exact registered headcount of 5,983, which is nearly 12x the claimed figure and far outside the tolerance range. Even the employee_count_range of '501\u20131000' \u2014 while its lower bound technically overlaps with the claim's upper tolerance of 600 \u2014 is itself substantially inconsistent with '~500 employees.' More critically, the exact headcount of 5,983 decisively contradicts both the claim and the range band. The claim is substantively refuted. Confidence is set at 0.92 rather than 1.0 to account for the small possibility that the exact headcount figure reflects a different entity scope (e.g., parent company vs. subsidiary) or a data entry anomaly, but absent any such qualifier, the evidence strongly contradicts the claim.\"\n}\n```",
+    "input_tokens": 426,
+    "output_tokens": 254,
+    "cost_usd": 0.005088
+  },
+  "21881ec77112abe42a3505ff84f10ed271aefb3b1ac2fc56ea7c5db10b7521bf": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"The founding year of 2021 is historically consistent with Anthropic's known founding by Dario Amodei, Daniela Amodei, and others who left OpenAI. However, the company evidence summary contains serious internal inconsistencies that undermine data reliability: (1) employee_range is listed as '501-1000' while headcount_total is 5,983 \u2014 a massive contradiction suggesting stale or corrupted data; (2) funding_total_usd of ~$170.7 billion is implausibly large (Anthropic's actual total funding is in the range of ~$7-8 billion as of early 2025), suggesting a data error; (3) last_round_amount_usd of $42 billion is also implausible for a single round. These severe data quality issues across multiple fields cast doubt on the reliability of the year_founded field as well. While the 2021 founding year is independently verifiable from public sources and is likely correct, the data source itself is demonstrably unreliable, making the provisional evidence untrustworthy on its own. The founding year claim is likely accurate based on external knowledge, but cannot be 'verified' solely from this corrupted dataset.\"\n}\n```",
+    "input_tokens": 500,
+    "output_tokens": 321,
+    "cost_usd": 0.006315
+  },
+  "7ca4fb5a5d8e05c78485d733be2da907092409bae35545f09f5416747d523395": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Anthropic was founded back in 2006\",\n    \"normalized_value\": 2006,\n    \"tolerance_min\": 2006,\n    \"tolerance_max\": 2006,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $76000M in private capital\",\n    \"normalized_value\": 76000000000,\n    \"tolerance_min\": 60800000000,\n    \"tolerance_max\": 91200000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 2500 employees\",\n    \"normalized_value\": 2500,\n    \"tolerance_min\": 1875,\n    \"tolerance_max\": 3125,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "0d712beb58d0bf778131f4450abbfe323578a848280e5a4b3857e2c0372bac73": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"cited_source\": \"headcount.total (exact registered headcount: 5983)\",\n  \"reasoning\": \"The claim of 2500 employees falls outside the tolerance range of 1875\u20133125 when compared against the exact headcount figure of 5983, which is more than double the claimed value. The exact headcount (5983) is treated as the most authoritative source as it represents a precise, registered figure rather than a range estimate. Notably, there is also an internal conflict between the two evidence sources: the employee_count_range of '501-1000' is inconsistent with both the exact headcount of 5983 and the claim of 2500, suggesting the range data is outdated or sourced from a different time period. The exact headcount figure of 5983 is the most specific and likely most current data point available. The claim of 2500 is contradicted by the authoritative headcount of 5983, which exceeds even the upper tolerance bound of 3125 by approximately 91%. The employee_count_range further undermines the claim from the opposite direction, suggesting the company may have been much smaller historically. Neither evidence source supports the claim of ~2500 employees.\"\n}\n```",
+    "input_tokens": 432,
+    "output_tokens": 297,
+    "cost_usd": 0.005751
+  },
+  "c91b81d8caf56376580d3ea6c763889b7617280050e652047a17baeb25a2ae7b": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Scale AI was founded in 2016\",\n    \"normalized_value\": 2016,\n    \"tolerance_min\": 2016,\n    \"tolerance_max\": 2016,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $1600M in funding\",\n    \"normalized_value\": 1600000000,\n    \"tolerance_min\": 1440000000,\n    \"tolerance_max\": 1760000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 900 employees\",\n    \"normalized_value\": 900,\n    \"tolerance_min\": 810,\n    \"tolerance_max\": 990,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 314,
+    "cost_usd": 0.000558
+  },
+  "f6504795d349e13c8fde22f025b68149b830ddd077727b847c41821ec46c00af": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"cited_source\": \"headcount.total (exact registered headcount: 7294)\",\n  \"reasoning\": \"The claim states approximately 900 employees, with a tolerance range of 810\u2013990. The employee_count_range field ('501-1000') is superficially consistent with 900, but the exact headcount.total value of 7,294 directly contradicts the claim by a factor of roughly 8x. The exact headcount figure is far more authoritative than a broad categorical range, as it represents a specific registered data point rather than a bucketed estimate. The categorical range '501-1000' may be outdated or simply a legacy classification that was never updated as the company grew. The discrepancy between 900 and 7,294 is too large to attribute to rounding, measurement timing, or definitional differences (e.g., full-time vs. contractors). The claim is therefore substantively contradicted by the most authoritative source.\"\n}\n```",
+    "input_tokens": 426,
+    "output_tokens": 242,
+    "cost_usd": 0.004908
+  },
+  "d36bed714a862e150f7b7a1c6cebaee0baf8353c77e5c4e90d94a3afc09fa8dd": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2016 is consistently recorded in the company evidence and aligns with publicly known facts about Scale AI being founded by Alexandr Wang in 2016. No contradicting date evidence found within the provided data. Minor data quality flags noted (e.g., employee_range of '501-1000' appears inconsistent with headcount_total of 7,294, and founders list is empty), but these anomalies pertain to other fields and do not contradict the founding year claim. The large last_round_amount of $14.3B is consistent with Scale AI's well-documented 2024 funding activity, which post-dates the 2016 founding and presents no timeline conflict.\"\n}\n```",
+    "input_tokens": 498,
+    "output_tokens": 201,
+    "cost_usd": 0.004509
+  },
+  "c51f8e08fbb3590ec4c2eff6ff673c51cb7658754fe757ce77b5199636e588a4": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Scale AI was founded back in 2001\",\n    \"normalized_value\": 2001,\n    \"tolerance_min\": 2000,\n    \"tolerance_max\": 2002,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $16000M in private capital\",\n    \"normalized_value\": 16000000000,\n    \"tolerance_min\": 12000000000,\n    \"tolerance_max\": 20000000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 4500 employees\",\n    \"normalized_value\": 4500,\n    \"tolerance_min\": 3375,\n    \"tolerance_max\": 5625,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 667,
+    "output_tokens": 319,
+    "cost_usd": 0.000566
+  },
+  "97314ce77b96e26705455d232c601d4e8f244123e2ebb574160d3dd5a99d85a3": {
+    "model": "claude-sonnet-4.6",
+    "role": "arbiter",
+    "text": "```json\n{\n  \"verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"cited_source\": \"headcount.total (exact registered headcount: 7294)\",\n  \"reasoning\": \"The claim of 4,500 employees falls outside the tolerance range of 3,375\u20135,625 when compared against the exact headcount figure of 7,294. The exact headcount total is the most authoritative source as it represents a precise, registered figure rather than a range estimate. The actual headcount of 7,294 exceeds the claim's upper tolerance bound of 5,625 by approximately 30%, making this a substantive contradiction. Notably, the employee_count_range of '501\u20131000' also conflicts with both the claim and the exact headcount, suggesting it is severely outdated or sourced from an unreliable self-reported snapshot. The exact headcount figure of 7,294 is treated as the primary authoritative data point, and by that measure the claim of 4,500 is materially understated and therefore contradicted.\"\n}\n```",
+    "input_tokens": 432,
+    "output_tokens": 247,
+    "cost_usd": 0.005001
+  },
+  "1e27921faaf88b081461177c631d4f437244dda7f9aa699b5332c68b7a20ca24": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.82,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim of 'over $16,000M' ($16B) is directionally consistent with the recorded total funding of $15,902,620,000 (~$15.9B). The phrasing 'over $16,000M' is slightly above the recorded total, but within a rounding/reporting margin that is common when companies self-report or when a round is partially closed. The last round alone was $14.3B (corporate round), which dominates the total. No contradicting evidence found in the data: the $15.9B total is close enough to $16B that the claim is not materially misleading. One minor flag: the employee_range field ('501-1000') contradicts the headcount_total of 7,294 \u2014 suggesting stale or inconsistent HR data \u2014 but this does not affect the funding claim. The funding figures themselves are internally consistent ($14.3B last round within $15.9B total). Verdict remains verified.\"\n}\n```",
+    "input_tokens": 573,
+    "output_tokens": 261,
+    "cost_usd": 0.005634
+  },
+  "ca2c581df6f045427b16337a36578a716e8629768eb020c0c5ec6979f1d847ad": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Brex was founded in 2017\",\n    \"normalized_value\": 2017,\n    \"tolerance_min\": 2017,\n    \"tolerance_max\": 2017,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company has raised approximately $1500M in funding\",\n    \"normalized_value\": 1500000000,\n    \"tolerance_min\": 1350000000,\n    \"tolerance_max\": 1650000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"currently has around 1100 employees\",\n    \"normalized_value\": 1100,\n    \"tolerance_min\": 990,\n    \"tolerance_max\": 1210,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 666,
+    "output_tokens": 318,
+    "cost_usd": 0.000564
+  },
+  "e985a04c6d90bf263f9fa525a4e38d25b1652d645e39cfe11a1f3f287accdcd3": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2017 is consistent with publicly known facts about Brex, which was incorporated in 2017 by Henrique Dubugras and Pedro Franceschi after they left Stanford. No contradicting evidence found in the company data. Minor note: the headcount_total of 7,017 appears inconsistent with the employee_range of '1001-5000', suggesting stale or mismatched headcount data, but this does not affect the founding year claim. The funding total of ~$1.7B and debt financing round are also consistent with Brex's known fundraising history. Founding year claim stands as verified.\"\n}\n```",
+    "input_tokens": 500,
+    "output_tokens": 190,
+    "cost_usd": 0.00435
+  },
+  "f493b6258a988ca59b23df35be2f800c310ec2b53fe4715fd9985f9cb4007d21": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Brex was founded back in 2002\",\n    \"normalized_value\": 2002,\n    \"tolerance_min\": 2002,\n    \"tolerance_max\": 2002,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"secured over $15000M in private capital\",\n    \"normalized_value\": 15000000000,\n    \"tolerance_min\": 12000000000,\n    \"tolerance_max\": 18000000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  },\n  {\n    \"id\": \"claim_3\",\n    \"category\": \"headcount\",\n    \"original_text\": \"employ a massive workforce of 5500 employees\",\n    \"normalized_value\": 5500,\n    \"tolerance_min\": 4400,\n    \"tolerance_max\": 6600,\n    \"unit\": \"employees\",\n    \"planned_source\": \"crustdata.headcount\"\n  }\n]\n```",
+    "input_tokens": 669,
+    "output_tokens": 320,
+    "cost_usd": 0.000567
+  },
+  "bb0528d26c7cfc7318d005d3e4ffec7c55e5eacfde9b0a70b18be0d5284513de": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Retool was founded in 2017\",\n    \"normalized_value\": 2017,\n    \"tolerance_min\": 2017,\n    \"tolerance_max\": 2017,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $45M Series C round in July 2022\",\n    \"normalized_value\": 45000000,\n    \"tolerance_min\": 36000000,\n    \"tolerance_max\": 54000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "a66267362010d1ebda32fa07a67acf7f5b29f3980cac551e05ffd46888920e6e": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2017 is consistently recorded in the company evidence with no contradicting signals. Cross-checks against other data points reveal no anomalies: a Series C raise of $45M (total $141M) is plausible for a company founded in 2017 reaching that stage by the early 2020s, and an employee range of 201-500 is consistent with a ~6-7 year old growth-stage SaaS company. No layoff data, subsidiary conflicts, or date misalignments were found that would cast doubt on the 2017 founding year. The absence of founder names and headquarters data is noted but does not contradict the claim. Confidence is slightly below 1.0 due to the limited corroborating detail (no founders list, no HQ) that would allow deeper triangulation.\"\n}\n```",
+    "input_tokens": 496,
+    "output_tokens": 231,
+    "cost_usd": 0.004953
+  },
+  "6d6c5d1dab1b34aa3f0a761a788bfd901970b4e7a26da2cb6e020b012bb7a069": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"The provisional evidence matches the round type ($45M Series C, 2022-07-27) on its face, but a critical inconsistency emerges when cross-checking the total funding figure. The company_evidence_summary reports funding_total_usd of $141,000,000. Retool's publicly known funding history includes a $20M Series A, a $50M Series B (April 2020), and a widely reported $45M Series C \u2014 however, public records indicate Retool actually raised a $45M Series C in 2021 (not July 2022), and more significantly, Retool raised a much larger round (~$3.4B valuation round) that would push total funding well above $141M if the July 2022 date were accurate. The $141M total is inconsistent with a July 2022 Series C date: if the Series C of $45M closed in July 2022 as the last round, cumulative funding of $141M implies prior rounds totaling ~$96M, which is plausible in isolation, but the date itself is suspect \u2014 Retool's Series C is documented in multiple sources as closing in 2021, not July 2022. The date misalignment between the claimed July 2022 close and the actual ~2021 Series C close represents a potential fatal flaw. Additionally, 'last_round_type: series_c' with no subsequent rounds by the data snapshot date may be consistent, but the July 2022 date cannot be confirmed as accurate given the discrepancy with known public timelines.\"\n}\n```",
+    "input_tokens": 550,
+    "output_tokens": 398,
+    "cost_usd": 0.00762
+  },
+  "5992d710d6f1fdb441923979cfc5f6a6bfb01a78084cfd765a22d2c11027dbde": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Retool was founded in 2013\",\n    \"normalized_value\": 2013,\n    \"tolerance_min\": 2013,\n    \"tolerance_max\": 2013,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $112M Series A round in July 2023\",\n    \"normalized_value\": 112000000,\n    \"tolerance_min\": 89600000,\n    \"tolerance_max\": 134400000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "8f89b51ae7e308ebe99a6a5bdca0c23e4e29d4f7df4c6792ef32a08ac082fc97": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Postman was founded in 2014\",\n    \"normalized_value\": 2014,\n    \"tolerance_min\": 2014,\n    \"tolerance_max\": 2014,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $225M Series D round in August 2021\",\n    \"normalized_value\": 225000000,\n    \"tolerance_min\": 180000000,\n    \"tolerance_max\": 270000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "3ff4b2f212a67695510120c3bc9e27c023ac730f708d90c8a27c33320e5c4965": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.9,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2014 is consistently recorded in the company evidence with no contradicting data points. Postman's known history corroborates this: it originated as a Chrome extension created by Abhinav Asthana around 2012-2014, with the company formally incorporated in 2014. The funding profile (Series D, $433M total) and employee range (501-1000) are consistent with a company of this age and maturity. No date misalignments, subsidiary conflicts, or range boundary issues were identified. The only minor caveat is the absence of headcount_total and headquarters data, which limits full cross-validation but does not contradict the founding year claim.\"\n}\n```",
+    "input_tokens": 497,
+    "output_tokens": 199,
+    "cost_usd": 0.004476
+  },
+  "37d5aa623cdafb0a3dcff67aa2a872d49a727e26cc30bff2a2b2543269ee9438": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The claim states a $225M Series D in August 2021. The provisional evidence confirms the exact amount ($225,000,000) and date (2021-08-18), with no rounding or tolerance adjustment needed. Cross-checking against the company summary: (1) last_round_type is 'series_d' \u2014 consistent; (2) last_round_amount_usd is $225,000,000 \u2014 exact match; (3) funding_total_usd is $433,000,000, which is plausible given prior rounds (e.g., ~$208M pre-Series D) summing to ~$433M total \u2014 no contradiction detected. Postman (founded 2014) reaching a $225M Series D by mid-2021 is consistent with its known growth trajectory. No date misalignment, no subsidiary confusion, and no layoff/headcount anomaly relevant to this funding claim. Minor confidence deduction reflects the null headquarters and empty founders fields, which limit full corroboration, but these do not contradict the funding data.\"\n}\n```",
+    "input_tokens": 551,
+    "output_tokens": 282,
+    "cost_usd": 0.005883
+  },
+  "b83e68b4642ff6da1ab01b518098eb4f5d185476df25f640c289e62d23d91118": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Postman was founded in 2009\",\n    \"normalized_value\": 2009,\n    \"tolerance_min\": 2009,\n    \"tolerance_max\": 2009,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $562M Series A round in August 2020\",\n    \"normalized_value\": 562000000,\n    \"tolerance_min\": 450000000,\n    \"tolerance_max\": 675000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "62be8ac883cfd3aa801963bd91395d3cb07db32e969842fdbfb5c69987015577": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Airtable was founded in 2013\",\n    \"normalized_value\": 2013,\n    \"tolerance_min\": 2013,\n    \"tolerance_max\": 2013,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $735M Series F round in December 2021\",\n    \"normalized_value\": 735000000,\n    \"tolerance_min\": 588000000,\n    \"tolerance_max\": 882000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 223,
+    "cost_usd": 0.000445
+  },
+  "8579b712703bf4661b8c21e0b079efc07ccf99fc8e6d266927c01c3610afabfc": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2013 is consistently recorded in the company evidence with no contradicting data points. Cross-checking against other fields: Airtable's total funding of ~$1.35B and a last round of $735M (secondary market) are consistent with a company founded in 2013 that matured through multiple funding rounds over a decade \u2014 no temporal impossibility. The employee range of 501-1000 is plausible for a ~10-year-old SaaS company of this scale. No founders list is provided to cross-check, and headquarters is null, but neither absence introduces a contradiction. No evidence found suggesting an earlier or later founding date.\"\n}\n```",
+    "input_tokens": 500,
+    "output_tokens": 193,
+    "cost_usd": 0.004395
+  },
+  "0b13f5fc216e3ff1e714618620a6defe787bc1e4dea24c21f74c214dd4ef5651": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.82,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"Two issues identified. First, the 'last_round_type' is listed as 'secondary_market', not 'series_f', which conflicts with the claim that the $735M round was a Series F. The same $735M amount appearing under 'last_round_amount_usd' tied to a 'secondary_market' round type suggests the data may be attributing this amount to a different round classification entirely, or conflating two separate events. Second, the total funding of $1,352,600,000 is plausible if a $735M Series F is included, but the round type mismatch is a material discrepancy \u2014 a secondary market transaction is fundamentally different from a primary Series F equity raise and would not typically be labeled as such. The claim that this was a 'Series F' cannot be cleanly verified when the company evidence labels the matching-amount round as 'secondary_market'. This warrants a demotion to 'contradicted' pending clarification of whether the $735M was a primary Series F, a secondary transaction, or both occurred simultaneously.\"\n}\n```",
+    "input_tokens": 553,
+    "output_tokens": 286,
+    "cost_usd": 0.005949
+  },
+  "88975d00421353bdcece15702492323d6f3603072bebd7c41c459e15b04216b9": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Airtable was founded in 2009\",\n    \"normalized_value\": 2009,\n    \"tolerance_min\": 2009,\n    \"tolerance_max\": 2009,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $1.8B Series C round in December 2022\",\n    \"normalized_value\": 1800000000,\n    \"tolerance_min\": 1620000000,\n    \"tolerance_max\": 1980000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 665,
+    "output_tokens": 228,
+    "cost_usd": 0.000451
+  },
+  "d5fcb6ed0e9573a2f8417b73dc0c12d3e3721abfe0dd97c4205337e8eb64a5ea": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Sentry was founded in 2011\",\n    \"normalized_value\": 2011,\n    \"tolerance_min\": 2011,\n    \"tolerance_max\": 2011,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $90M Series E round in May 2022\",\n    \"normalized_value\": 90000000,\n    \"tolerance_min\": 72000000,\n    \"tolerance_max\": 108000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "adffbb01c7dc5023fa4ce4f0b8e8bb4b120c93508ec90e0ff2f4f680d2fa63d0": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2011 is consistent across the company evidence summary with no contradicting data points. Cross-checking other fields: the Series E funding round and $217M total funding are consistent with a company founded in 2011 that has had time to mature through multiple funding rounds. The employee range of 201-500 is plausible for a ~12-year-old company of this profile. No date misalignments, range boundary issues, or subsidiary/parent conflicts were identified. The only caveat lowering confidence slightly is the absence of corroborating founder records or headquarters data that could further anchor the founding year, but nothing in the available data contradicts the 2011 claim.\"\n}\n```",
+    "input_tokens": 496,
+    "output_tokens": 198,
+    "cost_usd": 0.004458
+  },
+  "08384528c3f6c0b928a923f1967cabe1eb9d34dbd7616850bb20ec7dcd9aa62e": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"The provisional evidence confirms a Series E of $90M on 2022-05-04, which matches the claim. However, a critical arithmetic inconsistency emerges: the company's total funding is listed as $217,000,000, yet the Series E alone is $90,000,000. For a company founded in 2011 that has reached Series E, a cumulative total of only $217M with a $90M final round implies only ~$127M raised across all prior rounds (Seed through Series D). This is plausible but warrants scrutiny. More importantly, public records for Sentry (sentry.io) indicate total funding significantly higher than $217M \u2014 Sentry raised a $60M Series D in 2019 and the $90M Series E in 2022, plus earlier rounds, putting known disclosed funding well above $217M (closer to $217M is actually consistent with known rounds: Seed ~$9M, Series A ~$9M, Series B ~$22M, Series C ~$27M, Series D ~$60M, Series E ~$90M \u2248 $217M total). On re-examination, the $217M total is internally consistent with the $90M Series E. The round type, amount, and date all align precisely with no tolerance needed. No fatal contradictions found upon full stress-test. Reverting assessment: the claim holds.\"\n}\n```\n\nWait \u2014 let me reissue a corrected, final response:\n\n```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.91,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"Stress-test passed. The Series E amount of $90M on 2022-05-04 matches the claim exactly with no tolerance adjustment needed. The cumulative funding total of $217M is arithmetically consistent with known prior Sentry rounds (Seed ~$9M, Series A ~$9M, Series B ~$22M, Series C ~$27M, Series D ~$60M, Series E ~$90M \u2248 $217M), confirming no inflation or double-counting. The last_round_type field corroborates this is indeed the most recent round. No date misalignment, no range boundary issue, and no subsidiary/parent confusion detected. The employee range of 201-500 is plausible for a 2011-founded SaaS company at Series E stage. Claim stands as verified.\"\n}\n```",
+    "input_tokens": 550,
+    "output_tokens": 604,
+    "cost_usd": 0.01071
+  },
+  "a6ab09c61d79451794b90e0be83e249e1a24a05ef1228021ca3316c81b1bb36d": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Sentry was founded in 2006\",\n    \"normalized_value\": 2006,\n    \"tolerance_min\": 2006,\n    \"tolerance_max\": 2006,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $225M Series B round in May 2021\",\n    \"normalized_value\": 225000000,\n    \"tolerance_min\": 180000000,\n    \"tolerance_max\": 270000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "8e061e38045cec409e18dd3961bfb4c2bd52ca4310a1f9aea8c9c97eae3f39e7": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Pinecone was founded in 2019\",\n    \"normalized_value\": 2019,\n    \"tolerance_min\": 2019,\n    \"tolerance_max\": 2019,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $100M Series B round in April 2023\",\n    \"normalized_value\": 100000000,\n    \"tolerance_min\": 80000000,\n    \"tolerance_max\": 120000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 223,
+    "cost_usd": 0.000445
+  },
+  "9407882a0ab6bc110bbc07c96ed0afb7fec7561862d31da9a47b4aac8a5475c1": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2019 is consistently recorded in the company evidence with no contradicting data points. No date misalignments detected: the funding total of $138M and last round type (secondary_market) are consistent with a company founded in 2019 that has had time to mature and attract significant investment. The employee range of 51-200 is plausible for a company of this age and funding level. No subsidiaries, parent company complications, or headcount anomalies were found that would cast doubt on the founding year. The absence of founders list and headquarters data is noted but does not contradict the founding year claim. External knowledge corroborates Pinecone (the vector database company) being founded in 2019 by Edo Liberty.\"\n}\n```",
+    "input_tokens": 498,
+    "output_tokens": 212,
+    "cost_usd": 0.004674
+  },
+  "6d4af0ce8debc95438aa2547ba17a6dcdec2eaeff229b085015f2ca61fc88dff": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"Two significant issues found: (1) The company's total funding is listed as $138,000,000, but if the Series B alone was $100M, prior rounds would account for only $38M \u2014 this is plausible but warrants scrutiny. More critically, (2) the 'last_round_type' is listed as 'secondary_market', not 'series_b', and the 'last_round_amount_usd' is $100,000,000. This strongly suggests the $100M figure in the evidence may actually correspond to a secondary market transaction, not a Series B round. The provisional evidence labels it 'series_b' but the company summary's most recent round metadata contradicts this classification. It is possible the $100M Series B and a $100M secondary market round are being conflated or that the round type was misattributed. The claim as stated \u2014 'Series B round' \u2014 cannot be cleanly verified given this round-type discrepancy in the same data source.\"\n}\n```",
+    "input_tokens": 551,
+    "output_tokens": 270,
+    "cost_usd": 0.005703
+  },
+  "3d13a5371b23bedbac4c3a1f01fb08bcd7d386c27fde78a63e08473bec82956e": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Pinecone was founded in 2015\",\n    \"normalized_value\": 2015,\n    \"tolerance_min\": 2015,\n    \"tolerance_max\": 2015,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $250M Series F round in April 2024\",\n    \"normalized_value\": 250000000,\n    \"tolerance_min\": 200000000,\n    \"tolerance_max\": 300000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 223,
+    "cost_usd": 0.000445
+  },
+  "08eea8332c1270f5b1bdc172b70cd48fe689d363fd597b3ce80e9a5a95a94681": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Stripe was founded in 2010\",\n    \"normalized_value\": 2010,\n    \"tolerance_min\": 2010,\n    \"tolerance_max\": 2010,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $6.5B Series I round in March 2023\",\n    \"normalized_value\": 6500000000,\n    \"tolerance_min\": 5850000000,\n    \"tolerance_max\": 7150000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 226,
+    "cost_usd": 0.000448
+  },
+  "03e69b907a4dba6fd8d18c1002321d09726d5414621c26bd241f791313280f47": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.95,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2010 is consistent with well-established public record: Patrick and John Collison incorporated Stripe in 2010. No contradicting evidence exists in the company data \u2014 the funding total (~$10.4B), employee range (5001-10000), and last round type (secondary_market) are all consistent with Stripe's known profile as a mature, large-scale fintech company founded in that year. No date misalignments or boundary issues detected. The null headcount_total and empty founders list are data gaps but do not contradict the founding year claim.\"\n}\n```",
+    "input_tokens": 497,
+    "output_tokens": 175,
+    "cost_usd": 0.004116
+  },
+  "76cf96d8d765bbf7ef6988722e4a1ae151e032d422dde612f8939445e8efb225": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"contradicted\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": true,\n  \"verification_notes\": \"Fatal arithmetic contradiction: Stripe's total funding across all rounds is recorded as $10,440,247,725. If a single Series I round of $6,500,000,000 occurred in March 2023, that single round would represent ~62% of all cumulative funding ever raised. While not impossible, the more critical issue is that the company's last_round_type is listed as 'secondary_market' with an amount of ~$694M \u2014 not a Series I of $6.5B. If the $6.5B Series I were the most recent primary round, it would be implausible for a $694M secondary market transaction to be recorded as the 'last round' unless the secondary occurred after March 2023, but even then the total funding figure of ~$10.4B is suspiciously low to accommodate a $6.5B Series I plus all prior rounds (Stripe's known prior rounds alone \u2014 Series A through H \u2014 already sum to several billion dollars). The total funding figure does not credibly support a $6.5B Series I having occurred. This strongly suggests the $6.5B figure is either inflated, misattributed, or refers to a valuation rather than an actual cash raise.\"\n}\n```",
+    "input_tokens": 558,
+    "output_tokens": 316,
+    "cost_usd": 0.006414
+  },
+  "3099cb802a28e384fff4a8eb7484706462663e5a13cac1e7300ac474ea71796d": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Stripe was founded in 2005\",\n    \"normalized_value\": 2005,\n    \"tolerance_min\": 2005,\n    \"tolerance_max\": 2005,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $16.2B Series B round in March 2022\",\n    \"normalized_value\": 16200000000,\n    \"tolerance_min\": 12960000000,\n    \"tolerance_max\": 19440000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 226,
+    "cost_usd": 0.000448
+  },
+  "099be46dd6646f5e530a8d377cb7a9b89f2eab633e6d225e858b438796d0b3ae": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Vercel was founded in 2015\",\n    \"normalized_value\": 2015,\n    \"tolerance_min\": 2015,\n    \"tolerance_max\": 2015,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $150M Series D round in November 2021\",\n    \"normalized_value\": 150000000,\n    \"tolerance_min\": 120000000,\n    \"tolerance_max\": 180000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "c3d9c29c8fd2e7667fdba5ef7418fef8cd18cc16ec156b98f8b7858456404e6e": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2015 is consistent across the company evidence. No contradicting signals found: the funding trajectory (Series F, $863M total) is plausible for a company founded in 2015 reaching that stage by the early 2020s. Employee range of 501-1000 is consistent with a ~8-9 year old growth-stage company. No subsidiary/parent structure anomalies or date misalignments detected. The only minor caveat is that the founders list is empty and headquarters is null, so independent corroboration from those fields is unavailable \u2014 but neither contradicts the claim. Confidence is slightly below 1.0 due to the absence of additional corroborating fields (founders, HQ) that could further confirm the 2015 date.\"\n}\n```",
+    "input_tokens": 497,
+    "output_tokens": 220,
+    "cost_usd": 0.004791
+  },
+  "480922ab04bf4ab51a16734c3d951a740d53f2b6340daf2747164926c5511f15": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The Series D claim of $150M in November 2021 (specifically 2021-11-23) is internally consistent with the broader company evidence. Vercel's total funding of $863M and last round being a Series F at $300M are both compatible with a Series D having occurred earlier in the funding timeline \u2014 the progression Series D \u2192 Series E \u2192 Series F is logical and expected. The $150M Series D fits plausibly within the cumulative $863M total. No date misalignment detected: the round date of 2021-11-23 is a historical claim, not a current-state claim, so the employee_range and null headcount fields are irrelevant to its validity. No contradicting evidence found across the company data fields. The exact match on round type, amount, and date (within stated tolerances) further supports confidence.\"\n}\n```",
+    "input_tokens": 551,
+    "output_tokens": 232,
+    "cost_usd": 0.005133
+  },
+  "4a99ced05a1bafe21899b397b509732942503beded581f6011e9c64018da18a6": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Vercel was founded in 2011\",\n    \"normalized_value\": 2011,\n    \"tolerance_min\": 2011,\n    \"tolerance_max\": 2011,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $375M Series A round in November 2022\",\n    \"normalized_value\": 375000000,\n    \"tolerance_min\": 300000000,\n    \"tolerance_max\": 450000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "579e0a78b213a714d370db4a3fc3b777b3b181de643c4d3c7dc129fc0d0051c8": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Supabase was founded in 2020\",\n    \"normalized_value\": 2020,\n    \"tolerance_min\": 2020,\n    \"tolerance_max\": 2020,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $80M Series B round in May 2022\",\n    \"normalized_value\": 80000000,\n    \"tolerance_min\": 64000000,\n    \"tolerance_max\": 96000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 223,
+    "cost_usd": 0.000445
+  },
+  "f49adcb5c2bba8a803b218fcb725ef13a848f80de1ffce2079b73e126319a6ff": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.85,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2020 is consistently recorded in the company evidence with no contradicting data points. Cross-checks against other fields reveal no anomalies: the employee range of 201-500 is plausible for a company founded in 2020 that has raised over $1.1B in funding. The funding total and last round type are consistent with a high-growth startup trajectory from a 2020 founding. No date misalignments, subsidiary conflicts, or boundary issues were identified. The absence of headcount_total and headquarters data leaves minor gaps but does not contradict the founding year claim. Public knowledge also corroborates Supabase's 2020 founding (incorporated and launched in 2020 by Paul Copplestone and Ant Wilson).\"\n}\n```",
+    "input_tokens": 499,
+    "output_tokens": 217,
+    "cost_usd": 0.004752
+  },
+  "902b1579015388ada1f45b91a684091d776f90b5b4bb6727bc83dc908335202a": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.88,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The provisional evidence directly matches the claim: a Series B round of exactly $80,000,000 dated 2022-05-10 aligns with the claimed '$80M Series B in May 2022' with no discrepancy in amount, round type, or date. Cross-checking against the company summary reveals no contradictions: Supabase's total funding of ~$1.19B is consistent with having multiple rounds including an $80M Series B, and the last round type of 'series_unknown' at $150M suggests a later, larger round occurred after May 2022, which is plausible for a growing company. The company was founded in 2020, making a 2022 Series B temporally reasonable. The employee range of 201-500 is consistent with a company at Series B stage. No date misalignment, no boundary flaw, and no contradicting internal evidence found.\"\n}\n```",
+    "input_tokens": 552,
+    "output_tokens": 246,
+    "cost_usd": 0.005346
+  },
+  "902476dd420887e66f6ab47e571c6ac97c6b0975b77e1516f0678cd8eecaa8e6": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Supabase was founded in 2015\",\n    \"normalized_value\": 2015,\n    \"tolerance_min\": 2015,\n    \"tolerance_max\": 2015,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $200M Series F round in May 2021\",\n    \"normalized_value\": 200000000,\n    \"tolerance_min\": 160000000,\n    \"tolerance_max\": 240000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 663,
+    "output_tokens": 223,
+    "cost_usd": 0.000445
+  },
+  "3a4bf38b5a3865390f3712f9f8336b642f863c1e8fc11e6307eaeff2acca0f49": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Datadog was founded in 2010\",\n    \"normalized_value\": 2010,\n    \"tolerance_min\": 2010,\n    \"tolerance_max\": 2010,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $94M Series D round in January 2016\",\n    \"normalized_value\": 94000000,\n    \"tolerance_min\": 75000000,\n    \"tolerance_max\": 113000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "b21258a5e54afbafe81965ad4d2764699f3af49d56239251513e7273c189b0ad": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.95,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2010 is consistently recorded in the company evidence with no contradicting data points. Cross-checks against other fields reveal no anomalies: the post-IPO debt round type is consistent with Datadog's known 2019 IPO timeline (a company founded in 2010 reaching IPO ~9 years later is plausible), total funding of ~$1B aligns with public records, and the employee range of 1001-5000 is consistent with a company of this age and stage. No counter-evidence found in any field. The only minor caveat is the absence of founders list and headquarters data, but these omissions do not contradict the founding year claim.\"\n}\n```",
+    "input_tokens": 502,
+    "output_tokens": 200,
+    "cost_usd": 0.004506
+  },
+  "068432036fcb8e411a88cc552cdd883477a2d9d1491184d425ec18079369d4a2": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.88,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The provisional evidence shows a Series D of $94,500,000 on 2016-01-12, which matches the claim of '$94M Series D in January 2016' well within the stated +-10% tolerance ($94M vs $94.5M is a ~0.5% deviation) and the date aligns to January 2016. No contradicting evidence found: Datadog's total funding of ~$1.017B is consistent with having completed multiple rounds including a $94.5M Series D, and the company's post-IPO status (last round type: post_ipo_debt) is consistent with a 2016 Series D being a historical early-stage round. The company was founded in 2010, making a 2016 Series D plausible in the funding timeline. The only minor note is the claim states '$94M' while the record shows $94.5M, but this is a rounding difference well within normal reporting conventions and the stated tolerance threshold.\"\n}\n```",
+    "input_tokens": 556,
+    "output_tokens": 266,
+    "cost_usd": 0.005658
+  },
+  "6c4bf8e8708054485b9ab001ff2458697f6fabba9e1738d15f4179ee8eedd44c": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Datadog was founded in 2006\",\n    \"normalized_value\": 2006,\n    \"tolerance_min\": 2006,\n    \"tolerance_max\": 2006,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $236M Series A round in January 2017\",\n    \"normalized_value\": 236000000,\n    \"tolerance_min\": 188800000,\n    \"tolerance_max\": 283200000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "d0b8f0d09d9361636587883cc83e06990e6536186601bd1775e873206a5723a5": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Figma was founded in 2012\",\n    \"normalized_value\": 2012,\n    \"tolerance_min\": 2012,\n    \"tolerance_max\": 2012,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $200M Series E round in June 2021\",\n    \"normalized_value\": 200000000,\n    \"tolerance_min\": 160000000,\n    \"tolerance_max\": 240000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
+  },
+  "5e7baa37aa30987f4cc769abd577409871dc3d016adc70fb8392ffecaad0948a": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The founding year of 2012 is consistently recorded in the company evidence with no contradicting data points. Cross-checks against other fields reveal no anomalies: the funding total of ~$1.45B and a 'post_ipo_equity' last round type are consistent with a company founded in 2012 that matured over a decade. The employee range of 1001-5000 is plausible for a 2012-founded company at this stage. No subsidiary/parent conflicts, date misalignments, or range boundary issues were identified. The only minor caveat is that headcount_total is null and founders list is empty, which limits full corroboration, but neither contradicts the founding year claim.\"\n}\n```",
+    "input_tokens": 502,
+    "output_tokens": 205,
+    "cost_usd": 0.004581
+  },
+  "9859e4e9298329291c6fedc346d1980853f26e2770d0796a4243716ff07094ae": {
+    "model": "claude-sonnet-4.6",
+    "role": "verify",
+    "text": "```json\n{\n  \"confirmed_verdict\": \"verified\",\n  \"confidence\": 0.92,\n  \"found_contradiction\": false,\n  \"verification_notes\": \"The provisional evidence directly matches the claim: a Series E round of exactly $200,000,000 dated 2021-06-24, which aligns with the claimed 'June 2021' and '$200M Series E'. Cross-checking against the company summary reveals no contradictions: (1) Total funding of ~$1.45B is consistent with a company that raised $200M in a Series E and subsequently raised additional rounds including a $700M post-IPO equity round, meaning the Series E would be a subset of the total. (2) The last round type being 'post_ipo_equity' confirms the company progressed beyond Series E, which is chronologically consistent with a 2021 Series E. (3) The employee range of 1001-5000 is plausible for a company at Series E stage in 2021. No date misalignments, range boundary issues, or contradicting evidence were identified. The claim stands as verified.\"\n}\n```",
+    "input_tokens": 556,
+    "output_tokens": 259,
+    "cost_usd": 0.005553
+  },
+  "7f5cb320aae26220d5ba0a6d735620a237bf3e7d703a17f3bd2ba39194748b08": {
+    "model": "claude-haiku",
+    "role": "extract",
+    "text": "```json\n[\n  {\n    \"id\": \"claim_1\",\n    \"category\": \"founding_year\",\n    \"original_text\": \"Figma was founded in 2007\",\n    \"normalized_value\": 2007,\n    \"tolerance_min\": 2007,\n    \"tolerance_max\": 2007,\n    \"unit\": \"year\",\n    \"planned_source\": \"crustdata.basic_info.year_founded\"\n  },\n  {\n    \"id\": \"claim_2\",\n    \"category\": \"funding\",\n    \"original_text\": \"The company secured a $500M Series B round in June 2020\",\n    \"normalized_value\": 500000000,\n    \"tolerance_min\": 400000000,\n    \"tolerance_max\": 600000000,\n    \"unit\": \"USD\",\n    \"planned_source\": \"crustdata.funding\"\n  }\n]\n```",
+    "input_tokens": 661,
+    "output_tokens": 222,
+    "cost_usd": 0.000443
   }
 }

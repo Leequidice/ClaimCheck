@@ -1,4 +1,4 @@
-﻿"""Evaluation Harness for Claim Check.
+"""Evaluation Harness for Claim Check.
 
 Measures Precision, Recall, and False-Alarm Count across truthful profiles
 and adversarial planted lies. Saves run records to enable cross-run comparison.
@@ -25,7 +25,7 @@ RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
-    """Execute evaluation harness across all test cases."""
+    """Execute evaluation harness across train and held-out test cases."""
     cases = generate_eval_cases()
     if limit > 0:
         cases = cases[:limit]
@@ -33,35 +33,47 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
     auditor = ClaimAuditor(offline=offline)
     now_str = datetime.now(timezone.utc).isoformat()
 
-    tp_lies = 0      # Planted lie correctly identified as CONTRADICTED
-    fp_lies = 0      # Truthful claim falsely marked CONTRADICTED (False Alarm)
-    fn_lies = 0      # Planted lie missed (marked VERIFIED)
-    tn_truths = 0    # Truthful claim correctly marked VERIFIED
-    unverifiable = 0 # Claims marked UNVERIFIABLE
+    # Track metrics separately for train and held-out (test)
+    splits = {
+        "train": {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "unverifiable": 0, "errors": 0},
+        "test": {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "unverifiable": 0, "errors": 0},
+    }
 
+    enrichment_failures: List[Dict[str, Any]] = []
+    diagnostics: List[Dict[str, Any]] = []
     case_results = []
 
     print("=" * 72)
     print(f"  RUNNING CLAIM CHECK EVALUATION ({len(cases)} cases, offline={offline})")
+    print(f"  Split: 5 Companies Train (tune) | 5 Companies Held-out Test")
     print("=" * 72)
 
     for idx, case in enumerate(cases, 1):
-        print(f"[{idx}/{len(cases)}] Auditing {case.company} ({'ADVERSARIAL' if case.is_adversarial else 'TRUTHFUL'})...", end=" ")
+        sp = case.split
+        print(f"[{idx:2d}/{len(cases)}] [{sp.upper():5s}] {case.company:10s} ({'ADVERSARIAL' if case.is_adversarial else 'TRUTHFUL'})...", end=" ")
         try:
             report = auditor.audit(
                 text_or_url=case.pitch_text,
                 company_name=case.company,
                 domain=case.domain,
             )
-            print(f"OK ({report.claims_total} claims: {report.verified_count} V, {report.contradicted_count} C, {report.unverifiable_count} U)")
+            print(f"OK ({report.claims_total} claims: {report.verified_count} V, {report.contradicted_count} C, {report.unverifiable_count} U, {report.error_count} E)")
         except Exception as e:
             print(f"FAILED ({e})")
             continue
+
+        if report.enrichment_error:
+            enrichment_failures.append({
+                "company": case.company,
+                "domain": case.domain,
+                "reason": report.enrichment_error,
+            })
 
         case_record = {
             "case_id": case.case_id,
             "company": case.company,
             "domain": case.domain,
+            "split": case.split,
             "is_adversarial": case.is_adversarial,
             "claims": [],
         }
@@ -71,23 +83,60 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
             verdict = result.verdict
             expected = case.expected_verdicts.get(cat)
 
+            # If enrichment failed, exclude from precision/recall and count under errors
+            if verdict == VerdictType.ERROR:
+                splits[sp]["errors"] += 1
+                case_record["claims"].append({
+                    "category": cat,
+                    "text": result.claim.original_text,
+                    "verdict": verdict.value,
+                    "expected": expected,
+                    "status": "error",
+                    "reasoning": result.reasoning,
+                })
+                continue
+
             is_correct = False
             if case.is_adversarial:
                 if verdict == VerdictType.CONTRADICTED:
-                    tp_lies += 1
+                    splits[sp]["tp"] += 1
                     is_correct = True
                 elif verdict == VerdictType.VERIFIED:
-                    fn_lies += 1
+                    splits[sp]["fn"] += 1
+                    # Missed lie! Diagnose
+                    diagnostics.append({
+                        "type": "missed_lie",
+                        "split": sp,
+                        "company": case.company,
+                        "claim_text": result.claim.original_text,
+                        "ground_truth": case.metadata.get(f"true_{cat}"),
+                        "crustdata_value": result.evidence,
+                        "verdict": verdict.value,
+                        "reasoning": result.reasoning,
+                        "which_side_is_wrong": "auditor missed lie (marked verified)",
+                    })
                 else:
-                    unverifiable += 1
+                    splits[sp]["unverifiable"] += 1
             else:
                 if verdict == VerdictType.VERIFIED:
-                    tn_truths += 1
+                    splits[sp]["tn"] += 1
                     is_correct = True
                 elif verdict == VerdictType.CONTRADICTED:
-                    fp_lies += 1
+                    splits[sp]["fp"] += 1
+                    # False alarm! Diagnose
+                    diagnostics.append({
+                        "type": "false_alarm",
+                        "split": sp,
+                        "company": case.company,
+                        "claim_text": result.claim.original_text,
+                        "ground_truth": case.metadata.get(f"true_{cat}"),
+                        "crustdata_value": result.evidence,
+                        "verdict": verdict.value,
+                        "reasoning": result.reasoning,
+                        "which_side_is_wrong": "auditor contradicted truthful claim (false alarm)",
+                    })
                 else:
-                    unverifiable += 1
+                    splits[sp]["unverifiable"] += 1
 
             case_record["claims"].append({
                 "category": cat,
@@ -101,29 +150,40 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
 
         case_results.append(case_record)
 
-    # Compute metrics
-    total_evaluated = tp_lies + fp_lies + fn_lies + tn_truths + unverifiable
-    total_planted_lies = tp_lies + fn_lies
-    total_contradicted_emitted = tp_lies + fp_lies
+    def _calc_stats(s: Dict[str, int]) -> Dict[str, Any]:
+        total_eval = s["tp"] + s["fp"] + s["fn"] + s["tn"] + s["unverifiable"]
+        contra = s["tp"] + s["fp"]
+        lies = s["tp"] + s["fn"]
+        prec = (s["tp"] / contra) if contra > 0 else 0.0
+        rec = (s["tp"] / lies) if lies > 0 else 0.0
+        return {
+            "precision": round(prec, 4),
+            "recall": round(rec, 4),
+            "false_alarms": s["fp"],
+            "true_positives": s["tp"],
+            "false_negatives": s["fn"],
+            "true_negatives": s["tn"],
+            "unverifiable": s["unverifiable"],
+            "enrichment_errors": s["errors"],
+            "total_claims": total_eval,
+        }
 
-    precision = (tp_lies / total_contradicted_emitted) if total_contradicted_emitted > 0 else 0.0
-    recall = (tp_lies / total_planted_lies) if total_planted_lies > 0 else 0.0
-    false_alarm_count = fp_lies
+    train_stats = _calc_stats(splits["train"])
+    test_stats = _calc_stats(splits["test"])
+
+    # Aggregate overall stats
+    combined = {k: splits["train"][k] + splits["test"][k] for k in splits["train"]}
+    overall_stats = _calc_stats(combined)
 
     eval_summary = {
         "timestamp": now_str,
         "offline": offline,
         "cases_count": len(cases),
-        "total_claims_evaluated": total_evaluated,
-        "metrics": {
-            "precision": round(precision, 4),
-            "recall": round(recall, 4),
-            "false_alarm_count": false_alarm_count,
-            "true_positives_lies_caught": tp_lies,
-            "false_negatives_lies_missed": fn_lies,
-            "true_negatives_truths_verified": tn_truths,
-            "unverifiable_count": unverifiable,
-        },
+        "overall_metrics": overall_stats,
+        "train_metrics": train_stats,
+        "held_out_test_metrics": test_stats,
+        "enrichment_failures": enrichment_failures,
+        "diagnostics": diagnostics,
         "llm_usage": auditor.llm.get_summary(),
         "cases": case_results,
     }
@@ -136,20 +196,24 @@ def run_evaluation(offline: bool = False, limit: int = 0) -> Dict[str, Any]:
 
     # Print summary
     print("\n" + "=" * 72)
-    print("  EVALUATION RESULTS SUMMARY")
+    print("  EVALUATION RESULTS SUMMARY (TRAIN vs HELD-OUT)")
     print("=" * 72)
-    print(f"  Precision (Lies Caught / Flagged): {precision * 100:.2f}%")
-    print(f"  Recall (Lies Caught / Total Lies): {recall * 100:.2f}%")
-    print(f"  False Alarms (Truths flagged C):   {false_alarm_count}")
-    print(f"  Total Claims Evaluated:            {total_evaluated}")
-    print(f"  Truths Verified:                   {tn_truths}")
-    print(f"  Lies Caught (Contradicted):        {tp_lies}")
-    print(f"  Lies Missed:                       {fn_lies}")
-    print(f"  Unverifiable:                      {unverifiable}")
+    print(f"  {'Split':<12} | {'Precision':<10} | {'Recall':<8} | {'False Alarms':<13} | {'Errors':<7}")
+    print("-" * 72)
+    print(f"  {'TRAIN (5)':<12} | {train_stats['precision']*100:>9.1f}% | {train_stats['recall']*100:>7.1f}% | {train_stats['false_alarms']:>13} | {train_stats['enrichment_errors']:>7}")
+    print(f"  {'TEST (5)':<12} | {test_stats['precision']*100:>9.1f}% | {test_stats['recall']*100:>7.1f}% | {test_stats['false_alarms']:>13} | {test_stats['enrichment_errors']:>7}")
+    print(f"  {'OVERALL':<12} | {overall_stats['precision']*100:>9.1f}% | {overall_stats['recall']*100:>7.1f}% | {overall_stats['false_alarms']:>13} | {overall_stats['enrichment_errors']:>7}")
+    print("-" * 72)
+    print(f"  Enrichment Failures:  {len(enrichment_failures)}")
+    for ef in enrichment_failures:
+        print(f"    - {ef['company']} ({ef['domain']}): {ef['reason']}")
+    print(f"  Diagnostic Issues:    {len(diagnostics)}")
+    for d in diagnostics:
+        print(f"    - [{d['type'].upper()}] {d['company']}: Claim \"{d['claim_text']}\" -> Verdict: {d['verdict']} ({d['which_side_is_wrong']})")
     print("-" * 72)
     llm_stats = eval_summary["llm_usage"]
-    print(f"  Run LLM Spend:                     ${llm_stats.get('run_cost_usd', 0.0):.6f}")
-    print(f"  Cumulative Total Spent:            ${llm_stats.get('cumulative_cost_usd', 0.0):.4f} / $20.00")
+    print(f"  Run LLM Spend:        ${llm_stats.get('run_cost_usd', 0.0):.6f}")
+    print(f"  Cumulative Spent:     ${llm_stats.get('cumulative_cost_usd', 0.0):.4f} / $20.00")
     print("=" * 72)
 
     _print_historical_runs()

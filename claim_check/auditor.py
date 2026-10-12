@@ -103,7 +103,7 @@ class ClaimAuditor:
                 try:
                     span_ctx = root_span.get_span_context()
                     trace_id = f"{span_ctx.trace_id:032x}"
-                    trace_url = f"https://neatlogs.com/traces/{trace_id}"
+                    trace_url = f"https://app.neatlogs.com/traces/{trace_id}"
                 except Exception:
                     pass
                 report = self._run_pipeline(

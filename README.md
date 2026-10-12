@@ -175,9 +175,9 @@ Each company generates 3 paired cases:
 ## Built With
 
 - **[Neatlogs](https://neatlogs.com)**: Distributed tracing and observability across the audit pipeline. Emits structured spans (`company_audit_run`, `extract_claims`, `crustdata.enrich`, `verifier.independent_pass`). Neatlogs traces capture the side-by-side comparison between legacy demotions and evidence confirmations in this run:
-  - *Vercel Legacy Demotion Trace:* [https://neatlogs.com/traces/b6d27753f38a6687e52f7b88c9f61632](https://neatlogs.com/traces/b6d27753f38a6687e52f7b88c9f61632)
-  - *Vercel Evidence Confirmation Trace:* [https://neatlogs.com/traces/26c82e806766b88a44b7f7ad81004b8c](https://neatlogs.com/traces/26c82e806766b88a44b7f7ad81004b8c)
-  - *PostHog Legacy Demotion Trace:* [https://neatlogs.com/traces/70d18172f9b89de1d50eb85bd60e33e5](https://neatlogs.com/traces/70d18172f9b89de1d50eb85bd60e33e5)
-  - *PostHog Evidence Confirmation Trace:* [https://neatlogs.com/traces/ed439e200f70b76a8176af7a5680f763](https://neatlogs.com/traces/ed439e200f70b76a8176af7a5680f763)
+  - *Vercel Legacy Demotion Trace:* [https://app.neatlogs.com/traces/b6d27753f38a6687e52f7b88c9f61632](https://app.neatlogs.com/traces/b6d27753f38a6687e52f7b88c9f61632)
+  - *Vercel Evidence Confirmation Trace:* [https://app.neatlogs.com/traces/26c82e806766b88a44b7f7ad81004b8c](https://app.neatlogs.com/traces/26c82e806766b88a44b7f7ad81004b8c)
+  - *PostHog Legacy Demotion Trace:* [https://app.neatlogs.com/traces/70d18172f9b89de1d50eb85bd60e33e5](https://app.neatlogs.com/traces/70d18172f9b89de1d50eb85bd60e33e5)
+  - *PostHog Evidence Confirmation Trace:* [https://app.neatlogs.com/traces/ed439e200f70b76a8176af7a5680f763](https://app.neatlogs.com/traces/ed439e200f70b76a8176af7a5680f763)
 - **[Entire](https://entire.dev)**: Checkpointed git commit tracking for AI-assisted development. Every code change and evaluation step was committed through Entire with verifiable session checkpoint hashes (`entire enable -y --agent antigravity`).
 - **[cfo.ai](https://cfo.ai)**: Costs measured from the LLM spend log; Crustdata cost assumed; business model built separately in cfo.ai.
